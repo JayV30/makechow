@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '4.2.2'
+gem 'bcrypt',       '3.1.7'
 gem 'sass-rails',   '~> 5.0.2'
 gem 'autoprefixer-rails', '~> 6.0.3'
 gem 'uglifier',     '2.5.3'
