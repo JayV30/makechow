@@ -1,2 +1,36 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'Sign up') %>
+
+<div class="row">
+  <div class="col-md-4">
+    <h1>Sign Up</h1>
+    <h3>It's free!</h3>
+    <p>Get all of these benefits:</p>
+    <ul>
+      <li>Store your recipes online</li>
+      <li>Share with your friends and family</li>
+      <li>Have your recipes rated by other users</li>
+      <li>Rate and save your favorite recipes</li>
+    </ul>
+  </div> <!-- /.col-md-4 -->
+  <div class="col-md-8">
+    <h1>Create Your Account</h1>
+    <%= form_for(@user) do |f| %>
+    
+      <%= render 'shared/user_error_messages' %>
+      
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+      
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+      
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+      
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div> <!-- /.col-md-8 -->
+</div> <!-- /.row -->
