@@ -1,7 +1,9 @@
 <% provide(:title, "Home") %>
 
 <div id="intro" class="jumbotron">
-  <h1>Welcome to MakeChow!</h1>
-  <p>Store, share, and rate recipes. Save your favorites.</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a></p>
+  <div class="container">
+    <h1>Welcome to MakeChow!</h1>
+    <p>Store, share, and rate recipes. Save your favorites.</p>
+    <p><%= link_to "Sign Up Now!", signup_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+  </div> <!-- /.container -->
 </div> <!-- /.jumbotron -->

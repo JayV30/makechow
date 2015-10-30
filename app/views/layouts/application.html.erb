@@ -17,14 +17,20 @@
   
   <%= render 'layouts/header' %>
 
+  <% unless current_page?(root_path) %>
   <div class="container">
+  <% end %>
+
     
     <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
     
     <%= yield %>
+  
+  <% unless current_page?(root_path) %>
   </div> <!-- /.container -->
+  <% end %>
   
   <div class="container"><%= debug(params) if Rails.env.development? %></div>
 

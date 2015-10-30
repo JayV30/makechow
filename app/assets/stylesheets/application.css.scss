@@ -23,6 +23,35 @@
   box-sizing: border-box;
 }
 
+/* BASE */
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  background-color: #fef2e4;
+}
+
+body > .container {
+  background-color: #fafafa;
+  padding-top: 20px;
+}
+
+.navbar {
+  background-color: #805a3b;
+  border-color: #402d1d;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color: #fdfdfd;
+  &:hover, &:focus {
+    color: #fd974f;
+  }
+}
+
 /* PAGES */
 
 #intro.jumbotron {
@@ -49,7 +78,7 @@
 
 /* FORMS */
 
-.new_user input, .new_user textarea, .new_user select, .new_user.uneditable-input {
+input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 20px;
