@@ -7,10 +7,15 @@
   <div class="col-md-8">
     <h1><%= @user.name %></h1>
     <h2><%= @user.email %></h2>
+    <p>Member Since: <%= @creation_date %></p>
+    <p>Location: <%= @user.location %></p>
   </div>
 </div> <!-- /.row -->
 
+<hr/>
+
 <div class="row">
+  <h2 class="text-center"><%= @user.name %>'s Recipes</h2>
   <%= @recipes.each do |recipe| %>
     <div class="col-sm-3">
       <div class="thumbnail">

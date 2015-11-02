@@ -1,0 +1,33 @@
+<% provide(:title, "Edit Profile of " + @user.name) %>
+
+<div class="row">
+  <h1 class="text-center">UPDATE YOUR PROFILE</h1>
+</div>
+
+<div class="row">
+  <%= form_for(@user) do |f| %>
+    <%= render 'shared/user_error_messages' %>
+    <div class="col-md-4">
+      <p>USER PROFILE IMAGE HERE</p>
+      <!-- place user image url update here -->
+    </div>
+    <div class="col-md-8">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', :value => @user.name %>
+      
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control', :value => @user.email %>
+      
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'form-control', :value => @user.location %>
+      
+      <%= f.label :password, "New Password" %>
+      <%= f.password_field :password, class: 'form-control' %>
+      
+      <%= f.label :password_confirmation, "Confirm New Password" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div> <!-- /.row -->

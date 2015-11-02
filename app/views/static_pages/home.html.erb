@@ -4,6 +4,10 @@
   <div class="container">
     <h1>Welcome to MakeChow!</h1>
     <p>Store, share, and rate recipes. Save your favorites.</p>
-    <p><%= link_to "Sign Up Now!", signup_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+    <% if logged_in? %>
+      <p><%= link_to "Your Recipes", current_user, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+    <% else %>
+      <p><%= link_to "Sign Up Now!", signup_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+    <% end %>
   </div> <!-- /.container -->
 </div> <!-- /.jumbotron -->
