@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update]
   before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:index]
+  
+  def index
+    @users = User.all
+  end
   
   def show
     @user = User.find(params[:id])
@@ -40,7 +45,7 @@ class UsersController < ApplicationController
   private
   
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :location)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :location, :image_url)
     end
   
     # Confirms a logged-in user
@@ -56,6 +61,15 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+    
+    # Confirms an administrator
+    def admin_user
+      @user = current_user
+      unless admin_user?(@user)
+        flash[:danger] = "You must be an administrator to perform this action."
+        redirect_to root_url
+      end
     end
   
 end

@@ -11,6 +11,18 @@ class UsersControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
+  
+  test "should redirect index when not logged in" do
+    get :index
+    assert_redirected_to login_url
+  end
+  
+  test "should redirect index when not administrator" do
+    log_in_as(@other_user)
+    get :index, id: @other_user
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
 
   test "should redirect edit when not logged in" do
     get :edit, id: @user

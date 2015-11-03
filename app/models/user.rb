@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   before_save { self.email = email.downcase } 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  VALID_URL_REGEX = /(\A|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i
   validates :name, presence: true, length: { maximum: 60 }
   validates :email, presence: true, length: { maximum: 200 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -10,6 +11,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :location, allow_blank: true, length: { maximum: 200 }
+  validates :administrator, presence: true, length: { is: 1 }, format: { with: /\A(0|1)\z/ }
+  validates :image_url, allow_blank: true, length: { maximum: 255 }, format: { with: VALID_URL_REGEX }
   
   # Returns the hash digest of the given string
   def self.digest(string) 

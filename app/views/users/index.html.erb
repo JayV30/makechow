@@ -1,0 +1,16 @@
+<% provide(:title, "All Users") %>
+
+<div class="row">
+  <h1 class="text-center">All Users</h1>
+  <%= @users.each do |user| %>
+    <div class="col-sm-3">
+      <div class="thumbnail">
+        <%= link_to image_tag(user.image_url), user %>
+        <div class="caption">
+          <h3><%= user.name %></h3>
+          <p>Member Since: <%= user.created_at.strftime("%Y") %></p>
+        </div> <!-- /.caption -->
+      </div> <!-- /.thumbnail -->
+    </div> <!-- /.col-sm-3 -->
+  <% end %>
+</div> <!-- /.row -->
