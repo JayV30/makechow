@@ -15,7 +15,7 @@
           <li><%= link_to "Link Text", '#' %></li>
           <li><%= link_to "Link Text", '#' %></li>
           <li><%= link_to "Link Text", '#' %></li>
-          <% if logged_in? && admin_user?(current_user) %>
+          <% if logged_in? && current_user.admin? %>
             <li><%= link_to "Users", users_path %></li>
           <% end %>
         </ul>

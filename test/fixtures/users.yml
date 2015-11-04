@@ -5,12 +5,40 @@ michael:
   email: michael@example.com
   password_digest: <%= User.digest('password') %>
   location: Earth
-  administrator: 1
+  admin: true
+  image_url: https://robohash.org/michaelexample.png?size=300x300
   
 archer:
   name: Sterling Archer
   email: duchess@example.gov
   password_digest: <%= User.digest('password') %>
   location: Top Secret
-  administrator: 0
+  admin: false
+  image_url: https://robohash.org/sterlingarcher.png?size=300x300
+  
+rick:
+  name: Rick Sanchez
+  email: c137rick.s@example.com
+  password_digest: <%= User.digest('password') %>
+  location: Earth c137
+  admin: false
+  image_url: https://robohash.org/ricksanchez.png?size=300x300
+  
+morty:
+  name: Morty Smith
+  email: morty@glipglop.com
+  password_digest: <%= User.digest('password') %>
+  location: Earth c137
+  admin: false
+  image_url: https://robohash.org/mortysmith.png?size=300x300
+  
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.gov" %>
+  password_digest: <%= User.digest('password') %>
+  location: <%= "User #{n} Earth" %>
+  admin: false
+  image_url: <%= "https://robohash.org/user#{n}.png?size=300x300" %>
+<% end %>
   

@@ -1,16 +1,25 @@
 <% provide(:title, "All Users") %>
 
 <div class="row">
-  <h1 class="text-center">All Users</h1>
-  <%= @users.each do |user| %>
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <%= link_to image_tag(user.image_url), user %>
-        <div class="caption">
-          <h3><%= user.name %></h3>
-          <p>Member Since: <%= user.created_at.strftime("%Y") %></p>
-        </div> <!-- /.caption -->
-      </div> <!-- /.thumbnail -->
-    </div> <!-- /.col-sm-3 -->
-  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h2>All Users</h2></div>
+    
+    <table id="user-list" class="table">
+      <thead>
+        <tr>
+          <th>IMAGE</th>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>CREATED</th>
+          <th><!--empty header for "View Profile" button --></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @users %>
+      </tbody>
+    </table>
+    
+  </div> <!-- /.panel.panel-default -->
+  <%= will_paginate %>
 </div> <!-- /.row -->

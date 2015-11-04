@@ -5,3 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.create!( name: "Jay Karlsven",
+              email: "j.karlsven@gmail.com",
+              password: "foobar",
+              password_confirmation: "foobar",
+              location: "Ohio",
+              admin: true,
+              image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
+
+99.times do |n|
+  name = Faker::Name.name
+  email = Faker::Internet.email
+  password = "password"
+  location = Faker::Address.city
+  image_url = Faker::Avatar.image
+  User.create!( name: name,
+                email: email,
+                password: password,
+                password_confirmation: password,
+                location: location,
+                image_url: image_url)
+end

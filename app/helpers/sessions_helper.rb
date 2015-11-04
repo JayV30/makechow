@@ -17,11 +17,6 @@ module SessionsHelper
     user == current_user
   end
   
-  # Returns true if the given user is an administrator
-  def admin_user?(user)
-    user.administrator == 1
-  end
-  
   # Returns the current logged-in user (if any)
   def current_user
     if (user_id = session[:user_id])

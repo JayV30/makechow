@@ -76,6 +76,16 @@ body > .container {
   @include box_sizing;
 }
 
+/* PAGINATION */
+div.pagination {
+  width: 100%;
+  text-align: center;
+  ul.pagination {
+    margin: auto;
+  }
+}
+
+
 /* FORMS */
 
 input, textarea, select, .uneditable-input {
