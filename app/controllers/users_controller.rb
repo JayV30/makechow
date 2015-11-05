@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @recipes = [] # CHANGE THIS ONCE USERS MODEL HAS RECIPES
     @creation_date = @user.created_at.strftime("%Y")
+    if !current_user.admin?
+      redirect_to root_url and return unless @user.activated?
+    end
   end
   
   def new
