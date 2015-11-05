@@ -12,6 +12,8 @@ User.create!( name: "Jay Karlsven",
               password_confirmation: "foobar",
               location: "Ohio",
               admin: true,
+              activated: true,
+              activated_at: Time.zone.now,
               image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
 99.times do |n|
@@ -25,5 +27,7 @@ User.create!( name: "Jay Karlsven",
                 password: password,
                 password_confirmation: password,
                 location: location,
+                activated: true,
+                activated_at: Time.zone.now,
                 image_url: image_url)
 end

@@ -6,6 +6,8 @@ michael:
   password_digest: <%= User.digest('password') %>
   location: Earth
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
   image_url: https://robohash.org/michaelexample.png?size=300x300
   
 archer:
@@ -14,6 +16,8 @@ archer:
   password_digest: <%= User.digest('password') %>
   location: Top Secret
   admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
   image_url: https://robohash.org/sterlingarcher.png?size=300x300
   
 rick:
@@ -22,6 +26,8 @@ rick:
   password_digest: <%= User.digest('password') %>
   location: Earth c137
   admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
   image_url: https://robohash.org/ricksanchez.png?size=300x300
   
 morty:
@@ -30,6 +36,8 @@ morty:
   password_digest: <%= User.digest('password') %>
   location: Earth c137
   admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
   image_url: https://robohash.org/mortysmith.png?size=300x300
   
 <% 30.times do |n| %>
@@ -39,6 +47,8 @@ user_<%= n %>:
   password_digest: <%= User.digest('password') %>
   location: <%= "User #{n} Earth" %>
   admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
   image_url: <%= "https://robohash.org/user#{n}.png?size=300x300" %>
 <% end %>
   
