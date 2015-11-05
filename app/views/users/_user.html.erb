@@ -1,5 +1,7 @@
-<% if user.admin? %>
+<% if user.admin? && user.activated? %>
   <tr class="admin-row">
+<% elsif !user.activated? %>
+  <tr class="unactivated-row">
 <% else %>
   <tr>
 <% end %>
