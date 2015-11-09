@@ -75,4 +75,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
   
+  test "associated recipes should be destroyed" do
+    @user.save
+    @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, steps: ["step one", "step two", "step three"])
+    assert_difference "Recipe.count", -1 do
+      @user.destroy
+    end
+  end
+  
 end

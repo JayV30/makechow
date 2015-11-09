@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+chocolate:
+  title: Chocolate Cake
+  description: Delicious
+  image_url: http://imgur.com/abc123.png
+  prep_time: 10
+  cook_time: 10
+  steps: [step one, step two, step three]
+  created_at: <%= 10.hours.ago %>
+  user: michael
+
+cherry:
+  title: Cherry Pie
+  description: Sweet and fresh
+  image_url: http://imgur.com/123abc.png
+  prep_time: 20
+  cook_time: 5
+  steps: [cherry one, cherry two, cherry three]
+  created_at: <%= 5.hours.ago %>
+  user: michael
+  
+most_recent:
+  title: Banana Bread
+  description: Moist and tender
+  image_url: http://imgur.com/banana.png
+  prep_time: 20
+  cook_time: 60
+  steps: [banana one, banana two, banana three]
+  created_at: <%= Time.zone.now %>
+  user: michael
+
+<% 30.times do |n| %>
+recipe_<%= n %>:
+  title: <%= Faker::Lorem.word %>
+  description: <%= Faker::Lorem.sentence %>
+  image_url: <%= Faker::Avatar.image %>
+  prep_time: n + 1
+  cook_time: n + 2
+  steps: [<%= Faker::Lorem.sentence %>, <%= Faker::Lorem.sentence %>, <%= Faker::Lorem.sentence %>]
+  user: michael
+  created_at: <%= 3.days.ago %>
+<% end %>

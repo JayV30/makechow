@@ -31,3 +31,22 @@ User.create!( name: "Jay Karlsven",
                 activated_at: Time.zone.now,
                 image_url: image_url)
 end
+
+User.first.recipes.create!( title: "Pumpkin Pie",
+                            description: "Pumpkiny",
+                            image_url: Faker::Avatar.image("pumpkinpie"),
+                            prep_time: 10,
+                            cook_time: 30,
+                            steps: ["Fill pie pan with filling", "Place in oven for 30 minutes", "Enjoy!"])
+
+users = User.where.not(id: 1)
+
+10.times do |n|
+  title = Faker::Lorem.word
+  description = Faker::Lorem.sentence
+  image_url = Faker::Avatar.image
+  prep_time = n + 1
+  cook_time = n + 2
+  steps = [Faker::Lorem.sentence, Faker::Lorem.sentence, Faker::Lorem.sentence]
+  users.each { |user| user.recipes.create!( title: title, description: description, image_url: image_url, prep_time: prep_time, cook_time: cook_time, steps: steps)}
+end
