@@ -15,4 +15,13 @@ class Recipe < ActiveRecord::Base
   validates :cook_time, presence: true, numericality: { only_ingeter: true, greater_than: -1 }
   validates :steps, presence: true
   validates :image_url, allow_blank: true, length: { maximum: 255 }, format: { with: VALID_URL_REGEX }
+  
+  def self.search(value)
+    if value
+      where(['title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term', search_term: "%" + value + "%"])
+    else
+      all
+    end
+  end
+    
 end

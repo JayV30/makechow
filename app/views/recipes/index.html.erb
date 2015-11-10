@@ -1,0 +1,27 @@
+<% provide(:title, 'Recipes') %>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if params[:search].nil? %>
+      <h1>Browse All Recipes</h1>
+    <% else %>
+      <h1>Search Results for: <span><%= params[:search] %></span></h1>
+    <% end %>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row user-recipes">
+  <% if @recipes.count == 0 %>
+    <div class="col-md-12">
+      <h3>No Recipes Found</h3>
+    </div>
+  <% else %>
+    <%= render @recipes %>
+  <% end %>
+</div> <!-- /.row -->
+
+<div class="row">
+  <%= will_paginate %>
+</div>

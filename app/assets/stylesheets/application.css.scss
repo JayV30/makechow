@@ -52,6 +52,12 @@ body > .container {
   }
 }
 
+/* HEADER NAV */
+
+.navbar input#search.form-control {
+  margin-bottom: 0;
+}
+
 /* PAGES */
 
 #intro.jumbotron {
@@ -126,4 +132,23 @@ input {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+/* TABLES */
+
+#user-list.table td {
+  vertical-align: middle;
+}
+
+.panel-heading h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.admin-row {
+  background-color: #aaffaa;
+}
+
+.unactivated-row {
+  background-color: #ff5050;
 }
