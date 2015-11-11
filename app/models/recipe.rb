@@ -17,7 +17,7 @@ class Recipe < ActiveRecord::Base
   
   def self.search(value)
     if value
-      where(['title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term', search_term: "%" + value + "%"])
+      where(['title ILIKE :search_term OR description ILIKE :search_term OR id ILIKE :search_term', search_term: "%" + value + "%"])
     else
       all
     end
