@@ -6,3 +6,31 @@
   height: 150px;
   overflow: hidden;
 }
+
+.thumbnail {
+  position: relative;
+  .recipe-buttons {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+  h3 {
+    margin-top: 10px;
+  }
+}
+
+.main-img-wrapper {
+  position: relative;
+  #img-update-fields {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    label {
+      color: #31708f;
+    }
+  }
+}

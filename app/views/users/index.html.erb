@@ -1,30 +1,32 @@
 <% provide(:title, "All Users") %>
 
 <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading"><h2>All Users</h2></div>
-    
-    <table id="user-list" class="table">
-      <thead>
-        <tr>
-          <td class="admin-row" colspan="2">admin</td>
-          <td class="unactivated-row">not activated</td>
-        </tr>
-        <tr>
-          <th>IMAGE</th>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>EMAIL</th>
-          <th>CREATED</th>
-          <th><!-- empty header for "View Profile" button --></th>
-          <th><!-- empty header for "Delete User" button --></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render @users %>
-      </tbody>
-    </table>
-    
-  </div> <!-- /.panel.panel-default -->
-  <%= will_paginate %>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h2>All Users</h2></div>
+      <div class="table-responsive">
+        <table id="user-list" class="table table-hover">
+          <thead>
+            <tr>
+              <td class="admin-row" colspan="2">admin</td>
+              <td class="unactivated-row">not activated</td>
+            </tr>
+            <tr>
+              <th>IMAGE</th>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>CREATED</th>
+              <th><!-- empty header for "View Profile" button --></th>
+              <th><!-- empty header for "Delete User" button --></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @users %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    </div> <!-- /.panel.panel-default -->
+    <%= will_paginate %>
+  </div><!-- /.col-md-12 -->
 </div> <!-- /.row -->

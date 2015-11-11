@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151109152122) do
     t.string   "image_url"
     t.integer  "prep_time"
     t.integer  "cook_time"
-    t.text     "steps"
+    t.string   "servings"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

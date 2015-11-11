@@ -2,10 +2,9 @@ class Recipe < ActiveRecord::Base
   belongs_to :user
   #belongs_to :category
   #has_many :reviews, dependent: :destroy
+  #has_many :steps, dependent: :destroy
   #has_and_belongs_to_many :ingredients
   default_scope -> { order(created_at: :desc) }
-  serialize :steps, Array
-  
   
   VALID_URL_REGEX = /(\A|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i
   validates :user_id, presence: true
@@ -13,7 +12,7 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: true
   validates :prep_time, presence: true, numericality: { only_integer: true, greater_than: -1 }
   validates :cook_time, presence: true, numericality: { only_ingeter: true, greater_than: -1 }
-  validates :steps, presence: true
+  validates :servings, presence: true, length: { maximum: 60 }
   validates :image_url, allow_blank: true, length: { maximum: 255 }, format: { with: VALID_URL_REGEX }
   
   def self.search(value)

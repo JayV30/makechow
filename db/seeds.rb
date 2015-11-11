@@ -15,6 +15,16 @@ User.create!( name: "Jay Karlsven",
               activated: true,
               activated_at: Time.zone.now,
               image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
+              
+User.create!( name: "Non Admin",
+              email: "jay@jpkarlsven.com",
+              password: "foobar",
+              password_confirmation: "foobar",
+              location: "Columbus, Ohio",
+              admin: false,
+              activated: true,
+              activated_at: Time.zone.now,
+              image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
 99.times do |n|
   name = Faker::Name.name
@@ -37,16 +47,19 @@ User.first.recipes.create!( title: "Pumpkin Pie",
                             image_url: Faker::Avatar.image("pumpkinpie"),
                             prep_time: 10,
                             cook_time: 30,
-                            steps: ["Fill pie pan with filling", "Place in oven for 30 minutes", "Enjoy!"])
+                            servings: "1 pie - 8 servings")
 
 users = User.where.not(id: 1)
 
 10.times do |n|
-  title = Faker::Lorem.word
-  description = Faker::Lorem.sentence
-  image_url = Faker::Avatar.image
-  prep_time = n + 1
-  cook_time = n + 2
-  steps = [Faker::Lorem.sentence, Faker::Lorem.sentence, Faker::Lorem.sentence]
-  users.each { |user| user.recipes.create!( title: title, description: description, image_url: image_url, prep_time: prep_time, cook_time: cook_time, steps: steps)}
+  users.each { |user| 
+    title = Faker::Lorem.word
+    description = Faker::Lorem.sentence
+    image_url = Faker::Avatar.image
+    prep_time = n + 1
+    cook_time = n + 2
+    servings = rand(1...20).to_s + " " + Faker::Lorem.word
+  
+    user.recipes.create!( title: title, description: description, image_url: image_url, prep_time: prep_time, cook_time: cook_time, servings: servings )
+  }
 end

@@ -17,7 +17,7 @@
 
 <hr/>
 
-<div class="row user-recipes">
+<div id="user-recipes" class="row user-recipes">
   <% if @user.recipes.any? %>
   <h2 class="text-center"><%= @user.name %>'s Recipes</h2>
     <% if current_user?(@user) %>

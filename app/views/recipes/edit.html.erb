@@ -1,0 +1,71 @@
+<% provide(:title, "Edit " + @recipe.title) %>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Edit Recipe</h1>
+  </div>
+</div>
+
+<hr/>
+
+<%= form_for(@recipe) do |f| %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-img-wrapper">
+      <%= image_tag(@recipe.image_url, alt: @recipe.title, class: "img") %>
+      <div id="img-update-fields">
+        <%= f.label :image_url, "Recipe Image URL" %>
+        <%= f.text_field :image_url, class: 'form-control', size: 40, value: @recipe.image_url %>
+      </div>
+    </div><!-- /.main-img-wrapper -->
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div id="recipe-panel" class="panel panel-info center-block">
+          <div class="panel-heading">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: 'form-control', value: @recipe.title %>
+          </div><!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <%= f.label :prep_time %>
+                <%= f.number_field :prep_time, class: 'form-control', value: @recipe.prep_time %>
+                <%= f.label :cook_time %>
+                <%= f.number_field :cook_time, class: 'form-control', value: @recipe.cook_time %>
+              </div>
+              <div class="col-sm-6">
+                <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins (automatically generated)</h3>
+              </div>
+            </div>
+          </div><!-- /.panel-body -->
+        </div><!-- /.panel -->
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row -->
+  </div><!-- /.col-md-12" -->
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-md-8">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control', value: @recipe.description %>
+    <hr/>
+    <h3>Directions:</h3>
+    <p>placeholder for @recipe.steps</p>
+  </div><!-- /.col-md-8 -->
+  <div class="col-md-4">
+    <div class="well well-sm">
+      <%= f.label :servings %>
+      <%= f.text_field :servings, class: 'form-control', value: @recipe.servings %>
+    </div><!-- /.well -->
+    <h3>Ingredients:</h3>
+    <p>placeholder for @recipe.indgredients</p>
+  </div><!-- /.col-md-4 -->
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= f.submit "Update Recipe", class: 'btn btn-primary' %>
+  </div><!-- /.col-md-6 -->
+</div><!-- /.row -->
+
+<% end %><!-- /form_for @recipe -->

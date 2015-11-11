@@ -12,7 +12,7 @@ class RecipesControllerTest < ActionController::TestCase
                               description: "perfect",
                               prep_time: 40,
                               cook_time: 50,
-                              steps: ["lava one", "lava two", "lava three"] }
+                              servings: "2 servings" }
     end
     assert_redirected_to login_url
   end

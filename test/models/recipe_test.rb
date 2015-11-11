@@ -4,7 +4,7 @@ class RecipeTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, steps: ["mix batter", "cook cake"])
+    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings")
   end
   
   test "recipe should be valid" do
@@ -44,8 +44,8 @@ class RecipeTest < ActiveSupport::TestCase
     assert @recipe.valid?
   end
   
-  test "steps should be present" do 
-    @recipe.steps = nil
+  test "servings should be present" do 
+    @recipe.servings = nil
     assert_not @recipe.valid?
   end
   

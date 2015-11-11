@@ -6,7 +6,7 @@ chocolate:
   image_url: http://imgur.com/abc123.png
   prep_time: 10
   cook_time: 10
-  steps: [step one, step two, step three]
+  servings: 10 servings
   created_at: <%= 10.hours.ago %>
   user: michael
 
@@ -16,7 +16,7 @@ cherry:
   image_url: http://imgur.com/123abc.png
   prep_time: 20
   cook_time: 5
-  steps: [cherry one, cherry two, cherry three]
+  servings: 10 servings
   created_at: <%= 5.hours.ago %>
   user: michael
   
@@ -26,7 +26,7 @@ most_recent:
   image_url: http://imgur.com/banana.png
   prep_time: 20
   cook_time: 60
-  steps: [banana one, banana two, banana three]
+  servings: 10 servings
   created_at: <%= Time.zone.now %>
   user: michael
 
@@ -37,7 +37,7 @@ recipe_<%= n %>:
   image_url: <%= Faker::Avatar.image %>
   prep_time: n + 1
   cook_time: n + 2
-  steps: [<%= Faker::Lorem.sentence %>, <%= Faker::Lorem.sentence %>, <%= Faker::Lorem.sentence %>]
+  servings: <%= rand(1...20).to_s + " " + Faker::Lorem.word %>
   user: michael
   created_at: <%= 3.days.ago %>
 <% end %>

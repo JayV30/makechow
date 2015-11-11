@@ -6,7 +6,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :image_url
       t.integer :prep_time
       t.integer :cook_time
-      t.text :steps
+      t.string :servings
       
       t.references :user, index: true, foreign_key: true
 
