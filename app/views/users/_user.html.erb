@@ -5,7 +5,7 @@
 <% else %>
   <tr>
 <% end %>
-    <td><%= image_tag(user.image_url, size: "32", alt: user.name) %></td>
+    <td><%= image_tag(user.image_url.url, size: "32", alt: user.name) if user.image_url %></td>
     <td><%= user.id %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>

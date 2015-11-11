@@ -14,7 +14,7 @@ User.create!( name: "Jay Karlsven",
               admin: true,
               activated: true,
               activated_at: Time.zone.now,
-              image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
+              remote_image_url_url: "http://jpkarlsven.com/img/cartoon_jay.png")
               
 User.create!( name: "Non Admin",
               email: "jay@jpkarlsven.com",
@@ -24,14 +24,14 @@ User.create!( name: "Non Admin",
               admin: false,
               activated: true,
               activated_at: Time.zone.now,
-              image_url: "http://jpkarlsven.com/img/cartoon_jay.png")
+              remote_image_url_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
 99.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = "password"
   location = Faker::Address.city
-  image_url = Faker::Avatar.image
+  image_url = Faker::Lorem.word
   User.create!( name: name,
                 email: email,
                 password: password,
@@ -39,7 +39,7 @@ User.create!( name: "Non Admin",
                 location: location,
                 activated: true,
                 activated_at: Time.zone.now,
-                image_url: image_url)
+                remote_image_url_url: "https://robohash.org/#{image_url}.png")
 end
 
 User.first.recipes.create!( title: "Pumpkin Pie",

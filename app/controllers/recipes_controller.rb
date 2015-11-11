@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
   def destroy
     Recipe.find(params[:id]).destroy
     flash[:success] = "Recipe deleted"
-    redirect_to current_user
+    redirect_to request.referrer || current_user
   end
   
   private
@@ -51,8 +51,8 @@ class RecipesController < ApplicationController
     end
     
     def recipe_owner
-      @recipe = Recipe.find(params[:id])
-      unless current_user.id == @recipe.user_id
+      @recipe = current_user.recipes.find_by(id: params[:id])
+      if @recipe.nil?
         flash[:danger] = "Cannot modify another users recipes"
         redirect_to root_url
       end

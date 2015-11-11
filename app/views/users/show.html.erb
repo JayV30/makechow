@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-4">
-    <%= image_tag(@user.image_url, alt: @user.name + " Profile Image", class: "img-responsive img-rounded") %>
+    <%= image_tag(@user.image_url.url, alt: @user.name + " Profile Image", class: "img-responsive img-rounded") if @user.image_url? %>
   </div>
   <div class="col-md-8">
     <h1><%= @user.name %></h1>

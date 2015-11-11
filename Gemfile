@@ -11,9 +11,13 @@ gem 'uglifier',     '2.5.3'
 gem 'coffee-rails', '4.1.0'
 gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
+gem 'jquery-turbolinks'
 gem 'jbuilder',     '2.2.3'
 gem 'therubyracer', '0.12.2'
 gem 'bootstrap-sass','~> 3.3.5'
+gem 'carrierwave',  '0.10.0'
+gem 'mini_magick',  '3.8.0'
+gem 'fog',          '1.26.0'
 gem 'sdoc',         '0.4.0', group: :doc
 
 group :development, :test do

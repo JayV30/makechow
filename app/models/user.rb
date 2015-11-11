@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   
   has_many :recipes, dependent: :destroy
  # has_many :reviews, through: :recipes
+ 
+  mount_uploader :image_url, ImageUploader
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_URL_REGEX = /(\A|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :location, allow_blank: true, length: { maximum: 200 }
-  validates :image_url, allow_blank: true, length: { maximum: 255 }, format: { with: VALID_URL_REGEX }
+  validate :image_size
   
   # Returns the hash digest of the given string
   def self.digest(string) 
@@ -83,5 +85,12 @@ class User < ActiveRecord::Base
     def create_activation_digest
       self.activation_token = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+    
+    # Validates size of an uploaded image
+    def image_size
+      if image_url.size > 5.megabytes
+        errors.add(:image_url, "should be less than 5MB")
+      end
     end
 end

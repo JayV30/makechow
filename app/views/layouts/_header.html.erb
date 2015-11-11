@@ -14,7 +14,7 @@
         
         <ul class="nav navbar-nav">
           <li><%= link_to "Browse Recipes", recipes_path %></li>
-          <li><%= link_to "Your Recipe Book", user_path(current_user, anchor: "user-recipes") %></li>
+          <li><%= link_to "Your Recipe Book", user_path(current_user, anchor: "user-recipes") if logged_in? %></li>
         </ul>
         
         <%= form_tag recipes_path, :method => 'get', class: 'navbar-form navbar-left', role: 'search' do %>
