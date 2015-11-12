@@ -8,10 +8,12 @@ class RecipesController < ApplicationController
   
   def show
     @recipe = Recipe.find(params[:id])
+    @steps = @recipe.steps.all
   end
   
   def new
     @recipe = Recipe.new
+    3.times { |n| @recipe.steps.build(step_number: n + 1) } # needed to display form fields
   end
   
   def create
@@ -26,6 +28,7 @@ class RecipesController < ApplicationController
   
   def edit 
     @recipe = Recipe.find(params[:id])
+    @recipe.steps.build(step_number: 1) if @recipe.steps.empty? # need at least one instance to display form field
   end
   
   def update
@@ -47,7 +50,7 @@ class RecipesController < ApplicationController
   private
   
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings)
+      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, steps_attributes: [:step_number, :content])
     end
     
     def recipe_owner

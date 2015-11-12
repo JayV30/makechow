@@ -26,7 +26,8 @@ User.create!( name: "Non Admin",
               activated_at: Time.zone.now,
               remote_image_url_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
-99.times do |n|
+# Create 98 other Users                           
+98.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = "password"
@@ -42,31 +43,32 @@ User.create!( name: "Non Admin",
                 remote_image_url_url: "https://robohash.org/#{image_url}.png")
 end
 
-User.first.recipes.create!( title: "Pumpkin Pie",
-                            description: "Pumpkiny",
-                            remote_image_url_url: "https://robohash.org/pumpkinpie.png",
-                            prep_time: 10,
-                            cook_time: 30,
-                            servings: "1 pie - 8 servings")
-                            
-User.first.recipes.create!( title: "Chocolate Cake",
-                            description: "Moist, delcious chocolate cake that is SUPER EASY to make!",
-                            remote_image_url_url: "https://robohash.org/chocolatecake.png",
-                            prep_time: 50,
-                            cook_time: 50,
-                            servings: "1 cake - 12 slices")
 
-users = User.where.not(id: 1)
+# Create 10 Recipies for each user
+users = User.all
 
 10.times do |n|
   users.each { |user| 
-    title = Faker::Lorem.word
-    description = Faker::Lorem.sentence
+    title = Faker::Lorem.word + " " + Faker::Lorem.word
+    description = Faker::Lorem.paragraph
     image_url = Faker::Lorem.word
-    prep_time = n + 1
-    cook_time = n + 2
+    prep_time = rand(1...100)
+    cook_time = rand(1...120)
     servings = rand(1...20).to_s + " " + Faker::Lorem.word
   
     user.recipes.create!( title: title, description: description, remote_image_url_url: "https://robohash.org/#{image_url}.png", prep_time: prep_time, cook_time: cook_time, servings: servings )
   }
 end
+
+# Create 5 Steps for each Recipe
+recipes = Recipe.all
+
+5.times do |n|
+  recipes.each { |recipe|
+    step_number = n
+    content = Faker::Lorem.paragraph
+    
+    recipe.steps.create!( step_number: step_number, content: content)
+  }
+end
+  

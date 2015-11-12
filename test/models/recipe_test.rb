@@ -53,4 +53,12 @@ class RecipeTest < ActiveSupport::TestCase
     assert_equal recipes(:most_recent), Recipe.first
   end
   
+  test "associated steps should be destroyed" do
+    @recipe.save
+    @recipe.steps.create!(step_number: 1, content: "Lorem ipsum")
+    assert_difference 'Step.count', -1 do 
+      @recipe.destroy
+    end
+  end
+  
 end

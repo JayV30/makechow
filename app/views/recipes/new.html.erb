@@ -8,7 +8,7 @@
 
 <hr/>
 
-<%= form_for(@recipe) do |f| %>
+<%= form_for @recipe do |f| %>
 <div class="row">
   <div class="col-md-12">
     <%= render 'shared/error_messages', object: f.object %>
@@ -16,18 +16,23 @@
       <div class="col-md-8 col-md-offset-2">
         <div id="recipe-panel" class="panel panel-info center-block">
           <div class="panel-heading">
-            <%= f.label :title %>
-            <%= f.text_field :title, class: 'form-control' %>
+            <div class="form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title, class: 'form-control' %>
+            </div><!-- /.form-group -->
           </div><!-- /.panel-heading -->
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">
-                <%= f.label :prep_time %>
-                <%= f.number_field :prep_time, class: 'form-control', placeholder: 'minutes' %>
-                
-                <%= f.label :cook_time %>
-                <%= f.number_field :cook_time, class: 'form-control', placeholder: 'minutes' %>
-              </div>
+                <div class="form-group">
+                  <%= f.label :prep_time %>
+                  <%= f.number_field :prep_time, class: 'form-control', placeholder: 'minutes' %>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                  <%= f.label :cook_time %>
+                  <%= f.number_field :cook_time, class: 'form-control', placeholder: 'minutes' %>
+                </div><!-- /.form-group -->
+              </div><!-- /.col-sm-6 -->
             </div><!-- /.row -->
           </div><!-- /.panel-body -->
         </div><!-- /.panel -->
@@ -35,8 +40,10 @@
     </div><!-- /.row -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <%= f.label :image_url, "Recipe Image (5MB or less)" %>
-        <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
+        <div class="form-group">
+          <%= f.label :image_url, "Recipe Image (5MB or less)" %>
+          <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
+        </div><!-- /.form-group -->
       </div><!-- /.col-md-8 -->
     </div><!-- /.row -->
   </div><!-- /.col-md-12" -->
@@ -46,15 +53,26 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control' %>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control', rows: '4' %>
+    </div><!-- /.form-group -->
     <hr/>
     <h3>Directions:</h3>
-    <p>placeholder for @recipe.steps</p>
+      <%= f.fields_for :steps do |step| %>
+          <div class="form-group">
+            <%= step.label :step_number %>
+            <%= step.number_field :step_number, class: 'form-control' %>
+            <%= step.label :content %>
+            <%= step.text_area :content, class: 'form-control' %>
+          </div><!-- /.form-group -->
+      <% end %> <!-- / fields_for :steps -->
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
-    <%= f.label :servings %>
-    <%= f.text_field :servings, class: 'form-control' %>
+    <div class="form-group">
+      <%= f.label :servings %>
+      <%= f.text_field :servings, class: 'form-control' %>
+    </div>
     <h3>Ingredients:</h3>
     <p>placeholder for @recipe.indgredients</p>
   </div><!-- /.col-md-4 -->

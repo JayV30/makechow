@@ -39,7 +39,13 @@
     <p class="lead"><%= @recipe.description %></p>
     <hr/>
     <h3>Directions:</h3>
-    <p>placeholder for @recipe.steps</p>
+    <% if @recipe.steps.any? %>
+      <ol class="steps">
+        <%= render @steps %>
+      </ol>
+    <% else %>
+      <h4>No instructions provided</h4>
+    <% end %>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
     <div class="well well-sm">Servings: <%= @recipe.servings %></div>

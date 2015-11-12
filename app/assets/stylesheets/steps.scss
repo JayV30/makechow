@@ -1,0 +1,11 @@
+// Place all the styles related to the Steps controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ol.steps {
+  list-style: none;
+  padding-left: 0;
+  li {
+    margin-bottom: 1.2em;
+  }
+}
