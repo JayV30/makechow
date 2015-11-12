@@ -18,6 +18,7 @@ gem 'bootstrap-sass','~> 3.3.5'
 gem 'carrierwave',  '0.10.0'
 gem 'mini_magick',  '3.8.0'
 gem 'fog',          '1.26.0'
+gem 'cocoon',       '~> 1.2.6'
 gem 'sdoc',         '0.4.0', group: :doc
 
 group :development, :test do

@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= f.label :step_number %>
+  <%= f.number_field :step_number, class: 'form-control' %>
+  <%= f.label :content %>
+  <%= f.text_area :content, class: 'form-control' %>
+  <%= link_to_remove_association "remove step", f, { wrapper_class: "form-group" } %>
+</div><!-- /.form-group -->

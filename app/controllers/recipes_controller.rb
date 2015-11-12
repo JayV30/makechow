@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
-    3.times { |n| @recipe.steps.build(step_number: n + 1) } # needed to display form fields
+    @recipe.steps.build(step_number: 1) # needed to display form fields
   end
   
   def create

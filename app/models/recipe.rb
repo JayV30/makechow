@@ -4,7 +4,7 @@ class Recipe < ActiveRecord::Base
   #has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
   #has_and_belongs_to_many :ingredients
-  accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: lambda { |attributes| attributes['content'].blank? }
+  accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
   
   mount_uploader :image_url, ImageUploader
   

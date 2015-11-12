@@ -58,15 +58,13 @@
       <%= f.text_area :description, class: 'form-control', rows: '4' %>
     </div><!-- /.form-group -->
     <hr/>
-    <h3>Directions:</h3>
+    <div id="steps">
+      <h3>Directions:</h3>
       <%= f.fields_for :steps do |step| %>
-          <div class="form-group">
-            <%= step.label :step_number %>
-            <%= step.number_field :step_number, class: 'form-control' %>
-            <%= step.label :content %>
-            <%= step.text_area :content, class: 'form-control' %>
-          </div><!-- /.form-group -->
+       <%= render 'step_fields', f: step %>
       <% end %> <!-- / fields_for :steps -->
+      <%= link_to_add_association 'add a step', f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" }%>
+    </div>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
     <div class="form-group">
