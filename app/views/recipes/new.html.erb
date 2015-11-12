@@ -35,9 +35,9 @@
     </div><!-- /.row -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <%= f.label :image_url, "Recipe Image URL" %>
-        <%= f.url_field :image_url, class: 'form-control' %>
-      </div>
+        <%= f.label :image_url, "Recipe Image (5MB or less)" %>
+        <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
+      </div><!-- /.col-md-8 -->
     </div><!-- /.row -->
   </div><!-- /.col-md-12" -->
 </div><!-- /.row -->

@@ -4,16 +4,18 @@ class Recipe < ActiveRecord::Base
   #has_many :reviews, dependent: :destroy
   #has_many :steps, dependent: :destroy
   #has_and_belongs_to_many :ingredients
+  
+  mount_uploader :image_url, ImageUploader
+  
   default_scope -> { order(created_at: :desc) }
   
-  VALID_URL_REGEX = /(\A|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 80 }
   validates :description, presence: true
   validates :prep_time, presence: true, numericality: { only_integer: true, greater_than: -1 }
   validates :cook_time, presence: true, numericality: { only_ingeter: true, greater_than: -1 }
   validates :servings, presence: true, length: { maximum: 60 }
-  validates :image_url, allow_blank: true, length: { maximum: 255 }, format: { with: VALID_URL_REGEX }
+  validate :image_size
   
   def self.search(value)
     if value
@@ -26,5 +28,14 @@ class Recipe < ActiveRecord::Base
       all
     end
   end
+  
+  private
+  
+    # Validates size of an uploaded image
+    def image_size
+      if image_url.size > 5.megabytes
+        errors.add(:image_url, "should be less than 5MB")
+      end
+    end
     
 end

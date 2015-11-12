@@ -2,7 +2,7 @@
   <div class="thumbnail">
   <%= link_to(recipe) do %>
     <div class="thumb-img">
-      <%= image_tag recipe.image_url, alt: recipe.title, class:"img" %>
+      <%= image_tag(recipe.image_url.url, alt: recipe.title, class: "img") if recipe.image_url? %>
     </div>
     <div class="caption">
       <h3><%= recipe.title %></h3>

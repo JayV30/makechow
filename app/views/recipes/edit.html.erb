@@ -12,10 +12,10 @@
 <div class="row">
   <div class="col-md-12">
     <div class="main-img-wrapper">
-      <%= image_tag(@recipe.image_url, alt: @recipe.title, class: "img") %>
+      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") if @recipe.image_url? %>
       <div id="img-update-fields">
-        <%= f.label :image_url, "Recipe Image URL" %>
-        <%= f.text_field :image_url, class: 'form-control', size: 40, value: @recipe.image_url %>
+       <%= f.label :image_url, "Recipe Image (5MB or less)" %>
+       <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
       </div>
     </div><!-- /.main-img-wrapper -->
     <div class="row">

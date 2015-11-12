@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="main-img-wrapper">
-      <%= image_tag(@recipe.image_url, alt: @recipe.title, class: "img") %>
+      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") if @recipe.image_url? %>
     </div><!-- /.main-img-wrapper -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">

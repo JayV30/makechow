@@ -52,9 +52,11 @@ class RecipesController < ApplicationController
     
     def recipe_owner
       @recipe = current_user.recipes.find_by(id: params[:id])
-      if @recipe.nil?
-        flash[:danger] = "Cannot modify another users recipes"
-        redirect_to root_url
+      unless current_user.admin?
+        if @recipe.nil?
+          flash[:danger] = "Cannot modify another users recipes"
+          redirect_to root_url
+        end
       end
     end
 end
