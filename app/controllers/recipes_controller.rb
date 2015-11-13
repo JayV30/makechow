@@ -50,13 +50,13 @@ class RecipesController < ApplicationController
   private
   
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, steps_attributes: [:step_number, :content])
+      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, steps_attributes: [:id, :step_number, :content, :_destroy])
     end
     
     def recipe_owner
-      @recipe = current_user.recipes.find_by(id: params[:id])
+      recipe = current_user.recipes.find_by(id: params[:id])
       unless current_user.admin?
-        if @recipe.nil?
+        if recipe.nil?
           flash[:danger] = "Cannot modify another users recipes"
           redirect_to root_url
         end

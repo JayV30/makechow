@@ -8,9 +8,10 @@
 
 <hr/>
 
-<%= form_for(@recipe) do |f| %>
+<%= form_for(@recipe, html: { mulitpart: true }) do |f| %>
 <div class="row">
   <div class="col-md-12">
+    <%= render 'shared/error_messages', object: f.object %>
     <div class="main-img-wrapper">
       <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") if @recipe.image_url? %>
       <div id="img-update-fields">
@@ -54,7 +55,11 @@
       <%= f.fields_for :steps do |step| %>
        <%= render 'step_fields', f: step %>
       <% end %> <!-- / fields_for :steps -->
-      <%= link_to_add_association 'add a step', f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" }%>
+      <%= link_to_add_association f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" } do %>
+          <%= button_tag type: 'button', class: 'delete-button btn btn-success' do %>
+             <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Add Step
+          <% end %>
+      <% end %>
     </div>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
