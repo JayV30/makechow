@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
-    @recipe.steps.build(step_number: 1) # needed to display form fields
+    @recipe.steps.build(step_number: 0) # needed to display form fields
   end
   
   def create
@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
   
   def edit 
     @recipe = Recipe.find(params[:id])
-    @recipe.steps.build(step_number: 1) if @recipe.steps.empty? # need at least one instance to display form field
+    @recipe.steps.build(step_number: 0) if @recipe.steps.empty? # need at least one instance to display form field
   end
   
   def update

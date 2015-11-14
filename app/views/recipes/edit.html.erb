@@ -49,24 +49,31 @@
   <div class="col-md-8">
     <%= f.label :description %>
     <%= f.text_area :description, class: 'form-control', value: @recipe.description %>
-    <hr/>
-    <div id="steps">
-      <h3>Directions:</h3>
-      <%= f.fields_for :steps do |step| %>
-       <%= render 'step_fields', f: step %>
-      <% end %> <!-- / fields_for :steps -->
-      <%= link_to_add_association f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" } do %>
-          <%= button_tag type: 'button', class: 'delete-button btn btn-success' do %>
-             <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Add Step
-          <% end %>
-      <% end %>
-    </div>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
     <div class="well well-sm">
       <%= f.label :servings %>
       <%= f.text_field :servings, class: 'form-control', value: @recipe.servings %>
     </div><!-- /.well -->
+  </div>
+  <hr/>
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-md-8">
+    <div id="steps">
+      <h3>Directions:</h3>
+      <%= f.fields_for :steps do |step| %>
+       <%= render 'step_fields', f: step %>
+      <% end %> <!-- / fields_for :steps -->
+      <%= link_to_add_association f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" } do %>
+          <%= button_tag type: 'button', class: 'add-button btn btn-success' do %>
+             <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Add Step
+          <% end %>
+      <% end %>
+    </div>
+  </div><!-- /.col-md-8 -->
+  <div class="col-md-4">
     <h3>Ingredients:</h3>
     <p>placeholder for @recipe.indgredients</p>
   </div><!-- /.col-md-4 -->
@@ -74,7 +81,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= f.submit "Update Recipe", class: 'btn btn-primary' %>
+    <%= f.submit "Update Recipe", class: 'create-button btn btn-primary' %>
   </div><!-- /.col-md-6 -->
 </div><!-- /.row -->
 

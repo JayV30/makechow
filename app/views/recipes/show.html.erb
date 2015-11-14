@@ -37,7 +37,15 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead"><%= @recipe.description %></p>
-    <hr/>
+  </div><!-- /.col-md-8 --> 
+  <div class="col-md-4">
+    <div class="well well-sm">Servings: <%= @recipe.servings %></div>
+  </div> 
+  <hr/>
+</div><!-- /.row -->
+    
+<div class="row">
+  <div class="col-md-8">    
     <h3>Directions:</h3>
     <% if @recipe.steps.any? %>
       <ol class="steps">
@@ -48,7 +56,6 @@
     <% end %>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
-    <div class="well well-sm">Servings: <%= @recipe.servings %></div>
     <h3>Ingredients:</h3>
     <p>placeholder for @recipe.indgredients</p>
   </div><!-- /.col-md-4 -->

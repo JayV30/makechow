@@ -63,7 +63,11 @@
       <%= f.fields_for :steps do |step| %>
        <%= render 'step_fields', f: step %>
       <% end %> <!-- / fields_for :steps -->
-      <%= link_to_add_association 'add a step', f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" }%>
+      <%= link_to_add_association f, :steps, data: { "association-insertion-node" => "#steps > div:last-of-type", "association-insertion-method" => "after" } do %>
+          <%= button_tag type: 'button', class: 'add-button btn btn-success' do %>
+             <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Add Step
+          <% end %>
+      <% end %>
     </div>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
@@ -78,7 +82,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= f.submit "Create Recipe", class: 'btn btn-primary' %>
+    <%= f.submit "Create Recipe", class: 'create-button btn btn-primary' %>
   </div>
 </div>
 <% end %>
