@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
   end
   
   def destroy
-    id = @review.id
+    id = @review.recipe_id
     @review.destroy
     flash[:success] = "Review deleted"
     redirect_to recipe_path(id)
