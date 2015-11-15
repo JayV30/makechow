@@ -6,7 +6,11 @@
     </div>
     <div class="caption">
       <h3><%= recipe.title %></h3>
-      <p><%= recipe.description %></p>
+      <% if recipe.description.length < 71 %>
+        <p><%= recipe.description %></p>
+      <% else %>
+        <p><%= recipe.description[0...70].concat("...") %></p>
+      <% end %>
     </div> <!-- /.caption -->
   <% end %>
   <% if logged_in? %>
