@@ -57,6 +57,12 @@
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
     <h3>Ingredients:</h3>
-    <p>placeholder for @recipe.indgredients</p>
+    <% if @recipe.ingredients.any? %>
+      <ul class="ingredients">
+        <%= render @ingredients %>
+      </ul>
+    <% else %>
+      <h4>No ingredients provided</h4>
+    <% end %>
   </div><!-- /.col-md-4 -->
 </div><!-- /.row -->

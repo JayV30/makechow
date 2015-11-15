@@ -1,13 +1,13 @@
 <div class="form-group">
 
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <%= f.hidden_field :step_number, class: 'form-control', "data-field": "step_number" %>
       <div class="field">
         <%= f.text_area :content, rows: 4, class: 'form-control' %>
       </div>
-    </div><!-- /.col-sm-8 -->
-    <div class="col-sm-4">
+    </div><!-- /.col-sm-9 -->
+    <div class="col-sm-3">
       <div class="btn-group" role="group" aria-label="...">
         <%= button_tag type: 'button', class: 'move-up-button btn btn-default' do %>
           <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
@@ -21,8 +21,7 @@
              <span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
           <% end %>
         <% end %>
-    
-    </div><!-- /.col-sm-4 -->
+    </div><!-- /.col-sm-3 -->
   </div><!-- /.row -->
 
 </div><!-- /.form-group -->

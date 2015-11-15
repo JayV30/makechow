@@ -3,19 +3,20 @@ class Recipe < ActiveRecord::Base
   #belongs_to :category
   #has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
-  #has_and_belongs_to_many :ingredients
+  has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
   
   mount_uploader :image_url, ImageUploader
   
   default_scope -> { order(created_at: :desc) }
   
   validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 80 }
+  validates :title, presence: true, length: { maximum: 130 }
   validates :description, presence: true
   validates :prep_time, presence: true, numericality: { only_integer: true, greater_than: -1 }
   validates :cook_time, presence: true, numericality: { only_ingeter: true, greater_than: -1 }
-  validates :servings, presence: true, length: { maximum: 60 }
+  validates :servings, presence: true, length: { maximum: 80 }
   validate :image_size
   
   def self.search(value)

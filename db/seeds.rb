@@ -71,4 +71,14 @@ recipes = Recipe.all
     recipe.steps.create!( step_number: step_number, content: content)
   }
 end
+
+# Create 5 Ingredients for each Recipe
+5.times do |n|
+  recipes.each { |recipe|
+    quantity = rand(1...30).to_s + " " + Faker::Lorem.word
+    name = Faker::Lorem.word
+    
+    recipe.ingredients.create!(quantity: quantity, name: name)
+  }
+end
   

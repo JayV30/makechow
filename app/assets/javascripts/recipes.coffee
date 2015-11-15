@@ -47,6 +47,13 @@ $ ->
       step_to_be_added.fadeIn "slow"
     .on "cocoon:after-insert", ->
       setOrder()
+      
+  $('#ingredients')
+    .on "cocoon:before-remove", (e, step) ->
+      $(this).data 'remove-timeout', 1000
+      step.fadeOut "slow"
+    .on "cocoon:before-insert", (e, step_to_be_added) ->
+      step_to_be_added.fadeIn "slow"
 
   $('.move-up-button').on 'click', (e) ->
     e.preventDefault  

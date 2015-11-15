@@ -74,8 +74,17 @@
     </div>
   </div><!-- /.col-md-8 -->
   <div class="col-md-4">
-    <h3>Ingredients:</h3>
-    <p>placeholder for @recipe.indgredients</p>
+    <div id="ingredients">
+      <h3>Ingredients:</h3>
+      <%= f.fields_for :ingredients do |ingredient| %>
+        <%= render 'ingredient_fields', f: ingredient %>
+      <% end %>
+      <%= link_to_add_association f, :ingredients, data: { "association-insertion-node" => "#ingredients > div:last-of-type", "association-insertion-method" => "after" } do %>
+          <%= button_tag type: 'button', class: 'add-button btn btn-success' do %>
+             <span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Add Ingredient
+          <% end %>
+      <% end %>
+    </div><!-- /#ingredients -->
   </div><!-- /.col-md-4 -->
 </div><!-- /.row -->
 
