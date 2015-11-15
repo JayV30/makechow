@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   before_create :create_activation_digest
   
   has_many :recipes, dependent: :destroy
- # has_many :reviews, through: :recipes
+  has_many :reviews, dependent: :destroy
  
   mount_uploader :image_url, ImageUploader
   

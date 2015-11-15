@@ -1,7 +1,7 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
   #belongs_to :category
-  #has_many :reviews, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank

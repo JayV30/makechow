@@ -10,6 +10,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @steps = @recipe.steps.all
     @ingredients = @recipe.ingredients.all
+    @reviews = @recipe.reviews.all
+    if logged_in?
+      @review = current_user.reviews.find_by(recipe_id: params[:id]) || current_user.reviews.build
+    end
   end
   
   def new

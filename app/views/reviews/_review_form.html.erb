@@ -1,0 +1,28 @@
+<% if review_exists?(@recipe) %>
+  <%= form_for(@review) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group">
+      <%= f.hidden_field :recipe_id, value: @review.recipe_id %>
+      <%= f.number_field :rating, class: 'form-control', value: @review.rating %>
+      <%= f.text_area :content, class: 'form-control', value: @review.content %>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-2">
+        <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+      </div>
+  <% end %>
+      <div class="col-sm-4">
+        <%= link_to "Delete", @review, method: :delete, class: "btn btn-danger btn-block", role: "button" %>
+      </div>
+    </div>
+<% else %>
+  <%= form_for(@review) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group">
+      <%= f.hidden_field :recipe_id, value: params[:id] %>
+      <%= f.number_field :rating, class: 'form-control', placeholder: "Enter a number 1-5" %>
+      <%= f.text_area :content, class: 'form-control', placeholder: "Your review" %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

@@ -81,4 +81,16 @@ end
     recipe.ingredients.create!(quantity: quantity, name: name)
   }
 end
+
+# Create 2 Reviews for each Recipe
+2.times do |n|
+  recipes.each { |recipe|
+    user = User.order("RANDOM()").first
+    recipe_id = recipe.id
+    rating = rand(0...4)
+    content = Faker::Lorem.sentence
+    
+    user.reviews.create!(recipe_id: recipe_id, rating: rating, content: content)
+  }
+end
   

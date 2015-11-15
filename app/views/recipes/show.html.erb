@@ -66,3 +66,46 @@
     <% end %>
   </div><!-- /.col-md-4 -->
 </div><!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Reviews</h2>
+    <div class="row">
+      <% if @recipe.reviews.any? %>
+        <%= render @reviews %>
+      <% else %>
+        <div class="col-md-12">
+          <h3>No reviews yet.</h3>
+        </div><!-- /.col-md-12 -->
+      <% end %>
+    </div><!-- /.row -->
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <% if logged_in? && review_exists?(@recipe) %>
+      <h4>Change your review:</h4>
+    <% else %>
+      <h4>Leave a review:</h4>
+    <% end %>
+  </div><!-- /.col-sm-12 -->
+</div><!-- ./row -->
+
+<% if logged_in? %>  
+  <div class="row">
+    <div class="col-sm-6">
+      <%= render 'reviews/review_form' %>
+      <%= render 'shared/user_small' %>
+    </div>
+    <div class="col-sm-6">
+      <p>PLUG SOMETHING ELSE HERE</p>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to "Log in to leave a review", login_path, :class => "btn btn-primary", :role => "button" %>
+    </div><!-- /.col-sm-12 -->
+  </div><!-- /.row -->
+<% end %>

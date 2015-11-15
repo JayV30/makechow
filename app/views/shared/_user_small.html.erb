@@ -1,0 +1,2 @@
+ <%= image_tag(current_user.image_url.url, size: "50", alt: current_user.name, class: "img") if current_user.image_url? %>
+ <%= current_user.name %>
