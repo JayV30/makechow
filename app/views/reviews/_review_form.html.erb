@@ -3,7 +3,18 @@
     <%= render 'shared/error_messages', object: f.object %>
     <div class="form-group">
       <%= f.hidden_field :recipe_id, value: @review.recipe_id %>
-      <%= f.number_field :rating, class: 'form-control', value: @review.rating %>
+      <fieldset class="rating">
+        <%= f.radio_button :rating, "5", :checked => @review.rating == 5 ? true : nil %>
+        <%= f.label :rating, value: "5" %>
+        <%= f.radio_button :rating, "4", :checked => @review.rating == 4 ? true : nil %>
+        <%= f.label :rating, value: "4" %>
+        <%= f.radio_button :rating, "3", :checked => @review.rating == 3 ? true : nil %>
+        <%= f.label :rating, value: "3" %>
+        <%= f.radio_button :rating, "2", :checked => @review.rating == 2 ? true : nil %>
+        <%= f.label :rating, value: "2" %>
+        <%= f.radio_button :rating, "1", :checked => @review.rating == 1 ? true : nil %>
+        <%= f.label :rating, value: "1" %>
+      </fieldset>
       <%= f.text_area :content, class: 'form-control', value: @review.content %>
     </div>
     <div class="row">
@@ -20,7 +31,18 @@
     <%= render 'shared/error_messages', object: f.object %>
     <div class="form-group">
       <%= f.hidden_field :recipe_id, value: params[:id] %>
-      <%= f.number_field :rating, class: 'form-control', placeholder: "Enter a number 1-5" %>
+      <fieldset class="rating">
+        <%= f.radio_button :rating, "5" %>
+        <%= f.label :rating, value: "5" %>
+        <%= f.radio_button :rating, "4" %>
+        <%= f.label :rating, value: "4" %>
+        <%= f.radio_button :rating, "3" %>
+        <%= f.label :rating, value: "3" %>
+        <%= f.radio_button :rating, "2" %>
+        <%= f.label :rating, value: "2" %>
+        <%= f.radio_button :rating, "1" %>
+        <%= f.label :rating, value: "1" %>
+      </fieldset>
       <%= f.text_area :content, class: 'form-control', placeholder: "Your review" %>
     </div>
     <%= f.submit "Submit", class: "btn btn-primary" %>

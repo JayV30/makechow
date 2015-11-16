@@ -1,10 +1,49 @@
 <div class="col-sm-4">
-  <div class="panel panel-default">
+  <div class="panel panel-default review-panel">
     <div class="panel-heading">
-      <h3 class="panel-title">Rating: <%= review.rating %> stars</h3>
-    </div>
+      <div class="rating-display">
+        <% if review.rating == 5 %>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif review.rating == 4 %>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif review.rating == 3 %>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif review.rating == 2 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif review.rating == 1 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+        <% else %>
+        
+        <% end %>
+      </div><!-- /.rating-display -->
+    </div><!-- /.panel-heading -->
     <div class="panel-body">
       <p><%= review.content %></p>
-    </div>
-  </div>
-</div>
+    </div><!-- /.panel-body -->
+    <div class="panel-footer">
+      <%= image_tag(review.user.image_url.url, size: "32", alt: review.user.name, class: "img") if review.user.image_url? %>
+      <%= review.user.name %>
+      <%= review.updated_at.strftime("%b %d %Y") %>
+    </div><!-- /.panel-footer -->
+  </div><!-- /.panel -->
+</div><!-- /.col-sm-4 -->
