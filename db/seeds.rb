@@ -26,8 +26,8 @@ User.create!( name: "Non Admin",
               activated_at: Time.zone.now,
               remote_image_url_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
-# Create 98 other Users                           
-98.times do |n|
+# Create 20 other Users                           
+20.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = "password"
@@ -82,12 +82,12 @@ end
   }
 end
 
-# Create 2 Reviews for each Recipe
-2.times do |n|
+# Create 10 Reviews for each Recipe
+10.times do |n|
   recipes.each { |recipe|
     user = User.order("RANDOM()").first
     recipe_id = recipe.id
-    rating = rand(0...4)
+    rating = rand(1...5)
     content = Faker::Lorem.sentence
     
     user.reviews.create!(recipe_id: recipe_id, rating: rating, content: content)

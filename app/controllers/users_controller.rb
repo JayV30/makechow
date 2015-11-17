@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @recipes = @user.recipes.paginate(page: params[:page], per_page: 8)
+    @recipes = @user.recipes.paginate(page: params[:recipe_page], per_page: 8)
+    @reviews = @user.reviews.paginate(page: params[:review_page], per_page: 6)
     @creation_date = @user.created_at.strftime("%Y")
     unless @user.activated? || current_user.admin?
       redirect_to root_url and return

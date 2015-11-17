@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div class="col-sm-4" id="review-<%= review.id %>">
   <div class="panel panel-default review-panel">
     <div class="panel-heading">
       <div class="rating-display">
@@ -33,17 +33,27 @@
           <span></span>
           <span class="filled-star"></span>
         <% else %>
-        
+          <p>error retrieving star rating</p>
         <% end %>
       </div><!-- /.rating-display -->
     </div><!-- /.panel-heading -->
     <div class="panel-body">
       <p><%= review.content %></p>
+      <p class="text-center">
+        <%= link_to("#") do %>
+        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> full review <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+        <% end %>
+      </p>
     </div><!-- /.panel-body -->
     <div class="panel-footer">
-      <%= image_tag(review.user.image_url.url, size: "32", alt: review.user.name, class: "img") if review.user.image_url? %>
-      <%= review.user.name %>
-      <%= review.updated_at.strftime("%b %d %Y") %>
+      <div class="row no-gutter">
+        <div class="col-xs-2">
+          <%= link_to(image_tag(review.user.image_url.url, size: "32", alt: review.user.name, class: "img"), review.user) if review.user.image_url? %>
+        </div><!-- /.col-xs-2 -->
+        <div class="col-xs-10">
+          <p><%= link_to(review.user.name, review.user) %><span><%= review.updated_at.strftime("%b %d, %Y") %></span></p>
+        </div><!-- /.col-xs-10 -->
+      </div><!-- /.row -->
     </div><!-- /.panel-footer -->
   </div><!-- /.panel -->
 </div><!-- /.col-sm-4 -->

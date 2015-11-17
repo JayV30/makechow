@@ -15,17 +15,20 @@
         <%= f.radio_button :rating, "1", :checked => @review.rating == 1 ? true : nil %>
         <%= f.label :rating, value: "1" %>
       </fieldset>
+      <div class="pull-right">
+        <%= render 'shared/user_small' %>
+      </div><!-- /.pull-right -->
       <%= f.text_area :content, class: 'form-control', value: @review.content %>
-    </div>
+    </div><!-- /.form-group -->
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-2">
+      <div class="col-xs-4 col-xs-offset-2">
         <%= f.submit "Update", class: "btn btn-primary btn-block" %>
-      </div>
+      </div><!-- /.col-xs-4 -->
   <% end %>
-      <div class="col-sm-4">
+      <div class="col-xs-4">
         <%= link_to "Delete", @review, method: :delete, class: "btn btn-danger btn-block", role: "button" %>
-      </div>
-    </div>
+      </div><!-- /.col-xs-4 -->
+    </div><!-- /.row -->
 <% else %>
   <%= form_for(@review) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
@@ -43,8 +46,15 @@
         <%= f.radio_button :rating, "1" %>
         <%= f.label :rating, value: "1" %>
       </fieldset>
+      <div class="pull-right">
+        <%= render 'shared/user_small' %>
+      </div><!-- /.pull-right -->
       <%= f.text_area :content, class: 'form-control', placeholder: "Your review" %>
-    </div>
-    <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div><!-- /.form-group -->
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div><!-- /.col-xs-6 -->
+    </div><!-- /.row -->
   <% end %>
 <% end %>

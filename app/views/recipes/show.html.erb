@@ -58,7 +58,7 @@
   <div class="col-md-4">
     <h3>Ingredients:</h3>
     <% if @recipe.ingredients.any? %>
-      <ul class="ingredients">
+      <ul class="ingredients list-group">
         <%= render @ingredients %>
       </ul>
     <% else %>
@@ -73,6 +73,7 @@
     <div class="row">
       <% if @recipe.reviews.any? %>
         <%= render @reviews %>
+        <%= will_paginate @reviews %>
       <% else %>
         <div class="col-md-12">
           <h3>No reviews yet.</h3>
@@ -96,7 +97,6 @@
   <div class="row">
     <div class="col-sm-6">
       <%= render 'reviews/review_form' %>
-      <%= render 'shared/user_small' %>
     </div>
     <div class="col-sm-6">
       <p>PLUG SOMETHING ELSE HERE</p>

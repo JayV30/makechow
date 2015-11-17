@@ -1,0 +1,12 @@
+<div class="row user-reviews">
+  <% if @user.reviews.any? %>
+  <h2 class="text-center"><%= @user.name %>'s Reviews</h2>
+  <%= render @reviews %>
+  <% end %>
+</div> <!-- /.row -->
+
+<% if @user.reviews.any? %>
+  <div class="row">
+    <%= will_paginate @reviews, param_name: 'review_page' %>
+  </div>
+<% end %>

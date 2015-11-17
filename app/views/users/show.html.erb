@@ -17,18 +17,18 @@
 
 <hr/>
 
-<div id="user-recipes" class="row user-recipes">
-  <% if @user.recipes.any? %>
-  <h2 class="text-center"><%= @user.name %>'s Recipes</h2>
-    <% if current_user?(@user) %>
-      <p class="text-center"><%= link_to "Create a new recipe", new_recipe_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
-    <% end %>
-  <%= render @recipes %>
-  <% end %>
-</div> <!-- /.row -->
-
-<% if @user.recipes.any? %>
-  <div class="row">
-    <%= will_paginate @recipes %>
-  </div>
-<% end %>
+<div class="tab-display">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><%= link_to("Recipes", "#user-recipes", aria: { controls: "user recipes" }, role: "tab", data: { toggle: "tab" }) %></li>
+    <li role="presentation"><%= link_to("Reviews", "#user-reviews", aria: { controls: "user reviews" }, role: "tab", data: { toggle: "tab" }) %></li>
+  </ul><!-- /.nav-tabs -->
+  
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="user-recipes">
+      <%= render 'user_recipe_display' %>
+    </div><!-- /#user-recipes -->
+    <div role="tabpanel" class="tab-pane fade" id="user-reviews">
+      <%= render 'user_review_display' %>
+    </div><!-- /#user-reviews -->
+  </div><!-- /.tab-content -->
+</div><!-- /.tab-display -->
