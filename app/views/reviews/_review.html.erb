@@ -36,6 +36,9 @@
           <p>error retrieving star rating</p>
         <% end %>
       </div><!-- /.rating-display -->
+      <% if current_page?(controller: 'users', action: 'show') %>
+        <%= link_to(review.recipe.title, review.recipe) %>
+      <% end %>
     </div><!-- /.panel-heading -->
     <div class="panel-body">
       <p><%= review.content %></p>

@@ -27,10 +27,12 @@
 
 html, body {
   height: 100vh;
+  font-size: 16px;
 }
 
 body {
   background-color: #fef2e4;
+  font-family: "Pontano Sans", Helvetica, Arial, sans-serif;
 }
 
 body > .container {
@@ -322,7 +324,8 @@ form {
 /* DISPLAY RATINGS */
 
 .review-panel .panel-heading {
-  height: 30px;
+  height: 60px;
+  text-align: right;
 }
 
 .review-panel .panel-body {
@@ -383,7 +386,7 @@ form {
       padding:0 .1em;
       overflow:hidden;
       white-space:nowrap;
-      font-size: 160%;
+      font-size: 140%;
       line-height:1.2;
       color:#ddd;
       &.filled-star {
