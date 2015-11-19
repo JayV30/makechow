@@ -48,8 +48,6 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
-    bootstrap-will_paginate (0.0.10)
-      will_paginate
     builder (3.2.2)
     byebug (3.4.0)
       columnize (~> 0.8)
@@ -294,6 +292,8 @@ GEM
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -302,7 +302,6 @@ DEPENDENCIES
   autoprefixer-rails (~> 6.0.3)
   bcrypt (= 3.1.7)
   bootstrap-sass (~> 3.3.5)
-  bootstrap-will_paginate (= 0.0.10)
   byebug (= 3.4.0)
   carrierwave (= 0.10.0)
   cocoon (~> 1.2.6)
@@ -329,3 +328,4 @@ DEPENDENCIES
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
   will_paginate (= 3.0.7)
+  will_paginate-bootstrap (~> 1.0.1)

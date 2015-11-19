@@ -9,7 +9,7 @@
 </div> <!-- /.row -->
 
 <% if @user.recipes.any? %>
-  <div class="row">
-    <%= will_paginate @recipes, param_name: 'recipe_page' %>
+  <div class="row text-center">
+    <%= will_paginate @recipes, param_name: 'recipe_page', renderer: BootstrapPagination::Rails %>
   </div>
 <% end %>
