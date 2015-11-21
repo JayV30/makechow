@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+step_two:
   step_number: 2
   content: cook it
   recipe: chocolate
 
-two:
+step_three:
   step_number: 3
   content: bake it
   recipe: chocolate
   
-three:
+step_four:
   step_number: 4
   content: eat it
   recipe: chocolate
   
-first:
+step_first:
   step_number: 1
   content: prepare it
   recipe: chocolate

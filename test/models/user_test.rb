@@ -5,6 +5,8 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar")
+    @other_user = users(:michael)
+    @recipe = recipes(:chocolate)
   end
 
   test "should be vaild" do
@@ -21,8 +23,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
   
-  test "name should not be longer than 60 characters" do
-    @user.name = "x" * 61
+  test "name should not be longer than 100 characters" do
+    @user.name = "x" * 101
     assert_not @user.valid?
   end
   
@@ -79,6 +81,14 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, servings: "2 servings")
     assert_difference "Recipe.count", -1 do
+      @user.destroy
+    end
+  end
+  
+  test "associated reviews should be destroyed" do
+    @user.save
+    @user.reviews.create!(user_id: @other_user.id, recipe_id: @recipe.id, rating: 5, content: "five stars!")
+    assert_difference "Review.count", -1 do
       @user.destroy
     end
   end

@@ -36,6 +36,14 @@ morty:
   activated: true
   activated_at: <%= Time.zone.now %>
   
+nonactive:
+  name: Non Activated
+  email: notonyet@example.com
+  password_digest: <%= User.digest('password') %>
+  location: nowhere
+  admin: false
+  activated: false
+  
 <% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User #{n}" %>

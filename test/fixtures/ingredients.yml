@@ -1,9 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  quantity: MyString
+ingredient_one:
+  name: The First Ingredient
+  quantity: 1 cup
+  recipe: chocolate
 
-two:
-  name: MyString
-  quantity: MyString
+ingredient_two:
+  name: The Second Ingredient
+  quantity: 2 cups
+  recipe: chocolate
+
+ingredient_three:
+  name: The Third Ingredient
+  quantity: 3 cups
+  recipe: chocolate

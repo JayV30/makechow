@@ -14,10 +14,10 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'title', text: "#{@user.name} User Profile | Make Chow | Top food, snack, and drink recipes on the web"
     assert_select 'h1', text: @user.name
   # use once fixtures have a test image  assert_select 'img.img-rounded', { :count => 1}
-    assert_select 'div.pagination'
+    assert_select 'ul.pagination'
     @user.recipes.paginate(page: 1, per_page: 8).each do |recipe|
       assert_match recipe.title, response.body
-      assert_match recipe.description, response.body
+      assert_match recipe.description[0...70], response.body
     end
   end
   

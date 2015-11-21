@@ -18,6 +18,10 @@ class StepTest < ActiveSupport::TestCase
     assert_not @step.valid?
   end
   
+  test "recipe_id should be created" do
+    assert_equal @recipe.id, @step.recipe_id
+  end
+  
   test "content should be present" do 
     @step.content = nil
     assert_not @step.valid?
@@ -34,7 +38,7 @@ class StepTest < ActiveSupport::TestCase
   end
   
   test "should be ordered by step_number" do
-    assert_equal steps(:first), Step.first
-    assert_equal steps(:one), Step.second
+    assert_equal steps(:step_first), Step.first
+    assert_equal steps(:step_two), Step.second
   end
 end

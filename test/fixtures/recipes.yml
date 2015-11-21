@@ -3,7 +3,6 @@
 chocolate:
   title: Chocolate Cake
   description: Delicious
-  
   prep_time: 10
   cook_time: 10
   servings: 10 servings
@@ -13,7 +12,6 @@ chocolate:
 cherry:
   title: Cherry Pie
   description: Sweet and fresh
-
   prep_time: 20
   cook_time: 5
   servings: 10 servings
@@ -23,7 +21,6 @@ cherry:
 most_recent:
   title: Banana Bread
   description: Moist and tender
-
   prep_time: 20
   cook_time: 60
   servings: 10 servings
@@ -34,7 +31,6 @@ most_recent:
 recipe_<%= n %>:
   title: <%= Faker::Lorem.word %>
   description: <%= Faker::Lorem.sentence %>
-
   prep_time: n + 1
   cook_time: n + 2
   servings: <%= rand(1...20).to_s + " " + Faker::Lorem.word %>

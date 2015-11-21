@@ -61,4 +61,20 @@ class RecipeTest < ActiveSupport::TestCase
     end
   end
   
+  test "associated ingredients should be destroyed" do
+    @recipe.save
+    @recipe.ingredients.create!(name: "Lorem ipsum", quantity: "8 cups")
+    assert_difference 'Ingredient.count', -1 do
+      @recipe.destroy
+    end
+  end
+  
+  test "associated reviews should be destroyed" do
+    @recipe.save
+    @recipe.reviews.create!(rating: 5, content: "great!", user_id: @user.id)
+    assert_difference 'Review.count', -1 do
+      @recipe.destroy
+    end
+  end
+  
 end
