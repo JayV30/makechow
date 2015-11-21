@@ -5,6 +5,8 @@ class RecipeTest < ActiveSupport::TestCase
   def setup
     @user = users(:michael)
     @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings")
+    @image_recipe = recipes(:most_recent)
+    @no_image_recipe = recipes(:cherry)
   end
   
   test "recipe should be valid" do
@@ -47,6 +49,21 @@ class RecipeTest < ActiveSupport::TestCase
   test "servings should be present" do 
     @recipe.servings = nil
     assert_not @recipe.valid?
+  end
+  
+  test "should be able to have an image_url" do 
+    assert File.exists?(@image_recipe.image_url.file.path)
+    assert @image_recipe.valid?
+  end
+  
+  test "should be able to upload a valid image_url" do
+    @no_image_recipe.image_url = fixture_file_upload('/files/right_size.jpg', 'image/jpg')
+    assert(File.exists?(@no_image_recipe.reload.image_url.file.path))
+  end
+  
+  test "should not be able to upload a image over 5 megabytes" do
+    @no_image_recipe.image_url = fixture_file_upload('/files/too_large.jpg', 'image/jpg')
+    assert_not @no_image_recipe.valid?
   end
   
   test "order should be most recent first" do 

@@ -4,9 +4,28 @@ require 'rails/test_help'
 require "minitest/reporters"
 Minitest::Reporters.use!
 
+class CarrierWave::Mount::Mounter
+  def store!
+    # Not storing uploads in the tests
+  end
+end
+
+CarrierWave.root = 'test/fixtures/files'
+
 class ActiveSupport::TestCase
+  include ActionDispatch::TestProcess #allows fixture_file_upload method
+  
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+  
+  # CarrierWave image file fixtures
+  CarrierWave.root = Rails.root.join('test/fixtures/files')
+  
+  # Clean up CarrierWave tmp files after tests
+  def after_teardown
+    super
+    CarrierWave.clean_cached_files!(0)
+  end
 
   # Add more helper methods to be used by all tests here...
   def is_logged_in?
@@ -25,7 +44,7 @@ class ActiveSupport::TestCase
       session[:user_id] = user.id
     end
   end
-  
+
   private
     
     # Returns true inside an integration test

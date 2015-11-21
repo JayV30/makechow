@@ -8,4 +8,9 @@ if Rails.env.production?
     }
     config.fog_directory     =  ENV['S3_BUCKET']
   end
+elsif Rails.env.test?
+  CarrierWave.configure do |config|
+    config.enable_processing = false
+    config.storage = :file
+  end
 end

@@ -26,6 +26,7 @@ most_recent:
   servings: 10 servings
   created_at: <%= Time.zone.now %>
   user: michael
+  image_url: 'right_size.jpg'
 
 <% 30.times do |n| %>
 recipe_<%= n %>:

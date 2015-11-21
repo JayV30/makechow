@@ -6,10 +6,11 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar")
     @other_user = users(:michael)
+    @no_image_user = users(:archer)
     @recipe = recipes(:chocolate)
   end
 
-  test "should be vaild" do
+  test "should be valid" do
     assert @user.valid?
   end
   
@@ -71,6 +72,21 @@ class UserTest < ActiveSupport::TestCase
   test "password should have a minimum length" do
     @user.password = @user.password_confirmation = "x" * 5
     assert_not @user.valid?
+  end
+  
+  test "should be able to have an image_url" do 
+    assert File.exists?(@other_user.image_url.file.path)
+    assert @other_user.valid?
+  end
+  
+  test "should be able to upload a valid image_url" do
+    @no_image_user.image_url = fixture_file_upload('/files/right_size.jpg', 'image/jpg')
+    assert(File.exists?(@no_image_user.reload.image_url.file.path))
+  end
+  
+  test "should not be able to upload a image over 5 megabytes" do
+    @no_image_user.image_url = fixture_file_upload('/files/too_large.jpg', 'image/jpg')
+    assert_not @no_image_user.valid?
   end
   
   test "authenticated? should return false for a user with nil digest" do
