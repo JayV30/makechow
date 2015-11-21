@@ -5,15 +5,18 @@ review_one:
   content: Five Star Review
   recipe: chocolate 
   user: michael 
+  created_at: <%= 10.hours.ago %>
 
 review_two:
   rating: 1
   content: One Star Review
   recipe: cherry
   user: michael
+  created_at: <%= 5.hours.ago %>
 
 review_three:
   rating: 2
   content: Two Star Review
   recipe: most_recent
   user: michael
+  created_at: <%= Time.zone.now %>
