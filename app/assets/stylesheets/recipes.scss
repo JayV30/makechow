@@ -33,6 +33,45 @@
       color: #31708f;
     }
   }
+  #favorite-recipe {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    a {
+      opacity: 0.6;
+      transition: all 0.3s ease-in-out;
+      .glyphicon {
+        color: gray;
+        font-size: 30px;
+        top: 2px;
+        left: -1px;
+      }
+      @media (min-width:768px) {
+        .glyphicon {
+          font-size: 50px;
+        }
+      }
+      &:hover, &:active {
+        opacity: 0.9;
+        .glyphicon {
+          color: #FF0000;
+        }
+      }
+    }
+    a.favorited {
+      opacity: 0.8;
+      transition: all 0.3s ease-in-out;
+      .glyphicon {
+        color: #FF0000;
+      }
+      &:hover, &:active {
+        opacity: 1;
+        .glyphicon {
+          color: gray;
+        }
+      }
+    }
+  }
 }
 
 form ul {

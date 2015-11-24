@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  include RecipesHelper
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :favorite]
   before_action :recipe_owner, only: [:edit, :update, :destroy]
   
   def index
@@ -54,6 +55,19 @@ class RecipesController < ApplicationController
     redirect_to request.referrer || current_user
   end
   
+  def favorite
+    @recipe = Recipe.find(params[:id])
+    if existing_favorite?(@recipe)
+      current_user.favorites.delete(@recipe)
+      flash[:success] = "Unfavorited"
+      redirect_to @recipe
+    else
+      current_user.favorites << @recipe
+      flash[:success] = "Favorited"
+      redirect_to @recipe 
+    end
+  end
+  
   private
   
     def recipe_params
@@ -69,4 +83,5 @@ class RecipesController < ApplicationController
         end
       end
     end
+  
 end

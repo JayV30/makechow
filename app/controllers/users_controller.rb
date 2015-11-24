@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     end
     @recipes = @user.recipes.paginate(page: params[:recipe_page], per_page: 8)
     @reviews = @user.reviews.paginate(page: params[:review_page], per_page: 6)
+    @favorites = @user.favorites.paginate(page: params[:favorite_page], per_page: 8)
     @creation_date = @user.created_at.strftime("%Y")
   end
   

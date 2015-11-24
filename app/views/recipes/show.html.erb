@@ -4,6 +4,17 @@
   <div class="col-md-12">
     <div class="main-img-wrapper">
       <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") if @recipe.image_url? %>
+      <div id="favorite-recipe">
+        <% if logged_in? && existing_favorite?(@recipe) %>
+          <%= link_to favorite_recipe_path(@recipe), class: "btn btn-default btn-lg favorited", role: "button", method: :put do %>
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          <% end %>
+        <% else %>
+          <%= link_to favorite_recipe_path(@recipe), class: "btn btn-default btn-lg", role: "button", method: :put do %>
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+          <% end %>
+        <% end %>
+      </div><!-- /#favorite-recipe -->
     </div><!-- /.main-img-wrapper -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
@@ -99,7 +110,9 @@
       <%= render 'reviews/review_form' %>
     </div>
     <div class="col-sm-6">
-      <p>PLUG SOMETHING ELSE HERE</p>
+        <p>
+          Do something over here.
+        </p>
     </div>
   </div>
 <% else %>

@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   
   has_many :recipes, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  
+  # Favorite recipes
+  has_many :favorite_recipes
+  has_many :favorites, through: :favorite_recipes, source: :recipe, dependent: :destroy
  
   mount_uploader :image_url, ImageUploader
   

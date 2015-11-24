@@ -21,6 +21,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><%= link_to("Recipes", "#user-recipes", aria: { controls: "user recipes" }, role: "tab", data: { toggle: "tab" }) %></li>
     <li role="presentation"><%= link_to("Reviews", "#user-reviews", aria: { controls: "user reviews" }, role: "tab", data: { toggle: "tab" }) %></li>
+    <li role="presentation"><%= link_to("Favorites", "#user-favorites", aria: { controls: "user favorites"}, role: "tab", data: { toggle: "tab" }) %></li>
   </ul><!-- /.nav-tabs -->
   
   <div class="tab-content">
@@ -30,5 +31,8 @@
     <div role="tabpanel" class="tab-pane fade" id="user-reviews">
       <%= render 'user_review_display' %>
     </div><!-- /#user-reviews -->
+    <div role="tabpanel" class="tab-pane fade" id="user-favorites">
+      <%= render 'user_favorite_display' %>
+    </div><!-- /#user-favorites -->
   </div><!-- /.tab-content -->
 </div><!-- /.tab-display -->

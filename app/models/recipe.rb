@@ -4,6 +4,11 @@ class Recipe < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :ingredients, dependent: :destroy
+  
+  # Users that have favorited
+  has_many :favorite_recipes
+  has_many :favorited_by, through: :favorite_recipes, source: :user, dependent: :destroy
+  
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
   
