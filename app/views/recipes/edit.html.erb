@@ -36,6 +36,12 @@
               </div>
               <div class="col-sm-6">
                 <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins (automatically generated)</h3>
+                <div class="form-group">
+                  <%= f.label :hidden, class: "checkbox inline" do %>
+                    <%= f.check_box :hidden, value: @recipe.hidden %>
+                    <span>Private Recipe (only visible to you)</span>
+                  <% end %>
+                </div><!-- /.form-group -->
               </div>
             </div>
           </div><!-- /.panel-body -->

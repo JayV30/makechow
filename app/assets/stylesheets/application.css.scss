@@ -283,6 +283,16 @@ input {
   }
 }
 
+form.new_recipe, form.edit_recipe {
+  .checkbox {
+    margin-top: 30px;
+    input {
+      width: auto;
+      margin-left: 0;
+    }
+  } 
+}
+
 /* RATING STARS FORM INPUT */
 form {
   .rating {

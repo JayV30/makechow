@@ -15,6 +15,11 @@
           <% end %>
         <% end %>
       </div><!-- /#favorite-recipe -->
+      <% if @recipe.hidden == true %>
+        <div id="private-recipe-tag">
+          <h3><span class="label label-danger">Private</span></h3>
+        </div><!-- /#private-recipe-tag -->
+      <% end %>
     </div><!-- /.main-img-wrapper -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">

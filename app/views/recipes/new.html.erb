@@ -33,6 +33,14 @@
                   <%= f.number_field :cook_time, class: 'form-control', placeholder: 'minutes' %>
                 </div><!-- /.form-group -->
               </div><!-- /.col-sm-6 -->
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <%= f.label :hidden, class: "checkbox inline" do %>
+                    <%= f.check_box :hidden %>
+                    <span>Private Recipe (only visible to you)</span>
+                  <% end %>
+                </div><!-- /.form-group -->
+              </div><!-- /.co-sm-6 -->
             </div><!-- /.row -->
           </div><!-- /.panel-body -->
         </div><!-- /.panel -->

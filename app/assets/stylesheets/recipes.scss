@@ -9,6 +9,26 @@
 
 .thumbnail {
   position: relative;
+  a {
+    text-decoration: none;
+    &:hover, &:active {
+      text-decoration: none;
+    }
+  }
+  .thumb-img {
+    position: relative;
+    .warning-bar {
+      margin-top: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: center;
+      background-color: rgba(255,0,0,0.5);
+      position: absolute;
+      top: 30%;
+      width: 100%;
+      color: white;
+    }
+  }
   .recipe-buttons {
     position: absolute;
     bottom: 5px;
@@ -31,6 +51,15 @@
     border-color: #bce8f1;
     label {
       color: #31708f;
+    }
+  }
+  #private-recipe-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0.8;
+    h3 {
+      margin: 0;
     }
   }
   #favorite-recipe {

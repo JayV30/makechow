@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   include RecipesHelper
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :favorite]
   before_action :recipe_owner, only: [:edit, :update, :destroy]
+  before_action :hidden_recipe, only: [:show]
   
   def index
     @recipes = Recipe.search(params[:search]).paginate(page: params[:page], per_page: 8)
@@ -71,7 +72,7 @@ class RecipesController < ApplicationController
   private
   
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, steps_attributes: [:id, :step_number, :content, :_destroy], ingredients_attributes: [:id, :name, :quantity, :_destroy])
+      params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, :hidden, steps_attributes: [:id, :step_number, :content, :_destroy], ingredients_attributes: [:id, :name, :quantity, :_destroy])
     end
     
     def recipe_owner
@@ -79,6 +80,16 @@ class RecipesController < ApplicationController
       unless current_user.admin?
         if recipe.nil?
           flash[:danger] = "Cannot modify another users recipes"
+          redirect_to root_url
+        end
+      end
+    end
+    
+    def hidden_recipe
+      recipe = Recipe.find(params[:id])
+      unless logged_in? && (recipe.user_id == current_user.id)
+        if recipe.hidden == true
+          flash[:danger] = "This recipe is private"
           redirect_to root_url
         end
       end

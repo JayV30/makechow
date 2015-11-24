@@ -22,17 +22,18 @@ class Recipe < ActiveRecord::Base
   validates :prep_time, presence: true, numericality: { only_integer: true, greater_than: -1 }
   validates :cook_time, presence: true, numericality: { only_ingeter: true, greater_than: -1 }
   validates :servings, presence: true, length: { maximum: 80 }
+  validates :hidden, inclusion: { in: [true, false] }
   validate :image_size
   
   def self.search(value)
     if value
       if Rails.env.production?
-        where(['title ILIKE :search_term OR description ILIKE :search_term', search_term: "%" + value + "%"])
+        where(['(title ILIKE :search_term OR description ILIKE :search_term) AND hidden != :hidden', search_term: "%" + value + "%", hidden: "t" ])
       else
-        where(['title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term', search_term: "%" + value + "%"])
+        where(['(title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term) AND hidden != :hidden', search_term: "%" + value + "%", hidden: "t"])
       end
     else
-      all
+      where.not(["hidden = ?", "t"])
     end
   end
   
