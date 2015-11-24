@@ -109,4 +109,20 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+  test "should be able to favorite a recipe" do
+    @user.save
+    assert_difference "FavoriteRecipe.count", 1 do
+      @user.favorites << @recipe
+    end
+  end
+  
+  test "associated entries in join table favorite_recipes should be destroyed" do
+    @user.save
+    @recipe.save
+    @user.favorites << @recipe
+    assert_difference "FavoriteRecipe.count", -1 do 
+      @user.destroy
+    end
+  end
+  
 end

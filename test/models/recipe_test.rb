@@ -4,7 +4,7 @@ class RecipeTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings")
+    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings", hidden: false)
     @image_recipe = recipes(:most_recent)
     @no_image_recipe = recipes(:cherry)
   end
@@ -51,6 +51,13 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @recipe.valid?
   end
   
+  test "hidden should be a boolean" do
+    @recipe.hidden = true
+    assert @recipe.valid?
+    @recipe.hidden = nil
+    assert_not @recipe.valid?
+  end
+  
   test "should be able to have an image_url" do 
     assert File.exists?(@image_recipe.image_url.file.path)
     assert @image_recipe.valid?
@@ -94,4 +101,19 @@ class RecipeTest < ActiveSupport::TestCase
     end
   end
   
+  test "should be able to be favorited by a user" do
+    @user.save
+    assert_difference 'FavoriteRecipe.count', 1 do
+      @user.favorites << @recipe
+    end
+  end
+  
+  test "associated join table rows in favorite_recipes should be destroyed" do 
+    @user.save
+    @recipe.save
+    @user.favorites << @recipe
+    assert_difference 'FavoriteRecipe.count', -1 do 
+      @recipe.destroy
+    end
+  end
 end

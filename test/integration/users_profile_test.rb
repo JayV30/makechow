@@ -9,6 +9,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   end
   
   test "Profile Display" do
+    log_in_as(@user)
     get user_path(@user)
     assert_template 'users/show'
     assert_select 'title', text: "#{@user.name} User Profile | Make Chow | Top food, snack, and drink recipes on the web"
