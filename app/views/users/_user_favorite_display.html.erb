@@ -1,0 +1,12 @@
+<div class="row user-favorites">
+  <% if @user.favorites.any? %>
+  <h2 class="text-center"><%= @user.name %>'s Favorited Recipes</h2>
+  <%= render @favorites %>
+  <% end %>
+</div> <!-- /.row -->
+
+<% if @user.favorites.any? %>
+  <div class="row text-center">
+    <%= will_paginate @favorites, param_name: 'favorite_page', renderer: BootstrapPagination::Rails %>
+  </div>
+<% end %>

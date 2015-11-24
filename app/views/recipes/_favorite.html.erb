@@ -1,0 +1,25 @@
+<div class="col-sm-3" id="recipe-<%= favorite.id %>">
+  <div class="thumbnail">
+  <%= link_to(favorite) do %>
+    <div class="thumb-img">
+      <%= image_tag(favorite.image_url.url, alt: favorite.title, class: "img") if favorite.image_url? %>
+    </div>
+    <div class="caption">
+      <h3><%= favorite.title %></h3>
+      <% if favorite.description.length < 71 %>
+        <p><%= favorite.description %></p>
+      <% else %>
+        <p><%= favorite.description[0...70].concat("...") %></p>
+      <% end %>
+    </div> <!-- /.caption -->
+  <% end %>
+  <% if logged_in? %>
+    <% if (favorite.user_id == current_user.id) %>
+      <div class="recipe-buttons text-right">
+        <%= link_to "Edit", edit_recipe_path(favorite.id), class: "btn btn-primary btn-sm", role: "button" %>
+        <%= link_to "Delete", recipe, method: :delete, class: "btn btn-danger btn-sm", role: "button", data: { confirm: "Are you sure you want to delete this recipe?" } %>
+      </div> <!-- /.recipe-buttons -->
+     <% end %>
+  <% end %>
+  </div> <!-- /.thumbnail -->
+</div> <!-- /.col-sm-3 -->
