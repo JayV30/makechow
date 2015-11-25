@@ -33,14 +33,16 @@
                 <%= f.number_field :prep_time, class: 'form-control', value: @recipe.prep_time %>
                 <%= f.label :cook_time %>
                 <%= f.number_field :cook_time, class: 'form-control', value: @recipe.cook_time %>
+                <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins <span class="small">(calculated)</span></h3>
               </div>
               <div class="col-sm-6">
-                <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins (automatically generated)</h3>
                 <div class="form-group">
-                  <%= f.label :hidden, class: "checkbox inline" do %>
-                    <%= f.check_box :hidden, value: @recipe.hidden %>
-                    <span>Private Recipe (only visible to you)</span>
-                  <% end %>
+                  <%= f.label :cuisine %>
+                  <%= f.select(:cuisine, options_for_select(Recipe::CUISINE_OPTIONS, @recipe.cuisine), {}, { class: 'form-control'}) %>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                  <%= f.label :course %>
+                  <%= f.select(:course, options_for_select(Recipe::COURSE_OPTIONS, @recipe.course), {}, { class: 'form-control'}) %>
                 </div><!-- /.form-group -->
               </div>
             </div>
@@ -104,6 +106,10 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= f.label :hidden, class: "checkbox inline" do %>
+      <%= f.check_box :hidden, value: @recipe.hidden %>
+      <span>Private Recipe (only visible to you)</span>
+    <% end %>
     <%= f.submit "Update Recipe", class: 'create-button btn btn-primary' %>
   </div><!-- /.col-md-6 -->
 </div><!-- /.row -->

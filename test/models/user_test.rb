@@ -95,7 +95,7 @@ class UserTest < ActiveSupport::TestCase
   
   test "associated recipes should be destroyed" do
     @user.save
-    @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, servings: "2 servings")
+    @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, servings: "2 servings", cuisine: "American", course: "dessert")
     assert_difference "Recipe.count", -1 do
       @user.destroy
     end

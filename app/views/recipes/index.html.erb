@@ -22,6 +22,6 @@
   <% end %>
 </div> <!-- /.row -->
 
-<div class="row">
-  <%= will_paginate %>
+<div class="row text-center">
+  <%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
 </div>

@@ -4,7 +4,7 @@ class RecipeTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings", hidden: false)
+    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings", hidden: false, cuisine: "American", course: "dessert")
     @image_recipe = recipes(:most_recent)
     @no_image_recipe = recipes(:cherry)
   end
@@ -71,6 +71,24 @@ class RecipeTest < ActiveSupport::TestCase
   test "should not be able to upload a image over 5 megabytes" do
     @no_image_recipe.image_url = fixture_file_upload('/files/too_large.jpg', 'image/jpg')
     assert_not @no_image_recipe.valid?
+  end
+  
+  test "cuisine should be present and only one of the values in Recipe::CUISINE_OPTIONS" do
+    @recipe.cuisine = nil
+    assert_not @recipe.valid?
+    @recipe.cuisine = "Italian"
+    assert @recipe.valid?
+    @recipe.cuisine = "Martian"
+    assert_not @recipe.valid?
+  end
+  
+  test "course should be present and only one of the values in Recipe::COURSE_OPTIONS" do 
+    @recipe.course = nil
+    assert_not @recipe.valid?
+    @recipe.course = "appetizer"
+    assert @recipe.valid?
+    @recipe.course = "Gorging"
+    assert_not @recipe.valid?
   end
   
   test "order should be most recent first" do 

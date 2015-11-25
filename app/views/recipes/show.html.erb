@@ -25,7 +25,14 @@
       <div class="col-md-8 col-md-offset-2">
         <div id="recipe-panel" class="panel panel-info center-block">
           <div class="panel-heading">
-            <h1 class="panel-title"><%= @recipe.title %> | <small><%= link_to @recipe.user.name, @recipe.user %></small></h1>
+            <h1 class="panel-title"><%= @recipe.title %> <br/>
+            <span class="small">by: &nbsp;
+              <%= link_to @recipe.user do %>
+                <%= image_tag(@recipe.user.image_url.url, size: "26", alt: @recipe.user.name, class: "img") if @recipe.user.image_url? %>
+                <%= @recipe.user.name %>
+              <% end %>
+            </span>
+            </h1>
             <% if logged_in? && (@recipe.user_id == current_user.id || current_user.admin?) %>
               <div class="recipe-buttons pull-right">
                 <%= link_to "Edit", edit_recipe_path, class: "btn btn-primary btn-sm", role: "button" %>
@@ -45,6 +52,13 @@
             </div>
           </div><!-- /.panel-body -->
         </div><!-- /.panel -->
+        <div id="category-info" class="well well-sm text-center">
+          <div class="row">
+            <div class="col-xs-4">Category:</div>
+            <div class="col-xs-4">Cuisine: <%= @recipe.cuisine %></div>
+            <div class="col-xs-4">Course: <%= @recipe.course %></div>
+          </div><!-- /.row -->
+        </div><!-- /.well -->
       </div><!-- /.col-md-8 -->
     </div><!-- /.row -->
   </div><!-- /.col-md-12" -->

@@ -16,13 +16,11 @@
       <% end %>
     </div> <!-- /.caption -->
   <% end %>
-  <% if logged_in? %>
-    <% if (recipe.user_id == current_user.id) %>
-      <div class="recipe-buttons text-right">
-        <%= link_to "Edit", edit_recipe_path(recipe.id), class: "btn btn-primary btn-sm", role: "button" %>
-        <%= link_to "Delete", recipe, method: :delete, class: "btn btn-danger btn-sm", role: "button", data: { confirm: "Are you sure you want to delete this recipe?" } %>
-      </div> <!-- /.recipe-buttons -->
-     <% end %>
+  <% if logged_in? && current_user?(recipe.user) %>
+    <div class="recipe-buttons text-right">
+      <%= link_to "Edit", edit_recipe_path(recipe.id), class: "btn btn-primary btn-sm", role: "button" %>
+      <%= link_to "Delete", recipe, method: :delete, class: "btn btn-danger btn-sm", role: "button", data: { confirm: "Are you sure you want to delete this recipe?" } %>
+    </div> <!-- /.recipe-buttons -->
   <% end %>
   </div> <!-- /.thumbnail -->
 </div> <!-- /.col-sm-3 -->

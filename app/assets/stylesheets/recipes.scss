@@ -11,20 +11,20 @@
   position: relative;
   a {
     text-decoration: none;
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       text-decoration: none;
     }
   }
   .thumb-img {
     position: relative;
     .warning-bar {
-      margin-top: 10px;
+      margin-top: 0;
       padding-top: 5px;
       padding-bottom: 5px;
       text-align: center;
       background-color: rgba(255,0,0,0.5);
       position: absolute;
-      top: 30%;
+      top: 0;
       width: 100%;
       color: white;
     }
@@ -35,7 +35,7 @@
     right: 5px;
   }
   h3 {
-    margin-top: 10px;
+    margin-top: 0;
   }
 }
 
@@ -80,7 +80,7 @@
           font-size: 50px;
         }
       }
-      &:hover, &:active {
+      &:hover, &:active, &:focus {
         opacity: 0.9;
         .glyphicon {
           color: #FF0000;
@@ -93,7 +93,7 @@
       .glyphicon {
         color: #FF0000;
       }
-      &:hover, &:active {
+      &:hover, &:active, &:focus {
         opacity: 1;
         .glyphicon {
           color: gray;

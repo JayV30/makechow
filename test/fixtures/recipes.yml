@@ -7,6 +7,8 @@ chocolate:
   cook_time: 10
   servings: 10 servings
   hidden: false
+  cuisine: American
+  course: appetizer
   created_at: <%= 10.hours.ago %>
   user: michael
 
@@ -17,6 +19,8 @@ cherry:
   cook_time: 5
   servings: 10 servings
   hidden: false
+  cuisine: American
+  course: appetizer
   created_at: <%= 5.hours.ago %>
   user: michael
   
@@ -27,6 +31,8 @@ most_recent:
   cook_time: 60
   servings: 10 servings
   hidden: false
+  cuisine: American
+  course: appetizer
   created_at: <%= Time.zone.now %>
   user: michael
   image_url: 'right_size.jpg'
@@ -38,6 +44,8 @@ hidden_recipe:
   cook_time: 80
   servings: 30 servings
   hidden: true
+  cuisine: American
+  course: appetizer
   created_at: <%= 3.hours.ago %>
   user: michael
 
@@ -49,6 +57,8 @@ recipe_<%= n %>:
   cook_time: n + 2
   servings: <%= rand(1...20).to_s + " " + Faker::Lorem.word %>
   hidden: false
+  cuisine: <%= Recipe::CUISINE_OPTIONS.sample %>
+  course: <%= Recipe::COURSE_OPTIONS.sample %>
   user: michael
   created_at: <%= 3.days.ago %>
 <% end %>

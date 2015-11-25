@@ -47,6 +47,10 @@ end
 # Create 10 Recipies for each user
 users = User.all
 
+courseArr = Recipe::COURSE_OPTIONS
+
+cuisineArr = Recipe::CUISINE_OPTIONS
+
 10.times do |n|
   users.each { |user| 
     title = Faker::Lorem.word + " " + Faker::Lorem.word
@@ -55,8 +59,10 @@ users = User.all
     prep_time = rand(1...100)
     cook_time = rand(1...120)
     servings = rand(1...20).to_s + " " + Faker::Lorem.word
+    course = courseArr.sample
+    cuisine = cuisineArr.sample
   
-    user.recipes.create!( title: title, description: description, remote_image_url_url: "https://robohash.org/#{image_url}.png", prep_time: prep_time, cook_time: cook_time, servings: servings )
+    user.recipes.create!( title: title, description: description, remote_image_url_url: "https://robohash.org/#{image_url}.png", prep_time: prep_time, cook_time: cook_time, servings: servings, course: course, cuisine: cuisine )
   }
 end
 
@@ -91,6 +97,14 @@ end
     content = Faker::Lorem.sentence
     
     user.reviews.create!(recipe_id: recipe_id, rating: rating, content: content)
+  }
+end
+
+# Favorite 10 Recipes for each User
+10.time do |n|
+  users.each { |user| 
+    recipe = Recipe.order("RANDOM()").first
+    user.favorites << recipe
   }
 end
   

@@ -35,10 +35,12 @@
               </div><!-- /.col-sm-6 -->
               <div class="col-sm-6">
                 <div class="form-group">
-                  <%= f.label :hidden, class: "checkbox inline" do %>
-                    <%= f.check_box :hidden %>
-                    <span>Private Recipe (only visible to you)</span>
-                  <% end %>
+                  <%= f.label :cuisine %>
+                  <%= f.select(:cuisine, options_for_select(Recipe::CUISINE_OPTIONS), {}, { class: 'form-control'}) %>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                  <%= f.label :course %>
+                  <%= f.select(:course, options_for_select(Recipe::COURSE_OPTIONS), {}, { class: 'form-control'}) %>
                 </div><!-- /.form-group -->
               </div><!-- /.co-sm-6 -->
             </div><!-- /.row -->
@@ -112,6 +114,10 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= f.label :hidden, class: "checkbox inline" do %>
+      <%= f.check_box :hidden %>
+      <span>Private Recipe? (only visible to you)</span>
+    <% end %>
     <%= f.submit "Create Recipe", class: 'create-button btn btn-primary' %>
   </div>
 </div>

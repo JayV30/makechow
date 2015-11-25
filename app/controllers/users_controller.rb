@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     unless @user.activated? || current_user.admin?
       redirect_to root_url and return
     end
-    if logged_in? && (current_user.id == @user.id)
+    if logged_in? && current_user?(@user)
       @recipes = @user.recipes.paginate(page: params[:recipe_page], per_page: 8)
     else
       @recipes = @user.recipes.where.not(hidden: true).paginate(page: params[:recipe_page], per_page: 8)

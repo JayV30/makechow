@@ -99,8 +99,26 @@ body > .container {
     display: inline-block;
   }
   .recipe-buttons {
-      margin-top: 5px;
+    margin-top: 5px;
+  }
+  span {
+    &.small {
+      font-size: 55%; 
     }
+    a {
+      transition: all 0.2s ease-in-out;
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+        opacity: 0.8;
+        color: #fd974f;
+      }
+    }
+  }
+}
+
+#category-info {
+  position: relative;
+  top: -30px;
 }
 
 #new_recipe #recipe-panel {
@@ -144,6 +162,10 @@ body > .container {
   .col-xs-7 {
     padding: 10px 15px;
   }
+}
+
+.profile-img {
+  margin-top: 20px;
 }
 
 /* MISC */
@@ -286,6 +308,7 @@ input {
 form.new_recipe, form.edit_recipe {
   .checkbox {
     margin-top: 30px;
+    margin-bottom: 0;
     input {
       width: auto;
       margin-left: 0;
