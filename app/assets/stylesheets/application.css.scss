@@ -125,22 +125,6 @@ body > .container {
   top: 0;
 }
 
-.thumb-img {
-    img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      object-position: center;
-      overflow: hidden;
-    }
-    
-    @media (min-width: 768px) {
-      img {
-        height: 180px;
-      }
-    }
-}
-
 .ingredients.list-group {
   .list-group-item {
     padding: 0 15px;

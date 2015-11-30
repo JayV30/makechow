@@ -2,11 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.user-recipes .caption {
-  height: 150px;
-  overflow: hidden;
-}
-
 .thumbnail {
   position: relative;
   a {
@@ -28,14 +23,64 @@
       width: 100%;
       color: white;
     }
+    img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      img {
+        height: 180px;
+      }
+    }
   }
   .recipe-buttons {
     position: absolute;
     bottom: 5px;
     right: 5px;
   }
-  h3 {
-    margin-top: 0;
+  .caption {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 4px !important;
+    transition: opacity 0.2s ease-in-out;
+    h3 {
+      margin-top: 0;
+      color: white;
+      text-shadow: 2px 1px grey;
+      padding: 5px;
+      text-align: center;
+      width: 100%;
+      background-color: rgba(96, 96, 96, 0.5);
+    }
+  }
+  .overlay {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    background-color: #4d4d4d;
+    padding: 8px;
+    margin: 4px;
+    p {
+      color: white;
+    }
+  }
+  &:hover .caption {
+    opacity: 0;
+  }
+  &:hover .overlay {
+    opacity: 0.9;
   }
 }
 
