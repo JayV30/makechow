@@ -28,7 +28,8 @@ class Recipe < ActiveRecord::Base
   validates :hidden, inclusion: { in: [true, false] }
   validate :image_size
   validates :course, presence: true, inclusion: { in: COURSE_OPTIONS }
-  validates :cuisine, presence: true, inclusion: { in: CUISINE_OPTIONS }                                                        
+  validates :cuisine, presence: true, inclusion: { in: CUISINE_OPTIONS }
+  validates :average_rating, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
   
   def self.search(value)
     if value
