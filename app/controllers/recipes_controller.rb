@@ -5,7 +5,10 @@ class RecipesController < ApplicationController
   before_action :hidden_recipe, only: [:show]
   
   def index
-    @recipes = Recipe.search(params[:search]).paginate(page: params[:page], per_page: 8)
+    @recipes = Recipe.search(params[:search]).paginate(page: params[:page], per_page: 12)
+    filtering_params(params).each do |key, value|
+      @recipes = @recipes.public_send(key, value) if value.present?
+    end
   end
   
   def show
@@ -60,11 +63,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     if existing_favorite?(@recipe)
       current_user.favorites.delete(@recipe)
-      flash[:success] = "Unfavorited"
+      flash[:success] = "Removed from Favorites"
       redirect_to @recipe
     else
       current_user.favorites << @recipe
-      flash[:success] = "Favorited"
+      flash[:success] = "Saved to Favorites"
       redirect_to @recipe 
     end
   end
@@ -73,6 +76,10 @@ class RecipesController < ApplicationController
   
     def recipe_params
       params.require(:recipe).permit(:title, :description, :cook_time, :prep_time, :image_url, :servings, :hidden, :cuisine, :course, :average_rating, steps_attributes: [:id, :step_number, :content, :_destroy], ingredients_attributes: [:id, :name, :quantity, :_destroy])
+    end
+    
+    def filtering_params(params)
+      params.slice(:category, :cuisine, :course, :top_rated, :newest)
     end
     
     def recipe_owner

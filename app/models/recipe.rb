@@ -1,6 +1,5 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
-  #belongs_to :category
   has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :ingredients, dependent: :destroy
@@ -14,9 +13,15 @@ class Recipe < ActiveRecord::Base
   
   mount_uploader :image_url, ImageUploader
   
-  default_scope -> { order(created_at: :desc) }
+  scope :newest_top, -> { order(created_at: :desc, average_rating: :desc) }
+  scope :top_rated, ->(boolean) { where(["average_rating > ?", "3"]).order(average_rating: :desc) if boolean == '1' }
+  scope :newest, ->(boolean) { where(["created_at < ?", 5.days.ago]).order(created_at: :desc) if boolean == '1' }
+  scope :category, ->(category) { where(category: category) }
+  scope :cuisine, ->(cuisine) { where(cuisine: cuisine) }
+  scope :course, ->(course) { where(course: course) }
   
-  COURSE_OPTIONS = ["appetizer", "beverage", "bread", "dessert", "finger food", "main dish", "salad", "side dish", "snack", "soup and stew"]
+  CATEGORY_OPTIONS = ["Breakfast", "Brunch", "Lunch", "Dinner"]
+  COURSE_OPTIONS = ["Appetizer", "Beverage", "Bread", "Dessert", "Finger food", "Main dish", "Salad", "Side dish", "Snack", "Soup and stew"]
   CUISINE_OPTIONS = ["American", "Argentine", "Australian", "Brazilian", "Canadian", "Caribbean", "Central American", "Chinese", "English", "Ethiopian", "French", "German", "Greek", "Indian", "Irish", "Italian", "Jewish", "Korean", "Mexican", "Moroccan", "Native American", "Persian", "Polish", "Portuguese", "Russian", "Scandinavian", "South Pacific", "Spanish", "Thai", "Turkish", "Vietnamese"]
 
   validates :user_id, presence: true
@@ -27,6 +32,7 @@ class Recipe < ActiveRecord::Base
   validates :servings, presence: true, length: { maximum: 80 }
   validates :hidden, inclusion: { in: [true, false] }
   validate :image_size
+  validates :category, presence: true, inclusion: { in: CATEGORY_OPTIONS }
   validates :course, presence: true, inclusion: { in: COURSE_OPTIONS }
   validates :cuisine, presence: true, inclusion: { in: CUISINE_OPTIONS }
   validates :average_rating, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }

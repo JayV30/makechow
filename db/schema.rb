@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206153914) do
+ActiveRecord::Schema.define(version: 20151207143643) do
 
   create_table "favorite_recipes", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -44,17 +44,10 @@ ActiveRecord::Schema.define(version: 20151206153914) do
     t.string   "course"
     t.string   "cuisine"
     t.float    "average_rating", default: 0.0
+    t.string   "category"
   end
 
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
-
-  create_table "recipes_users", id: false, force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "user_id"
-  end
-
-  add_index "recipes_users", ["recipe_id"], name: "index_recipes_users_on_recipe_id"
-  add_index "recipes_users", ["user_id"], name: "index_recipes_users_on_user_id"
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"

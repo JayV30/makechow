@@ -37,6 +37,10 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
+                  <%= f.label :category %>
+                  <%= f.select(:category, options_for_select(Recipe::CATEGORY_OPTIONS, @recipe.category), {}, { class: 'form-control'}) %>
+                </div><!-- /.form-group -->
+                <div class="form-group">
                   <%= f.label :cuisine %>
                   <%= f.select(:cuisine, options_for_select(Recipe::CUISINE_OPTIONS, @recipe.cuisine), {}, { class: 'form-control'}) %>
                 </div><!-- /.form-group -->

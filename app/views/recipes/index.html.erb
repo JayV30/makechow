@@ -12,13 +12,64 @@
   </div><!-- /.col-md-12 -->
 </div><!-- /.row -->
 
+<div class="row">
+  <%= form_tag recipes_path, :method => 'get', class: 'filter', role: 'filter' do %>
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:category, "Filter by Category") %>
+        <%= select_tag(:category, options_for_select(Recipe::CATEGORY_OPTIONS, params[:category]), { class: 'form-control', :include_blank => 'All Categories' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:cuisine, "Filter by Cuisine") %>
+        <%= select_tag(:cuisine, options_for_select(Recipe::CUISINE_OPTIONS, params[:cuisine]), { class: 'form-control', :include_blank => 'All Cuisines' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:course, "Filter by Course") %>
+        <%= select_tag(:course, options_for_select(Recipe::COURSE_OPTIONS, params[:course]), { class: 'form-control', :include_blank => 'All Courses' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:top_rated, class: 'checkbox inline') do %>
+          <%= check_box_tag(:top_rated, '1', !params[:top_rated].blank?) %>
+          <span>Top Rated Only</span>
+        <% end %>
+        <%= label_tag(:newest, class: 'checkbox inline') do %>
+          <%= check_box_tag(:newest, '1', !params[:newest].blank?) %>
+          <span>Newest Only</span>
+        <% end %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= submit_tag("Apply Filters", :name => nil, class: 'btn btn-primary') %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= link_to "Reset All Filters", recipes_path, class: 'btn btn-danger btn-block' %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+  <% end %>
+</div><!-- /.row -->
+
+<hr />
+
 <div class="row user-recipes">
   <% if @recipes.count == 0 %>
     <div class="col-md-12">
       <h3>No Recipes Found</h3>
     </div>
   <% else %>
-    <%= render @recipes %>
+    <% if params.nil? %>
+      <%= render @recipes.newest_top %>
+    <% else %>
+      <%= render @recipes %>
+    <% end %>
   <% end %>
 </div> <!-- /.row -->
 

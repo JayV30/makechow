@@ -54,7 +54,7 @@
         </div><!-- /.panel -->
         <div id="category-info" class="well well-sm text-center">
           <div class="row">
-            <div class="col-xs-4">Category:</div>
+            <div class="col-xs-4">Category: <%= @recipe.category %></div>
             <div class="col-xs-4">Cuisine: <%= @recipe.cuisine %></div>
             <div class="col-xs-4">Course: <%= @recipe.course %></div>
           </div><!-- /.row -->
@@ -100,16 +100,20 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Reviews</h2>
-    <div class="row">
-      <% if @recipe.reviews.any? %>
+    <% if @recipe.reviews.any? %>
+      <div class="row">
         <%= render @reviews %>
-        <%= will_paginate @reviews %>
-      <% else %>
+      </div><!-- /.row -->
+      <div class="row text-center">
+        <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
+      </div><!-- /.row -->
+    <% else %>
+      <div class="row">
         <div class="col-md-12">
           <h3>No reviews yet.</h3>
         </div><!-- /.col-md-12 -->
-      <% end %>
-    </div><!-- /.row -->
+      </div><!-- /.row -->
+    <% end %>
   </div><!-- /.col-md-12 -->
 </div><!-- /.row -->
 
