@@ -68,6 +68,7 @@
       object-fit: cover;
       object-position: center;
       overflow: hidden;
+      background-color: #E0E4CC;
     }
     @media (min-width: 768px) {
       img {
@@ -84,9 +85,17 @@
       right: 0;
       margin: 0 auto;
       border: solid 3px #fff;
-      border-top-right-radius: 48px;
       border-top-left-radius: 48px;
-      background-color: #696969;
+      border-bottom-right-radius: 48px;
+      border-bottom-left-radius: 48px;
+      background-color: #69D2E7;
+      transition: opacity 0.2s ease-in-out;
+      &:hover, &:focus {
+        opacity: 0.8;
+      }
+    }
+    p {
+      margin-top: 20px;
     }
   }
   

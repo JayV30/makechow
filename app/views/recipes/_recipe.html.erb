@@ -8,46 +8,6 @@
       <% end %>
       <div class="recipe-head">
         <h3><%= recipe.title %></h3>
-        <div class="rating-display">
-          <% case recipe.average_rating %>
-          <% when 4.5..5 %>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-          <% when 3.5...4.5 %>
-            <span></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-          <% when 2.5...3.5 %>
-            <span></span>
-            <span></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-          <% when 1.5...2.5 %>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span class="filled-star"></span>
-            <span class="filled-star"></span>
-          <% when 0.1...1.5 %>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span class="filled-star"></span>
-          <% else %>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          <% end %>
-        </div><!-- /.rating-display -->
       </div> <!-- /.caption -->
       <div class="overlay">
         <% if recipe.description.length < 121 %>
@@ -59,9 +19,49 @@
       </div><!-- /.overlay -->
     </div><!-- /.thumb-img -->
   <% end %>
-    <div class="caption">
+    <div class="caption text-center">
       <%= link_to(image_tag(recipe.user.image_url.url, size: "48", alt: recipe.user.name, class: "img"), recipe.user) if recipe.user.image_url? %>
-      <p><%= link_to(recipe.user.name, recipe.user) %></p>
+      <p>by: <%= link_to(recipe.user.name, recipe.user) %></p>
+      <div class="rating-display recipe-rating">
+        <% case recipe.average_rating %>
+        <% when 4.5..5 %>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% when 3.5...4.5 %>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% when 2.5...3.5 %>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% when 1.5...2.5 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% when 0.1...1.5 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+        <% else %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        <% end %>
+      </div><!-- /.rating-display -->
     </div><!-- /.caption -->
   <% if logged_in? && current_user?(recipe.user) %>
     <div class="recipe-buttons text-right">

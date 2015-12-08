@@ -31,12 +31,12 @@ html, body {
 }
 
 body {
-  background-color: #fef2e4;
+  background-color: #A7DBD8;
   font-family: "Pontano Sans", Helvetica, Arial, sans-serif;
 }
 
 body > .container {
-  background-color: #fafafa;
+  background-color: #FBFAF9;
   padding-top: 20px;
 }
 
@@ -431,6 +431,11 @@ form {
       &.filled-star {
         color: #f70;
       }
+  }
+  &.recipe-rating {
+    float: none;
+    display: inline-block;
+    margin: 10px auto -10px;
   }
 }
 
