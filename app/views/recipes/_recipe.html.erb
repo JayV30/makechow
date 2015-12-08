@@ -6,58 +6,63 @@
       <% if recipe.hidden == true %>
         <h2 class="warning-bar">PRIVATE</h2>
       <% end %>
-    </div>
-    <div class="caption">
-      <h3><%= recipe.title %></h3>
-      <div class="rating-display">
-        <% case recipe.average_rating %>
-        <% when 4.5..5 %>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-        <% when 3.5...4.5 %>
-          <span></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-        <% when 2.5...3.5 %>
-          <span></span>
-          <span></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-        <% when 1.5...2.5 %>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span class="filled-star"></span>
-          <span class="filled-star"></span>
-        <% when 0.1...1.5 %>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span class="filled-star"></span>
+      <div class="recipe-head">
+        <h3><%= recipe.title %></h3>
+        <div class="rating-display">
+          <% case recipe.average_rating %>
+          <% when 4.5..5 %>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+          <% when 3.5...4.5 %>
+            <span></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+          <% when 2.5...3.5 %>
+            <span></span>
+            <span></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+          <% when 1.5...2.5 %>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="filled-star"></span>
+            <span class="filled-star"></span>
+          <% when 0.1...1.5 %>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="filled-star"></span>
+          <% else %>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          <% end %>
+        </div><!-- /.rating-display -->
+      </div> <!-- /.caption -->
+      <div class="overlay">
+        <% if recipe.description.length < 121 %>
+          <p><%= recipe.description %></p>
         <% else %>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <p><%= recipe.description[0...120].concat("...") %></p>
         <% end %>
-      </div><!-- /.rating-display -->
-    </div> <!-- /.caption -->
-    <div class="overlay">
-      <% if recipe.description.length < 121 %>
-        <p><%= recipe.description %></p>
-      <% else %>
-        <p><%= recipe.description[0...120].concat("...") %></p>
-      <% end %>
-    </div>
+        <p>created: <%= recipe.created_at.strftime("%b %d, %Y") %></p>
+      </div><!-- /.overlay -->
+    </div><!-- /.thumb-img -->
   <% end %>
+    <div class="caption">
+      <%= link_to(image_tag(recipe.user.image_url.url, size: "48", alt: recipe.user.name, class: "img"), recipe.user) if recipe.user.image_url? %>
+      <p><%= link_to(recipe.user.name, recipe.user) %></p>
+    </div><!-- /.caption -->
   <% if logged_in? && current_user?(recipe.user) %>
     <div class="recipe-buttons text-right">
       <%= link_to "Edit", edit_recipe_path(recipe.id), class: "btn btn-primary btn-sm", role: "button" %>

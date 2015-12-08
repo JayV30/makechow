@@ -12,6 +12,45 @@
   }
   .thumb-img {
     position: relative;
+    .recipe-head {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: opacity 0.2s ease-in-out;
+      h3 {
+        margin-top: 0;
+        color: white;
+        text-shadow: 2px 1px grey;
+        padding: 5px;
+        text-align: center;
+        width: 100%;
+        background-color: rgba(96, 96, 96, 0.5);
+      }
+    }
+    .overlay {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      background-color: #4d4d4d;
+      padding: 8px;
+      p {
+        color: white;
+      }
+    }
+    &:hover .caption {
+      opacity: 0;
+    }
+    &:hover .overlay {
+      opacity: 0.9;
+    }
     .warning-bar {
       margin-top: 0;
       padding-top: 5px;
@@ -36,51 +75,25 @@
       }
     }
   }
+  .caption {
+    position: relative;
+    img {
+      position: absolute;
+      top: -24px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      border: solid 3px #fff;
+      border-top-right-radius: 48px;
+      border-top-left-radius: 48px;
+      background-color: #696969;
+    }
+  }
+  
   .recipe-buttons {
     position: absolute;
     bottom: 5px;
     right: 5px;
-  }
-  .caption {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 4px !important;
-    transition: opacity 0.2s ease-in-out;
-    h3 {
-      margin-top: 0;
-      color: white;
-      text-shadow: 2px 1px grey;
-      padding: 5px;
-      text-align: center;
-      width: 100%;
-      background-color: rgba(96, 96, 96, 0.5);
-    }
-  }
-  .overlay {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    background-color: #4d4d4d;
-    padding: 8px;
-    margin: 4px;
-    p {
-      color: white;
-    }
-  }
-  &:hover .caption {
-    opacity: 0;
-  }
-  &:hover .overlay {
-    opacity: 0.9;
   }
 }
 
