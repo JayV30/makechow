@@ -12,10 +12,21 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
   
   mount_uploader :image_url, ImageUploader
+  before_save :set_total_time
   
-  scope :newest_top, -> { order(created_at: :desc, average_rating: :desc) }
-  scope :top_rated, ->(boolean) { where(["average_rating > ?", "3"]).order(average_rating: :desc) if boolean == '1' }
-  scope :newest, ->(boolean) { where(["created_at < ?", 5.days.ago]).order(created_at: :desc) if boolean == '1' }
+  scope :popular, -> { where(["average_rating > :average_rating AND hidden != :hidden", average_rating: "3.2", hidden: "t"]) }
+  scope :latest, -> { where(["created_at > :created_at AND hidden != :hidden", created_at: 5.days.ago, hidden: "t"]) }
+  scope :quick, -> { where(["total_time <= :total_time AND hidden != :hidden", total_time: "30", hidden: "t"]) }
+  scope :sort_by, ->(symbol) do
+    case symbol
+      when "Rating"
+        order average_rating: :desc
+      when "Date (default)"
+        order created_at: :desc 
+      when "Time to Make"
+        order total_time: :asc
+    end
+  end
   scope :category, ->(category) { where(category: category) }
   scope :cuisine, ->(cuisine) { where(cuisine: cuisine) }
   scope :course, ->(course) { where(course: course) }
@@ -23,6 +34,7 @@ class Recipe < ActiveRecord::Base
   CATEGORY_OPTIONS = ["Breakfast", "Brunch", "Lunch", "Dinner"]
   COURSE_OPTIONS = ["Appetizer", "Beverage", "Bread", "Dessert", "Finger food", "Main dish", "Salad", "Side dish", "Snack", "Soup and stew"]
   CUISINE_OPTIONS = ["American", "Argentine", "Australian", "Brazilian", "Canadian", "Caribbean", "Central American", "Chinese", "English", "Ethiopian", "French", "German", "Greek", "Indian", "Irish", "Italian", "Jewish", "Korean", "Mexican", "Moroccan", "Native American", "Persian", "Polish", "Portuguese", "Russian", "Scandinavian", "South Pacific", "Spanish", "Thai", "Turkish", "Vietnamese"]
+  SORTING_OPTIONS = ["Date (default)", "Rating", "Time to Make" ]
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 130 }
@@ -56,6 +68,10 @@ class Recipe < ActiveRecord::Base
       if image_url.size > 5.megabytes
         errors.add(:image_url, "should be less than 5MB")
       end
+    end
+    
+    def set_total_time
+      self.total_time = prep_time + cook_time
     end
     
 end

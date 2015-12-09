@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="nav nav-pills">
+      <li role="presentation"><%= link_to "All Recipes", { action: "index", sort_by: "Date (default)"}, class: 'btn' %></li>
+      <li role="presentation"><%= link_to "Popular", { action: "popular", sort_by: "Date (default)"}, class: 'btn' %></li>
+      <li role="presentation"><%= link_to "Recent", { action: "latest", sort_by: "Date (default)"}, class: 'btn' %></li>
+      <li role="presentation"><%= link_to "Quick", { action: "quick", sort_by: "Date (default)"}, class: 'btn' %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:category, "Filter by Category") %>
+        <%= select_tag(:category, options_for_select(Recipe::CATEGORY_OPTIONS, params[:category]), { class: 'form-control', :include_blank => 'All Categories' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:cuisine, "Filter by Cuisine") %>
+        <%= select_tag(:cuisine, options_for_select(Recipe::CUISINE_OPTIONS, params[:cuisine]), { class: 'form-control', :include_blank => 'All Cuisines' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:course, "Filter by Course") %>
+        <%= select_tag(:course, options_for_select(Recipe::COURSE_OPTIONS, params[:course]), { class: 'form-control', :include_blank => 'All Courses' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= label_tag(:sort_by, "Sort by") %>
+        <%= select_tag(:sort_by, options_for_select(Recipe::SORTING_OPTIONS, params[:sort_by]), { class: 'form-control' }) %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= submit_tag("Apply Filters", :name => nil, class: 'btn btn-primary') %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+    <div class="col-sm-2">
+      <div class="form-group">
+        <%= link_to("Remove All Filters", { action: "index", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'index') %>
+        <%= link_to("Remove All Filters", { action: "popular", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'popular') %>
+        <%= link_to("Remove All Filters", { action: "latest", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'latest') %>
+        <%= link_to("Remove All Filters", { action: "quick", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'quick') %>
+      </div><!-- /.form-group -->
+    </div><!-- /.col-sm-2 -->
+</div><!-- /.row -->

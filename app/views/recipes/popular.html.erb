@@ -1,18 +1,14 @@
-<% provide(:title, 'Recipes') %>
+<% provide(:title, 'Popular Recipes') %>
 
 <div class="row">
   <div class="col-md-12">
     <div class="page-header">
-      <% if params[:search].nil? %>
-        <h1>Browse All Recipes</h1>
-      <% else %>
-        <h1>Search Results for: <small><%= params[:search] %></small></h1>
-      <% end %>
+      <h1>Popular Recipes</h1>
     </div><!-- /.page-header -->
   </div><!-- /.col-md-12 -->
 </div><!-- /.row -->
 
-<%= form_tag recipes_path, :method => 'get', class: 'filter', role: 'filter' do %>
+<%= form_tag popular_recipes_path, :method => 'get', class: 'filter', role: 'filter' do %>
   <%= render 'recipes/filters' %>
 <% end %>
 

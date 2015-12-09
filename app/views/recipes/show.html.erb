@@ -43,11 +43,11 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">
-                <p>Prep time: <%= @recipe.prep_time %> mins</p>
-                <p>Cook time: <%= @recipe.cook_time %> mins</p>
+                <p>Prep time: <%= pluralize(hours_in_number(@recipe.prep_time), "hr ", "hrs ") unless hours_in_number(@recipe.prep_time) == 0 %><%= pluralize(minutes_in_number(@recipe.prep_time), "min", "mins") unless minutes_in_number(@recipe.prep_time) == 0 %></p>
+                <p>Cook time: <%= pluralize(hours_in_number(@recipe.cook_time), "hr ", "hrs ") unless hours_in_number(@recipe.cook_time) == 0 %><%= pluralize(minutes_in_number(@recipe.cook_time), "min", "mins") unless minutes_in_number(@recipe.cook_time) == 0 %></p>
               </div>
               <div class="col-sm-6">
-                <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins</h3>
+                <h3>Total time: <%= pluralize(hours_in_number(@recipe.total_time), "hr ", "hrs ") unless hours_in_number(@recipe.total_time) == 0 %><%= pluralize(minutes_in_number(@recipe.total_time), "min", "mins") unless minutes_in_number(@recipe.total_time) == 0 %></h3>
               </div>
             </div>
           </div><!-- /.panel-body -->

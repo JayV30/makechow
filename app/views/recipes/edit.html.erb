@@ -33,7 +33,7 @@
                 <%= f.number_field :prep_time, class: 'form-control', value: @recipe.prep_time %>
                 <%= f.label :cook_time %>
                 <%= f.number_field :cook_time, class: 'form-control', value: @recipe.cook_time %>
-                <h3>Total time: <%= @recipe.prep_time + @recipe.cook_time %> mins <span class="small">(calculated)</span></h3>
+                <h3>Total time: <%= pluralize(hours_in_number(@recipe.total_time), "hr ", "hrs ") unless hours_in_number(@recipe.total_time) == 0 %><%= pluralize(minutes_in_number(@recipe.total_time), "min ", "mins ") unless minutes_in_number(@recipe.total_time) == 0%><span class="small">(calculated)</span></h3>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">

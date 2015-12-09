@@ -78,6 +78,7 @@
   }
   .caption {
     position: relative;
+    min-height: 150px;
     img {
       position: absolute;
       top: -24px;
@@ -91,18 +92,30 @@
       background-color: #69D2E7;
       transition: opacity 0.2s ease-in-out;
       &:hover, &:focus {
-        opacity: 0.8;
+        opacity: 0.9;
       }
     }
-    p {
+    p.author {
       margin-top: 20px;
     }
+    @media (min-width: 1200px) {
+      min-height: 100px;
+    }
   }
-  
   .recipe-buttons {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    top: 40%;
+    left: 5px;
+    padding: 5px;
+    background-color: rgba(96, 96, 96, 0.5);
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    a {
+      display: block;
+      &.btn-primary {
+        margin-bottom: 5px;
+      }
+    }
   }
 }
 

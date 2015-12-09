@@ -10,10 +10,10 @@
         <h3><%= recipe.title %></h3>
       </div> <!-- /.caption -->
       <div class="overlay">
-        <% if recipe.description.length < 121 %>
+        <% if recipe.description.length < 101 %>
           <p><%= recipe.description %></p>
         <% else %>
-          <p><%= recipe.description[0...120].concat("...") %></p>
+          <p><%= recipe.description[0..100].concat("...") %></p>
         <% end %>
         <p>created: <%= recipe.created_at.strftime("%b %d, %Y") %></p>
       </div><!-- /.overlay -->
@@ -21,8 +21,9 @@
   <% end %>
     <div class="caption text-center">
       <%= link_to(image_tag(recipe.user.image_url.url, size: "48", alt: recipe.user.name, class: "img"), recipe.user) if recipe.user.image_url? %>
-      <p>by: <%= link_to(recipe.user.name, recipe.user) %></p>
+      <p class="author">by: <%= link_to(recipe.user.name, recipe.user) %></p>
       <div class="rating-display recipe-rating">
+        <p class="hidden-xs">(<%= recipe.reviews.size %>)</p>
         <% case recipe.average_rating %>
         <% when 4.5..5 %>
           <span class="filled-star"></span>
@@ -61,10 +62,15 @@
           <span></span>
           <span></span>
         <% end %>
+        <p class="visible-xs">(<%= recipe.reviews.size %>)</p>
       </div><!-- /.rating-display -->
+      <div class="recipe-time">
+        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+        <%= pluralize(hours_in_number(recipe.total_time), "hr ", "hrs ") unless hours_in_number(recipe.total_time) == 0 %><%= pluralize(minutes_in_number(recipe.total_time), "min", "mins") unless minutes_in_number(recipe.total_time) == 0 %>
+      </div>
     </div><!-- /.caption -->
   <% if logged_in? && current_user?(recipe.user) %>
-    <div class="recipe-buttons text-right">
+    <div class="recipe-buttons">
       <%= link_to "Edit", edit_recipe_path(recipe.id), class: "btn btn-primary btn-sm", role: "button" %>
       <%= link_to "Delete", recipe, method: :delete, class: "btn btn-danger btn-sm", role: "button", data: { confirm: "Are you sure you want to delete this recipe?" } %>
     </div> <!-- /.recipe-buttons -->

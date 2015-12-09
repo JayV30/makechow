@@ -55,6 +55,12 @@ body > .container {
   }
 }
 
+@media (min-width: 1400px) {
+  .container {
+    width: 1370px;
+  }
+}
+
 .navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
   color: #fdfdfd;
   &:hover, &:focus {
@@ -420,17 +426,26 @@ form {
     content:'★ ';
   }
   span {
-    float:right;
-      width:1em;
-      padding:0 .1em;
-      overflow:hidden;
-      white-space:nowrap;
-      font-size: 140%;
-      line-height:1.2;
-      color:#ddd;
-      &.filled-star {
-        color: #f70;
-      }
+    float: right;
+    width: 0.85em;
+    padding: 0 .1em;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 140%;
+    line-height: 1.2;
+    color:#ddd;
+    &.filled-star {
+      color: #f70;
+    }
+  }
+  p { 
+    @media(min-width: 768px) {
+      float: right;
+      padding: 0 .1em;
+      margin: 4px 0;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
   }
   &.recipe-rating {
     float: none;

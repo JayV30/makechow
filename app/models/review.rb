@@ -1,8 +1,8 @@
 class Review < ActiveRecord::Base
-  belongs_to :recipe
+  belongs_to :recipe, counter_cache: true
   belongs_to :user
-  after_save :update_avg_rating
-  after_destroy :update_avg_rating
+  after_save :update_recipe
+  after_destroy :update_recipe
   
   default_scope -> { order(created_at: :desc) }
   
@@ -13,7 +13,7 @@ class Review < ActiveRecord::Base
 
   private 
   
-    def update_avg_rating
+    def update_recipe
      average = recipe.reviews.average(:rating).to_f
      recipe.update_column(:average_rating, average)
     end

@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :recipes do
     put :favorite, on: :member
+    collection do
+      get 'popular'
+      get 'latest'
+      get 'quick'
+    end
   end
   resources :reviews, only: [:create, :update, :destroy]
 

@@ -72,6 +72,27 @@ class RecipesController < ApplicationController
     end
   end
   
+  def popular
+    @recipes = Recipe.popular.paginate(page: params[:page], per_page: 12)
+    filtering_params(params).each do |key, value|
+      @recipes = @recipes.public_send(key, value) if value.present?
+    end
+  end
+  
+  def latest
+    @recipes = Recipe.latest.paginate(page: params[:page], per_page: 12)
+    filtering_params(params).each do |key, value|
+      @recipes = @recipes.public_send(key, value) if value.present?
+    end
+  end
+  
+  def quick
+    @recipes = Recipe.quick.paginate(page: params[:page], per_page: 12)
+    filtering_params(params).each do |key, value|
+      @recipes = @recipes.public_send(key, value) if value.present?
+    end
+  end
+  
   private
   
     def recipe_params
@@ -79,7 +100,7 @@ class RecipesController < ApplicationController
     end
     
     def filtering_params(params)
-      params.slice(:category, :cuisine, :course, :top_rated, :newest)
+      params.slice(:category, :cuisine, :course, :sort_by)
     end
     
     def recipe_owner
