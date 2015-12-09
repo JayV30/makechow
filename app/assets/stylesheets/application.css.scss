@@ -31,7 +31,7 @@ html, body {
 }
 
 body {
-  background-color: #A7DBD8;
+  background-color: #F5F2EF;
   font-family: "Pontano Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -41,8 +41,8 @@ body > .container {
 }
 
 .navbar {
-  background-color: #805a3b;
-  border-color: #402d1d;
+  background-color: #8CA2AC;
+  border-color: #7A939E;
   margin-bottom: 0;
   border-radius: 0;
   a.navbar-brand {
@@ -89,7 +89,7 @@ body > .container {
 }
 
 .main-img-wrapper {
-  background-color: #3b807d;
+  background-color: #E0E4CC;
   img {
     width: 100%;
     max-height: 400px;
@@ -135,10 +135,6 @@ body > .container {
   top: -30px;
 }
 
-#new_recipe #recipe-panel {
-  top: 0;
-}
-
 .ingredients.list-group {
   .list-group-item {
     padding: 0 15px;
@@ -179,6 +175,10 @@ body > .container {
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
+}
+
+.center-pills {
+  display: inline-block;
 }
 
 /* PAGINATION */

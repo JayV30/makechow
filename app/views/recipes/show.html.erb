@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="main-img-wrapper">
-      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") if @recipe.image_url? %>
+      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") %>
       <div id="favorite-recipe">
         <% if logged_in? && existing_favorite?(@recipe) %>
           <%= link_to favorite_recipe_path(@recipe), class: "btn btn-default btn-lg favorited", role: "button", method: :put do %>
@@ -28,7 +28,7 @@
             <h1 class="panel-title"><%= @recipe.title %> <br/>
             <span class="small">by: &nbsp;
               <%= link_to @recipe.user do %>
-                <%= image_tag(@recipe.user.image_url.url, size: "26", alt: @recipe.user.name, class: "img") if @recipe.user.image_url? %>
+                <%= image_tag(@recipe.user.image_url.url, size: "26", alt: @recipe.user.name, class: "img") %>
                 <%= @recipe.user.name %>
               <% end %>
             </span>
@@ -43,11 +43,11 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">
-                <p>Prep time: <%= pluralize(hours_in_number(@recipe.prep_time), "hr ", "hrs ") unless hours_in_number(@recipe.prep_time) == 0 %><%= pluralize(minutes_in_number(@recipe.prep_time), "min", "mins") unless minutes_in_number(@recipe.prep_time) == 0 %></p>
-                <p>Cook time: <%= pluralize(hours_in_number(@recipe.cook_time), "hr ", "hrs ") unless hours_in_number(@recipe.cook_time) == 0 %><%= pluralize(minutes_in_number(@recipe.cook_time), "min", "mins") unless minutes_in_number(@recipe.cook_time) == 0 %></p>
+                <p>Prep time: <%= hours_and_minutes(@recipe.prep_time) %></p>
+                <p>Cook time: <%= hours_and_minutes(@recipe.cook_time) %></p>
               </div>
               <div class="col-sm-6">
-                <h3>Total time: <%= pluralize(hours_in_number(@recipe.total_time), "hr ", "hrs ") unless hours_in_number(@recipe.total_time) == 0 %><%= pluralize(minutes_in_number(@recipe.total_time), "min", "mins") unless minutes_in_number(@recipe.total_time) == 0 %></h3>
+                <h3>Total time: <%= hours_and_minutes(@recipe.total_time) %></h3>
               </div>
             </div>
           </div><!-- /.panel-body -->

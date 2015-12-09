@@ -1,0 +1,13 @@
+<div class="row user-recipes">
+  <% if @recipes.count == 0 %>
+    <div class="col-md-12">
+      <h3>No Recipes Found</h3>
+    </div>
+  <% else %>
+    <%= render @recipes %>
+  <% end %>
+</div> <!-- /.row -->
+
+<div class="row text-center">
+  <%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
+</div>

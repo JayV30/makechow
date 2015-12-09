@@ -1,29 +1,5 @@
 <% provide(:title, 'Quick Recipes') %>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="page-header">
-      <h1>Quick Recipes</h1>
-    </div><!-- /.page-header -->
-  </div><!-- /.col-md-12 -->
-</div><!-- /.row -->
-
-<%= form_tag quick_recipes_path, :method => 'get', class: 'filter', role: 'filter' do %>
-  <%= render 'recipes/filters' %>
-<% end %>
-
-<hr />
-
-<div class="row user-recipes">
-  <% if @recipes.count == 0 %>
-    <div class="col-md-12">
-      <h3>No Recipes Found</h3>
-    </div>
-  <% else %>
-    <%= render @recipes %>
-  <% end %>
-</div> <!-- /.row -->
-
-<div class="row text-center">
-  <%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
-</div>
+<%= render 'recipes/index_header' %>
+<%= render 'recipes/filters' %>
+<%= render 'recipes/index_footer' %>

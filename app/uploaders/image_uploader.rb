@@ -6,7 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   
-  process resize_to_limit: [800, 800]
+  process resize_to_limit: [1100, 1100]
   
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
@@ -22,6 +22,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
+  def default_url(*args)
+    case model.class.name
+      when "User"
+        ActionController::Base.helpers.asset_path([version_name, "user_default.png"].compact.join('_'))
+      when "Recipe"
+        ActionController::Base.helpers.asset_path([version_name, "recipe_default.png"].compact.join('_'))
+      else
+        ActionController::Base.helpers.asset_path([version_name, "default.jpg"].compact.join('_'))
+    end
+  end
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))

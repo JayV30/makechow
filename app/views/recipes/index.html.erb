@@ -1,33 +1,5 @@
 <% provide(:title, 'Recipes') %>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="page-header">
-      <% if params[:search].nil? %>
-        <h1>Browse All Recipes</h1>
-      <% else %>
-        <h1>Search Results for: <small><%= params[:search] %></small></h1>
-      <% end %>
-    </div><!-- /.page-header -->
-  </div><!-- /.col-md-12 -->
-</div><!-- /.row -->
-
-<%= form_tag recipes_path, :method => 'get', class: 'filter', role: 'filter' do %>
-  <%= render 'recipes/filters' %>
-<% end %>
-
-<hr />
-
-<div class="row user-recipes">
-  <% if @recipes.count == 0 %>
-    <div class="col-md-12">
-      <h3>No Recipes Found</h3>
-    </div>
-  <% else %>
-    <%= render @recipes %>
-  <% end %>
-</div> <!-- /.row -->
-
-<div class="row text-center">
-  <%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
-</div>
+<%= render 'recipes/index_header' %>
+<%= render 'recipes/filters' %>
+<%= render 'recipes/index_footer' %>

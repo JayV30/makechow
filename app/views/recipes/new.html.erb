@@ -12,6 +12,13 @@
 <div class="row">
   <div class="col-md-12">
     <%= render 'shared/error_messages', object: f.object %>
+    <div class="main-img-wrapper">
+      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") %>
+      <div id="img-update-fields">
+        <%= f.label :image_url, "Recipe Image (5MB or less)" %>
+        <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
+      </div>
+    </div><!-- /.main-img-wrapper -->
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div id="recipe-panel" class="panel panel-info center-block">
@@ -50,14 +57,6 @@
             </div><!-- /.row -->
           </div><!-- /.panel-body -->
         </div><!-- /.panel -->
-      </div><!-- /.col-md-8 -->
-    </div><!-- /.row -->
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-          <%= f.label :image_url, "Recipe Image (5MB or less)" %>
-          <%= f.file_field :image_url, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
-        </div><!-- /.form-group -->
       </div><!-- /.col-md-8 -->
     </div><!-- /.row -->
   </div><!-- /.col-md-12" -->
