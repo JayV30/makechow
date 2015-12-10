@@ -25,19 +25,19 @@
       <div class="col-md-8 col-md-offset-2">
         <div id="recipe-panel" class="panel panel-info center-block">
           <div class="panel-heading">
-            <h1 class="panel-title"><%= @recipe.title %> <br/>
-            <span class="small">by: &nbsp;
-              <%= link_to @recipe.user do %>
-                <%= image_tag(@recipe.user.image_url.url, size: "26", alt: @recipe.user.name, class: "img") %>
-                <%= @recipe.user.name %>
-              <% end %>
-            </span>
-            </h1>
+            <h1 class="panel-title"><%= @recipe.title %></h1>
             <% if logged_in? && (@recipe.user_id == current_user.id || current_user.admin?) %>
-              <div class="recipe-buttons pull-right">
+              <div class="recipe-buttons">
                 <%= link_to "Edit", edit_recipe_path, class: "btn btn-primary btn-sm", role: "button" %>
                 <%= link_to "Delete", @recipe, method: :delete, class: "btn btn-danger btn-sm", role: "button", data: { confirm: "Are you sure you want to delete this recipe?" } %>
               </div> <!-- /.recipe-buttons -->
+            <% else %>
+              <h3>by: &nbsp;
+                <%= link_to @recipe.user do %>
+                  <%= image_tag(@recipe.user.image_url.url, size: "32", alt: @recipe.user.name, class: "img profile-img") %>
+                  <%= @recipe.user.name %>
+                <% end %>
+              </h3>
             <% end %>
           </div><!-- /.panel-heading -->
           <div class="panel-body">
@@ -65,12 +65,12 @@
 </div><!-- /.row -->
 
 <div class="row">
-  <div class="col-md-8">
-    <p class="lead"><%= @recipe.description %></p>
-  </div><!-- /.col-md-8 --> 
-  <div class="col-md-4">
+  <div class="col-md-4 col-md-push-8">
     <div class="well well-sm">Servings: <%= @recipe.servings %></div>
   </div> 
+  <div class="col-md-8 col-md-pull-4">
+    <p class="lead"><%= @recipe.description %></p>
+  </div><!-- /.col-md-8 --> 
   <hr/>
 </div><!-- /.row -->
     
@@ -97,20 +97,19 @@
   </div><!-- /.col-md-4 -->
 </div><!-- /.row -->
 
+<hr />
+
 <div class="row">
   <div class="col-md-12">
-    <h2>Reviews</h2>
+    <h2>Reviews &nbsp;<span class="small"><%= link_to "view all", recipe_reviews_path(@recipe) %></span></h2>
     <% if @recipe.reviews.any? %>
       <div class="row">
         <%= render @reviews %>
       </div><!-- /.row -->
-      <div class="row text-center">
-        <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
-      </div><!-- /.row -->
     <% else %>
       <div class="row">
         <div class="col-md-12">
-          <h3>No reviews yet.</h3>
+          <p>No reviews yet.</p>
         </div><!-- /.col-md-12 -->
       </div><!-- /.row -->
     <% end %>
@@ -130,14 +129,16 @@
 <% if logged_in? %>  
   <div class="row">
     <div class="col-sm-6">
-      <%= render 'reviews/review_form' %>
-    </div>
+      <div class="well">
+        <%= render 'reviews/review_form' %>
+      </div><!-- /.well -->
+    </div><!-- /.col-sm-6 -->
     <div class="col-sm-6">
         <p>
           Do something over here.
         </p>
-    </div>
-  </div>
+    </div><!-- /.col-sm-6 -->
+  </div><!-- /.row -->
 <% else %>
   <div class="row">
     <div class="col-sm-12">

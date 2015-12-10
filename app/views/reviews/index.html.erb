@@ -1,0 +1,34 @@
+<% provide(:title, 'Reviews for ' + @recipe.title) %>
+
+<div class="row">
+  <div class="col-sm-4 col-md-2 col-md-offset-1">
+      <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img img-responsive recipe-img") %>
+  </div><!-- /.col-xs-4-->
+  <div class="col-sm-8">
+    <h1><%= link_to @recipe.title, @recipe %></h1>
+    <h3>by: &nbsp;
+      <%= link_to @recipe.user do %>
+        <%= image_tag(@recipe.user.image_url.url, size: "32", alt: @recipe.user.name, class: "img profile-img") %>
+        <%= @recipe.user.name %>
+      <% end %>
+    </h3>
+    <hr />
+    <h2>All Reviews</h2>
+  </div><!-- /.col-xs-8 -->
+</div><!-- /.row -->
+
+<hr/>
+
+<div class="row recipe-reviews">
+  <% if @reviews.count == 0 %>
+    <div class="col-md-12">
+      <h3>No Reviews Found</h3>
+    </div>
+  <% else %>
+    <%= render @reviews %>
+  <% end %>
+</div> <!-- /.row -->
+
+<div class="row text-center">
+  <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
+</div>

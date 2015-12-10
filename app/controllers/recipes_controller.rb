@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @steps = @recipe.steps.all
     @ingredients = @recipe.ingredients.all
-    @reviews = @recipe.reviews.paginate(page: params[:page], per_page: 6)
+    @reviews = @recipe.reviews.limit(6)
     if logged_in?
       @review = current_user.reviews.find_by(recipe_id: params[:id]) || current_user.reviews.build
     end

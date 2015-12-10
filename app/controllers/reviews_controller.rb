@@ -2,6 +2,11 @@ class ReviewsController < ApplicationController
   before_action :logged_in_user, only: [:create, :update, :destroy]
   before_action :review_owner, only: [:update, :destroy]
   
+  def index
+    @recipe = Recipe.find(params[:recipe_id])
+    @reviews = @recipe.reviews.paginate(page: params[:page], per_page: 12)
+  end
+  
   def create
     @review = current_user.reviews.build(review_params)
     if @review.save

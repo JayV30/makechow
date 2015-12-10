@@ -33,26 +33,23 @@ html, body {
 body {
   background-color: #F5F2EF;
   font-family: "Pontano Sans", Helvetica, Arial, sans-serif;
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Bevan", Helvetica, Arial, serif;
+    color: #2B1B17;
+  }
+  a {
+    color: #54A8B8;
+    transition: color 0.2s ease-in-out;
+    &:hover, &:active, &:focus {
+      color: #FA6900;
+      text-decoration: none;
+    }
+  }
 }
 
 body > .container {
   background-color: #FBFAF9;
   padding-top: 20px;
-}
-
-.navbar {
-  background-color: #8CA2AC;
-  border-color: #7A939E;
-  margin-bottom: 0;
-  border-radius: 0;
-  a.navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: opacity 0.2s ease-in-out;
-    &:hover, &:focus {
-      opacity: 0.7;
-    }
-  }
 }
 
 @media (min-width: 1400px) {
@@ -61,17 +58,91 @@ body > .container {
   }
 }
 
-.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
-  color: #fdfdfd;
-  &:hover, &:focus {
-    color: #fd974f;
+/* HEADER NAV */
+
+// Main Nav Styles
+.navbar {
+  background-color: #CEE0B4;
+  border-color: #a4b390;
+  margin-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0;
+  min-height: 70px;
+  a.navbar-brand {
+    padding-top: 3px;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 10px;
+    transition: opacity 0.2s ease-in-out;
+    &:hover, &:focus {
+      opacity: 0.7;
+    }
+    @media (min-width: 768px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media (min-width: 992px) {
+      margin-right: 20px;
+    }
   }
 }
 
-/* HEADER NAV */
+// Links
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a, .dropdown-menu > li > a {
+  font-family: "Unica One", Arial, sans-serif;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  color: #2B1B17;
+  transition: color 0.2s ease-in-out;
+  &:hover, &:focus {
+    color: #FA6900;
+  }
+}
+.navbar-nav > li.dropdown > a {
+  padding: 0 0 0 15px;
+  img {
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+  }
+  &:hover, &:focus, &:active {
+    img {
+      opacity: 1;
+    }
+  }
+}
+.navbar-nav > li.dropdown.open > a {
+  background-color: transparent;
+  color: #FA6900;
+  &:hover, &:focus, &:active {
+    background-color: transparent;
+  }
+}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  @media (max-width: 767px) {
+    color: #2B1B17;
+    &:hover, &:focus {
+      color: #FA6900;
+    }
+  }
+}
 
-.navbar input#search.form-control {
-  margin-bottom: 0;
+// Navbar Search Form
+.navbar .navbar-form {
+  input#search.form-control {
+    margin-bottom: 0;
+    width: 80%;
+    display: inline-block;
+    @media (min-width: 768px) {
+      width: auto;
+    }
+  }
+  button {
+    margin-bottom: 2px;
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 /* PAGES */
@@ -88,43 +159,30 @@ body > .container {
   }
 }
 
-.main-img-wrapper {
-  background-color: #E0E4CC;
-  img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    object-position: center;
-    overflow: hidden;
-  }
-  
-  @media (min-width: 768px) {
-    img {
-      max-height: 500px;
-    }
-  }
-}
-
 #recipe-panel {
   position: relative;
-  top: -30px;
+  top: -50px;
   .panel-title {
+    color: #2B1B17;
     font-size: 36px;
     display: inline-block;
   }
   .recipe-buttons {
-    margin-top: 5px;
+    margin-top: 15px;
   }
-  span {
-    &.small {
-      font-size: 55%; 
-    }
+  h3 {
+    margin-bottom: 0;
+    margin-top: 15px;
     a {
       transition: all 0.2s ease-in-out;
       &:hover, &:focus, &:active {
         text-decoration: none;
         opacity: 0.8;
-        color: #fd974f;
+        color: #FA6900;
+      }
+      img {
+        position: relative;
+        bottom: 4px;
       }
     }
   }
@@ -132,7 +190,7 @@ body > .container {
 
 #category-info {
   position: relative;
-  top: -30px;
+  top: -20px;
 }
 
 .ingredients.list-group {
@@ -158,10 +216,6 @@ body > .container {
   }
 }
 
-.profile-img {
-  margin-top: 20px;
-}
-
 /* MISC */
 
 .debug_dump {
@@ -179,6 +233,16 @@ body > .container {
 
 .center-pills {
   display: inline-block;
+}
+
+.profile-img {
+  background-color: #BCE6E0;
+  border-radius: 50%;
+  border: 2px solid #96c5c2;
+}
+
+.recipe-img {
+  background-color: #CECFB6;
 }
 
 /* PAGINATION */
@@ -333,6 +397,8 @@ form {
   .rating {
       float:left;
       border:none;
+      position: relative;
+      bottom: 4px;
   }
   .rating:not(:checked) > input {
       position:absolute;
