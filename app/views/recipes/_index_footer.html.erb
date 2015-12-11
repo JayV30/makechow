@@ -9,5 +9,7 @@
 </div> <!-- /.row -->
 
 <div class="row text-center">
-  <%= will_paginate @recipes, renderer: BootstrapPagination::Rails %>
+  <div class="col-xs-12">
+    <%= will_paginate @recipes, inner_window: 1, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>

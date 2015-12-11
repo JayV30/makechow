@@ -37,7 +37,8 @@
                 <%= f.number_field :prep_time, class: 'form-control', value: @recipe.prep_time %>
                 <%= f.label :cook_time %>
                 <%= f.number_field :cook_time, class: 'form-control', value: @recipe.cook_time %>
-                <h3>Total time: <%= hours_and_minutes(@recipe.total_time) %><span class="small">(calculated)</span></h3>
+                <h3>Total time:</h3>
+                <h4><%= hours_and_minutes(@recipe.total_time) %> &nbsp; <span class="small">(calculated)</span></h4>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">

@@ -4,7 +4,7 @@
 $.fn.setPaginateLink = ->
   this.each ->
     append = this.getAttribute("id")
-    links = $(this).find("ul.pagination > li >a")
+    links = $(this).find("ul.pagination > li > a")
     links.each ->
       _href = this.getAttribute("href").replace(/#\S*$/, "")
       $(this).attr("href", _href + "#" + append)

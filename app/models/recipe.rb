@@ -14,9 +14,10 @@ class Recipe < ActiveRecord::Base
   mount_uploader :image_url, ImageUploader
   before_save :set_total_time
   
-  scope :popular, -> { where(["average_rating > :average_rating AND hidden != :hidden", average_rating: "3.2", hidden: "t"]) }
-  scope :latest, -> { where(["created_at > :created_at AND hidden != :hidden", created_at: 5.days.ago, hidden: "t"]) }
-  scope :quick, -> { where(["total_time <= :total_time AND hidden != :hidden", total_time: "30", hidden: "t"]) }
+  scope :popular, -> { where(["average_rating > :average_rating", average_rating: "3.2"]).not_private }
+  scope :latest, -> { where(["created_at > :created_at", created_at: 5.days.ago]).not_private }
+  scope :quick, -> { where(["total_time <= :total_time", total_time: "30"]).not_private }
+  scope :not_private, -> { where.not(hidden: true) }
   scope :sort_by, ->(symbol) do
     case symbol
       when "Rating"
@@ -52,12 +53,12 @@ class Recipe < ActiveRecord::Base
   def self.search(value)
     if value
       if Rails.env.production?
-        where(['(title ILIKE :search_term OR description ILIKE :search_term) AND hidden != :hidden', search_term: "%" + value + "%", hidden: "t" ])
+        where(['(title ILIKE :search_term OR description ILIKE :search_term)', search_term: "%" + value + "%" ]).not_private
       else
-        where(['(title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term) AND hidden != :hidden', search_term: "%" + value + "%", hidden: "t"])
+        where(['(title LIKE :search_term OR description LIKE :search_term OR id LIKE :search_term)', search_term: "%" + value + "%" ]).not_private
       end
     else
-      where.not(["hidden = ?", "t"])
+      not_private
     end
   end
   

@@ -12,3 +12,14 @@
     }
   }
 }
+
+.users.show {
+  .nav.nav-tabs > li > a {
+    font-size: 0.9em;
+    padding: 6px 11px;
+    @media (min-width: 768px) {
+      font-size: 1em;
+      padding: 10px 15px;
+    }
+  }
+}

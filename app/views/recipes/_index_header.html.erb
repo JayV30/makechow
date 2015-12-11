@@ -4,7 +4,7 @@
       <% if params[:search].nil? %>
         <h1>Browse</h1>
         <ul class="nav nav-pills center-pills">
-          <li role="presentation" class="<%= 'active' if current_page?(action: 'index') %>"><%= link_to "All Recipes", { action: "index", sort_by: "Date (default)"} %></li>
+          <li role="presentation" class="<%= 'active' if current_page?(action: 'index') %>"><%= link_to "All", { action: "index", sort_by: "Date (default)"} %></li>
           <li role="presentation" class="<%= 'active' if current_page?(action: 'popular') %>"><%= link_to "Popular", { action: "popular", sort_by: "Date (default)"} %></li>
           <li role="presentation" class="<%= 'active' if current_page?(action: 'latest') %>"><%= link_to "Recent", { action: "latest", sort_by: "Date (default)"} %></li>
           <li role="presentation" class="<%= 'active' if current_page?(action: 'quick') %>"><%= link_to "Quick", { action: "quick", sort_by: "Date (default)"} %></li>

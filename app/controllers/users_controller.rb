@@ -13,12 +13,12 @@ class UsersController < ApplicationController
       redirect_to root_url and return
     end
     if logged_in? && current_user?(@user)
-      @recipes = @user.recipes.paginate(page: params[:recipe_page], per_page: 8)
+      @recipes = @user.recipes.order(created_at: :desc).paginate(page: params[:recipe_page], per_page: 8)
     else
-      @recipes = @user.recipes.where.not(hidden: true).paginate(page: params[:recipe_page], per_page: 8)
+      @recipes = @user.recipes.where.not(hidden: true).order(created_at: :desc).paginate(page: params[:recipe_page], per_page: 8)
     end
-    @reviews = @user.reviews.paginate(page: params[:review_page], per_page: 6)
-    @favorites = @user.favorites.paginate(page: params[:favorite_page], per_page: 8)
+    @reviews = @user.reviews.order(created_at: :desc).paginate(page: params[:review_page], per_page: 6)
+    @favorites = @user.favorites.order(created_at: :desc).paginate(page: params[:favorite_page], per_page: 8)
     @creation_date = @user.created_at.strftime("%Y")
   end
   

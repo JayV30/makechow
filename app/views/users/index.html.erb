@@ -27,6 +27,6 @@
         </table>
       </div><!-- /.table-responsive -->
     </div> <!-- /.panel.panel-default -->
-    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @users, inner_window: 1, renderer: BootstrapPagination::Rails %>
   </div><!-- /.col-md-12 -->
 </div> <!-- /.row -->

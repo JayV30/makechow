@@ -7,6 +7,8 @@
 
 <% if @user.reviews.any? %>
   <div class="row text-center">
-    <%= will_paginate @reviews, param_name: 'review_page', renderer: BootstrapPagination::Rails %>
+    <div class="col-md-12">
+      <%= will_paginate @reviews, param_name: 'review_page', inner_window: 1, renderer: BootstrapPagination::Rails %>
+    </div>
   </div>
 <% end %>

@@ -30,5 +30,7 @@
 </div> <!-- /.row -->
 
 <div class="row text-center">
-  <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
+  <div class="col-md-12">
+    <%= will_paginate @reviews, inner_window: 1, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>

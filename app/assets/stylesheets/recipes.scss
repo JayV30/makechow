@@ -28,6 +28,7 @@
         text-align: center;
         width: 100%;
         background-color: rgba(96, 96, 96, 0.5);
+        font-size: 1.2em;
       }
     }
     .overlay {
@@ -211,7 +212,16 @@ body.recipes.latest, body.recipes.quick {
   .page-header {
     margin: 0;
     h1 {
-      font-size: 46px;
+      font-size: 2.5em;
+      @media (min-width: 768px) {
+        font-size: 3em;
+      }
+    }
+    .nav > li > a {
+      @media (max-width: 768px) {
+        padding: 8px 13px;
+        font-size: 0.9em;
+      }
     }
   }
   .filters {
