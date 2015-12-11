@@ -26,7 +26,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     case model.class.name
       when "User"
         ActionController::Base.helpers.asset_path([version_name, "user_default.png"].compact.join('_'))
-      when "Recipe"
+      when "Recipe" || "Collection"
         ActionController::Base.helpers.asset_path([version_name, "recipe_default.png"].compact.join('_'))
       else
         ActionController::Base.helpers.asset_path([version_name, "default.jpg"].compact.join('_'))

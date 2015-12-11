@@ -1,0 +1,88 @@
+<% provide(:title, "Edit #{@collection.name}") %>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Edit Collection</h1>
+  </div>
+</div>
+
+<hr/>
+
+<%= form_for(@collection, html: { mulitpart: true }) do |f| %>
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="main-img-wrapper">
+      <%= image_tag(@collection.image.url, alt: @collection.name, class: "img") %>
+      <div id="img-update-fields">
+        <%= f.label :image, "Collection Image (5MB or less)" %>
+        <%= f.file_field :image, class: 'form-control', accept: 'image/jpeg,image/gif,image/png' %>
+        <%= f.label :remove_image, class: "checkbox inline" do %>
+          <%= f.check_box :remove_image %>
+          <span>Remove Current Image (press save to remove)</span>
+        <% end %>
+      </div>
+    </div><!-- /.main-img-wrapper -->
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div id="recipe-panel" class="panel panel-info center-block">
+          <div class="panel-heading">
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: 'form-control', value: @collection.name %>
+            </div><!-- /.form-group -->
+          </div><!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <%= f.label :description %>
+                  <%= f.text_area :description, class: 'form-control', value: @collection.description %>
+                </div><!-- /.form-group -->
+              </div><!-- /.col-xs-12 -->
+            </div><!-- /.row -->
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.label :featured, class: "checkbox inline" do %>
+                  <%= f.check_box :featured, value: @collection.featured %>
+                  <span>Featured (listed on home page)</span>
+                <% end %>
+                <%= f.submit "Update", class: 'create-button btn btn-primary' %>
+              </div>
+            </div><!-- /.row -->
+          </div><!-- /.panel-body -->
+        </div><!-- /.panel -->
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row -->
+  </div><!-- /.col-md-12" -->
+</div><!-- /.row -->
+<% end %><!-- /form -->
+
+<%= render 'recipes/filters' %>
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="table-responsive">
+        <table id="recipe-list" class="table table-hover">
+          <thead>
+            <tr>
+              <th>IMAGE</th>
+              <th>ID</th>
+              <th>TITLE</th>
+              <th>TIME</th>
+              <th>RATING</th>
+              <th>AUTHOR</th>
+              <th>CREATED</th>
+              <th><!-- empty header for "View" button --></th>
+              <th><!-- empty header for "Add" button --></th>
+              <th><!-- empty header fo "Remove" button --></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: 'admin_collection_recipes', collection: @recipes, as: :recipe %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    <%= will_paginate @recipes, inner_window: 1, renderer: BootstrapPagination::Rails %>
+  </div><!-- /.col-md-12 -->
+</div> <!-- /.row -->

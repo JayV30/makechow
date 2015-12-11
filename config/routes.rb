@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'password_resets/edit'
 
-  root 'static_pages#home'
+  root 'collections#index'
   
   get 'signup'    => 'users#new'
   get 'login'     => 'sessions#new'
@@ -23,7 +23,11 @@ Rails.application.routes.draw do
     end
   end
   resources :reviews, only: [:create, :update, :destroy]
-
+  resources :collections do
+    collection do
+      get 'admin_view'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

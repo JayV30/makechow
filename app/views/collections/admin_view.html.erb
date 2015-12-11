@@ -1,0 +1,29 @@
+<% provide(:title, "Collection Admin Panel") %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h2>All Collections &nbsp; <%= link_to "New", new_collection_path, class: "btn btn-primary", role: "button" %></h2></div>
+      <div class="table-responsive">
+        <table id="collection-list" class="table table-hover">
+          <thead>
+            <tr>
+              <th>IMAGE</th>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>RECIPES</th>
+              <th>FEATURED</th>
+              <th>UPDATED</th>
+              <th><!-- empty header for "Edit" button --></th>
+              <th><!-- empty header for "Delete" button --></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: 'admin_collection', collection: @collections, as: :collection %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    </div> <!-- /.panel.panel-default -->
+    <%= will_paginate @collections, inner_window: 1, renderer: BootstrapPagination::Rails %>
+  </div><!-- /.col-md-12 -->
+</div> <!-- /.row -->

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208212651) do
+ActiveRecord::Schema.define(version: 20151211223959) do
+
+  create_table "collections", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
+    t.boolean  "featured",    default: false
+    t.integer  "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "collections", ["user_id"], name: "index_collections_on_user_id"
+
+  create_table "collections_recipes", force: :cascade do |t|
+    t.integer "collection_id"
+    t.integer "recipe_id"
+  end
 
   create_table "favorite_recipes", force: :cascade do |t|
     t.integer  "recipe_id"
@@ -38,6 +55,7 @@ ActiveRecord::Schema.define(version: 20151208212651) do
     t.integer  "cook_time"
     t.string   "servings"
     t.integer  "user_id"
+    t.integer  "collection_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "hidden",         default: false
@@ -49,6 +67,7 @@ ActiveRecord::Schema.define(version: 20151208212651) do
     t.integer  "reviews_count"
   end
 
+  add_index "recipes", ["collection_id"], name: "index_recipes_on_collection_id"
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
   create_table "reviews", force: :cascade do |t|
@@ -89,6 +108,7 @@ ActiveRecord::Schema.define(version: 20151208212651) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer  "collections_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

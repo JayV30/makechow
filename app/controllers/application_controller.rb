@@ -16,4 +16,11 @@ class ApplicationController < ActionController::Base
       end 
     end
     
+    def admin_user
+      unless current_user.admin?
+        flash[:danger] = "Not authorized to perform this action."
+        redirect_to root_url
+      end
+    end
+    
 end

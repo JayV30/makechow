@@ -9,6 +9,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :servings
       
       t.references :user, index: true, foreign_key: true
+      t.references :collection, index: true, foreign_key: true
 
       t.timestamps null: false
     end

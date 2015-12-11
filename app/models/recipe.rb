@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   belongs_to :user
+  has_and_belongs_to_many :collections
   has_many :reviews, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :ingredients, dependent: :destroy
