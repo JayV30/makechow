@@ -1,6 +1,7 @@
 class CollectionsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :admin_view]
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :admin_view]
+  include RecipesHelper
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :admin_view, :remove_from_collection]
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :admin_view, :remove_from_collection]
   
   def index
   end
@@ -16,8 +17,8 @@ class CollectionsController < ApplicationController
   def create
     @collection = current_user.collections.build(collection_params)
     if @collection.save
-      flash[:success] = "Collection created - add recipes via edit button"
-      redirect_to admin_view_collections_path
+      flash[:success] = "Collection created - add recipes"
+      redirect_to admin_view_recipes_path
     else
       render 'new'
     end
@@ -25,10 +26,6 @@ class CollectionsController < ApplicationController
   
   def edit
     @collection = Collection.find(params[:id])
-    @recipes = Recipe.search(params[:search]).paginate(page: params[:page])
-    filtering_params(params).each do |key, value|
-      @recipes = @recipes.public_send(key, value) if value.present?
-    end
   end
   
   def update
@@ -51,15 +48,23 @@ class CollectionsController < ApplicationController
     @collections = Collection.paginate(page: params[:page])
   end
   
+  def remove_from_collection
+    @collection = Collection.find(params[:id])
+    @recipe = Recipe.find(params[:recipe])
+    if in_collection?(@collection, @recipe)
+      @collection.recipes.delete(@recipe)
+      flash[:success] = "Removed from Collection"
+      redirect_to edit_collection_path(@collection)
+    else
+      flash[:danger] = "Error removing Recipe from Collection"
+      redirect_to edit_collection_path(@collection)
+    end
+  end
+  
   private
   
     def collection_params
       params.require(:collection).permit(:name, :description, :featured, :image, :remove_image)
     end
-    
-    def filtering_params(params)
-      params.slice(:category, :cuisine, :course, :sort_by)
-    end
   
-
 end

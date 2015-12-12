@@ -2,11 +2,54 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h1>Edit Collection</h1>
+    <h1>Edit <%= @collection.name %> Collection</h1>
   </div>
 </div>
 
 <hr/>
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="table-responsive">
+        <table id="recipe-list" class="table table-hover">
+          <thead>
+            <tr>
+              <th>IMAGE</th>
+              <th>ID</th>
+              <th>TITLE</th>
+              <th>AUTHOR</th>
+              <th>TIME</th>
+              <th>RATING</th>
+              <th>CUSINE</th>
+              <th>CATEGORY</th>
+              <th>COURSE</th>
+              <th>CREATED</th>
+              <th><!-- empty header for "View" button --></th>
+              <th><!-- empty header for "Remove" button --></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @collection.recipes.each do |recipe| %>
+              <tr>
+                <td><%= image_tag(recipe.image_url.url, size: "32", alt: recipe.title) %></td>
+                <td><%= recipe.id %></td>
+                <td><%= link_to recipe.title, recipe %></td>
+                <td><%= link_to recipe.user.name, recipe.user %></td>
+                <td><%= recipe.total_time %></td>
+                <td><%= recipe.average_rating %></td>
+                <td><%= recipe.cuisine %></td>
+                <td><%= recipe.category %></td>
+                <td><%= recipe.course %></td>
+                <td><%= recipe.created_at.strftime("%m-%d-%Y") %></td>
+                <td><%= link_to "View", recipe, :class => "btn btn-primary btn-sm", :role => "button" %></td>
+                <td><%= link_to "Remove", remove_from_collection_collection_path(@collection, :recipe => recipe.id), :method => "put", :class => "btn btn-danger btn-sm", :role => "button" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+  </div><!-- /.col-md-12 -->
+</div> <!-- /.row -->
 
 <%= form_for(@collection, html: { mulitpart: true }) do |f| %>
 <div class="row">
@@ -56,33 +99,5 @@
     </div><!-- /.row -->
   </div><!-- /.col-md-12" -->
 </div><!-- /.row -->
+
 <% end %><!-- /form -->
-
-<%= render 'recipes/filters' %>
-
-<div class="row">
-  <div class="col-md-12">
-      <div class="table-responsive">
-        <table id="recipe-list" class="table table-hover">
-          <thead>
-            <tr>
-              <th>IMAGE</th>
-              <th>ID</th>
-              <th>TITLE</th>
-              <th>TIME</th>
-              <th>RATING</th>
-              <th>AUTHOR</th>
-              <th>CREATED</th>
-              <th><!-- empty header for "View" button --></th>
-              <th><!-- empty header for "Add" button --></th>
-              <th><!-- empty header fo "Remove" button --></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render partial: 'admin_collection_recipes', collection: @recipes, as: :recipe %>
-          </tbody>
-        </table>
-      </div><!-- /.table-responsive -->
-    <%= will_paginate @recipes, inner_window: 1, renderer: BootstrapPagination::Rails %>
-  </div><!-- /.col-md-12 -->
-</div> <!-- /.row -->

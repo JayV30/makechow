@@ -1,8 +1,9 @@
 class RecipesController < ApplicationController
   include RecipesHelper
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :favorite]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :favorite, :admin_view, :add_to_collection]
   before_action :recipe_owner, only: [:edit, :update, :destroy]
   before_action :hidden_recipe, only: [:show]
+  before_action :admin_user, only: [:admin_view, :add_to_collection]
   
   def index
     @recipes = Recipe.search(params[:search]).paginate(page: params[:page], per_page: 12)
@@ -90,6 +91,30 @@ class RecipesController < ApplicationController
     @recipes = Recipe.quick.paginate(page: params[:page], per_page: 12)
     filtering_params(params).each do |key, value|
       @recipes = @recipes.public_send(key, value) if value.present?
+    end
+  end
+  
+  def admin_view
+    @recipes = Recipe.search(params[:admin_search]).paginate(page: params[:page])
+    @collections = Collection.all
+    filtering_params(params).each do |key, value|
+      @recipes = @recipes.public_send(key, value) if value.present?
+    end
+  end
+  
+  def add_to_collection
+    @collection = Collection.find_by(id: params[:collection])
+    @recipe = Recipe.find(params[:id])
+    if params[:collection].blank?
+      flash[:warning] = "No Collection Supplied - Remove Recipes from Collections on the Collection Edit Screen"
+      redirect_to admin_view_recipes_path
+    elsif in_collection?(@collection, @recipe)
+      flash[:warning] = "Already in the Collection"
+      redirect_to admin_view_recipes_path
+    else
+      @collection.recipes << @recipe
+      flash[:success] = "Added to Collection"
+      redirect_to admin_view_recipes_path
     end
   end
   

@@ -255,3 +255,16 @@ body.recipes.latest, body.recipes.quick {
     margin-top: 40px;
   }
 }
+
+body.recipes.admin_view {
+  table#admin-recipe-list {
+    select#collection {
+      display: inline-block;
+      width: 60%;
+      margin-bottom: 0;
+    }
+    input.btn {
+      width: auto;
+    }
+  }
+}

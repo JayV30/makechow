@@ -24,6 +24,10 @@
         </table>
       </div><!-- /.table-responsive -->
     </div> <!-- /.panel.panel-default -->
-    <%= will_paginate @collections, inner_window: 1, renderer: BootstrapPagination::Rails %>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <%= will_paginate @rcollections, inner_window: 1, renderer: BootstrapPagination::Rails %>
+      </div><!-- /.col-xs-12 -->
+    </div><!--/.row -->
   </div><!-- /.col-md-12 -->
 </div> <!-- /.row -->

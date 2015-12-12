@@ -1,0 +1,88 @@
+<% provide(:title, 'Recipe Admin') %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header text-center">
+      <% if params[:admin_search].nil? %>
+        <h1>All Recipes</h1>
+      <% else %>
+        <h1><%= @recipes.size %> results for: <small><%= params[:admin_search] %></small></h1>
+      <% end %>
+    </div><!-- /.page-header -->
+  </div><!-- /.col-sm-12 -->
+</div><!-- /.row -->
+
+<div class="row">
+  <%= form_tag admin_view_recipes_path, :method => 'get', role: 'search' do %>
+    <div class="form-group">
+      <div class="col-xs-10 col-md-4 col-md-offset-4">
+        <%= text_field_tag :admin_search, params[:admin_search], class: 'form-control', placeholder: 'Search' %>
+      </div>
+      <div class="col-xs-2">
+        <%= button_tag(type: 'submit', class: 'btn btn-default', name: nil) do %>
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'recipes/filters' %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="table-responsive">
+        <table id="admin-recipe-list" class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>TITLE</th>
+              <th>AUTHOR</th>
+              <th>TIME</th>
+              <th>RATING</th>
+              <th>CUSINE</th>
+              <th>CATEGORY</th>
+              <th>COURSE</th>
+              <th>CREATED</th>
+              <th>COLLECTIONS</th>
+              <th>SELECT COLLECTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recipes.each do |recipe| %>
+              <tr>
+                <td><%= recipe.id %></td>
+                <td><%= link_to(recipe.title, recipe) %></td>
+                <td><%= link_to(recipe.user.name, recipe.user) %></td>
+                <td><%= recipe.total_time %></td>
+                <td><%= recipe.average_rating %></td>
+                <td><%= recipe.cuisine %></td>
+                <td><%= recipe.category %></td>
+                <td><%= recipe.course %></td>
+                <td><%= recipe.created_at.strftime("%m-%d-%Y") %></td>
+                <td>
+                  <% if recipe.collections.any? %>
+                    <% recipe.collections.each do |collection| %>
+                      <%= link_to(collection.name, edit_collection_path(collection)) + " | " %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= form_tag add_to_collection_recipe_path(recipe), :method => 'put', role: 'form' do %>
+                    <%= select_tag(:collection, options_for_select(@collections.collect{|cn| [cn.name, cn.id]}, (recipe.collections.first.id if recipe.collections.any?)), { class: 'form-control', include_blank: true }) %>
+                    <%= submit_tag("Add", :name => nil, class: 'btn btn-primary btn-small') %>
+                  <% end %>
+                </td>
+            <% end %>
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+    </div> <!-- /.panel.panel-default -->
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <%= will_paginate @recipes, inner_window: 1, renderer: BootstrapPagination::Rails %>
+      </div><!-- /.col-xs-12 -->
+    </div><!--/.row -->
+  </div><!-- /.col-md-12 -->
+</div> <!-- /.row -->

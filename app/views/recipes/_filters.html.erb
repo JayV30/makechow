@@ -55,6 +55,7 @@
                 <%= link_to("Remove All", { action: "popular", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'popular') %>
                 <%= link_to("Remove All", { action: "latest", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'latest') %>
                 <%= link_to("Remove All", { action: "quick", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'quick') %>
+                <%= link_to("Remove All", { action: "admin_view", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'admin_view') %>
               </div><!-- /.form-group -->
             </div><!-- /.col-sm-2 -->
           </div><!-- /.row -->

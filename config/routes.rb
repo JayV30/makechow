@@ -16,14 +16,17 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :reviews, only: [:index]
     put :favorite, on: :member
+    put :add_to_collection, on: :member
     collection do
       get 'popular'
       get 'latest'
       get 'quick'
+      get 'admin_view'
     end
   end
   resources :reviews, only: [:create, :update, :destroy]
   resources :collections do
+    put :remove_from_collection, on: :member
     collection do
       get 'admin_view'
     end
