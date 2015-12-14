@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20151211223959) do
     t.integer  "cook_time"
     t.string   "servings"
     t.integer  "user_id"
-    t.integer  "collection_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "hidden",         default: false
@@ -67,7 +66,6 @@ ActiveRecord::Schema.define(version: 20151211223959) do
     t.integer  "reviews_count"
   end
 
-  add_index "recipes", ["collection_id"], name: "index_recipes_on_collection_id"
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
   create_table "reviews", force: :cascade do |t|
