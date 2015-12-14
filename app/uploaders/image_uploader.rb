@@ -6,6 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   
+  process :auto_orient
   process resize_to_limit: [1100, 1100]
   
   # Choose what kind of storage to use for this uploader:
@@ -62,5 +63,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  
+  # Ensure correct image orientation
+  def auto_orient
+    manipulate! do |img|
+      img = img.auto_orient
+    end
+  end
 
 end
