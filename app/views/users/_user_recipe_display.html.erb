@@ -1,9 +1,9 @@
 <div class="row user-recipes">
-  <% if @user.recipes.any? %>
   <h2 class="text-center"><%= @user.name %>'s Recipes</h2>
     <% if current_user?(@user) %>
       <p class="text-center"><%= link_to "Create a new recipe", new_recipe_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
     <% end %>
+  <% if @user.recipes.any? %>
   <%= render @recipes %>
   <% end %>
 </div> <!-- /.row -->

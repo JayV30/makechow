@@ -1,6 +1,6 @@
 <div class="row user-favorites">
-  <% if @user.favorites.any? %>
   <h2 class="text-center"><%= @user.name %>'s Favorited Recipes</h2>
+  <% if @user.favorites.any? %>
   <%= render @favorites %>
   <% end %>
 </div> <!-- /.row -->

@@ -1,6 +1,6 @@
 <div class="row user-reviews">
-  <% if @user.reviews.any? %>
   <h2 class="text-center"><%= @user.name %>'s Reviews</h2>
+  <% if @user.reviews.any? %>
   <%= render @reviews %>
   <% end %>
 </div> <!-- /.row -->
