@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-xs-4 col-sm-3 col-md-2 col-md-offset-1">
-    <%= image_tag(@user.image_url.url, alt: @user.name + " Profile Image", class: "img-responsive profile-img") %>
+    <%= image_tag(@user.image_url.url(:square), alt: @user.name + " Profile Image", class: "img-responsive profile-img") %>
   </div>
   <div class="col-xs-8">
     <h1><%= @user.name %></h1>

@@ -8,7 +8,7 @@
   <%= form_for(@user, html: { mulitpart: true }) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="col-md-4">
-       <%= image_tag( @user.image_url.url, alt: @user.name + " Profile Image", class: "img-responsive center-block profile-img") %>
+       <%= image_tag( @user.image_url.url(:square), alt: @user.name + " Profile Image", class: "img-responsive center-block profile-img") %>
        <%= f.label :remove_image_url, class: "checkbox inline" do %>
           <%= f.check_box :remove_image_url %>
           <span>Remove Current Image (press save to remove)</span>
