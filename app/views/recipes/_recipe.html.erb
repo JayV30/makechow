@@ -21,7 +21,7 @@
     </div><!-- /.thumb-img -->
   <% end %>
     <div class="caption text-center">
-      <%= link_to(image_tag(recipe.user.image_url.url, size: "48", alt: recipe.user.name, class: "img"), recipe.user) %>
+      <%= link_to(image_tag(recipe.user.image_url.url(:square), size: "48", alt: recipe.user.name, class: "img"), recipe.user) %>
       <% if logged_in? && current_user?(recipe.user) %>
         <div class="recipe-buttons">
           <%= link_to "Edit", edit_recipe_path(recipe.id), class: "btn btn-primary btn-sm", role: "button" %>
