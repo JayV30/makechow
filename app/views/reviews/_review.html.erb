@@ -43,9 +43,7 @@
     <div class="panel-body">
       <p><%= review.content %></p>
       <p class="text-center">
-        <%= link_to("#") do %>
-        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> full review <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-        <% end %>
+        <%= link_to "full review", recipe_review_path(recipe_id: review.recipe.id, id: review.id) %>
       </p>
     </div><!-- /.panel-body -->
     <div class="panel-footer">

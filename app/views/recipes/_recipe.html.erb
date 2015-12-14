@@ -6,7 +6,7 @@
   <div class="thumbnail">
   <%= link_to(recipe) do %>
     <div class="thumb-img">
-      <%= image_tag(recipe.image_url.url, alt: recipe.title, class: "img") %>
+      <%= image_tag(recipe.image_url.url(:square), alt: recipe.title, class: "img") %>
       <div class="recipe-head">
         <h3><%= recipe.title %></h3>
       </div> <!-- /.recipe-head -->

@@ -10,7 +10,7 @@
 
 <%= form_for(@recipe, html: { mulitpart: true }) do |f| %>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <%= render 'shared/error_messages', object: f.object %>
     <div class="main-img-wrapper">
       <%= image_tag(@recipe.image_url.url, alt: @recipe.title, class: "img") %>
@@ -24,7 +24,7 @@
       </div>
     </div><!-- /.main-img-wrapper -->
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
         <div id="recipe-panel" class="panel panel-info center-block">
           <div class="panel-heading">
             <%= f.label :title %>
@@ -57,9 +57,14 @@
             </div>
           </div><!-- /.panel-body -->
         </div><!-- /.panel -->
-      </div><!-- /.col-md-8 -->
+      </div><!-- /.col-md-10 -->
     </div><!-- /.row -->
-  </div><!-- /.col-md-12" -->
+  </div><!-- /.col-md-8 -->
+  <div class="col-md-4">
+    <div class="well" style="min-height: 500px; width: 100%;">
+      <p>AD SPACE HERE</p>
+    </div>
+  </div>
 </div><!-- /.row -->
 
 <div class="row">

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   get 'about'     => 'static_pages#about'
   get 'privacy'   => 'static_pages#privacy'
+  get 'terms'     => 'static_pages#terms'
   get 'signup'    => 'users#new'
   get 'login'     => 'sessions#new'
   post 'login'    => 'sessions#create'
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :recipes do
-    resources :reviews, only: [:index]
+    resources :reviews, only: [:index, :show]
     put :favorite, on: :member
     put :add_to_collection, on: :member
     collection do

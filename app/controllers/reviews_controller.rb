@@ -7,6 +7,10 @@ class ReviewsController < ApplicationController
     @reviews = @recipe.reviews.paginate(page: params[:page], per_page: 12)
   end
   
+  def show
+    @review = Review.find(params[:id])
+  end
+  
   def create
     @review = current_user.reviews.build(review_params)
     if @review.save

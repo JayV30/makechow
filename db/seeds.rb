@@ -26,8 +26,8 @@ User.create!( name: "Non Admin",
               activated_at: Time.zone.now,
               remote_image_url_url: "http://jpkarlsven.com/img/cartoon_jay.png")
 
-# Create 20 other Users                           
-20.times do |n|
+# Create 10 other Users                           
+10.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = "password"
@@ -70,42 +70,59 @@ end
 # Create 5 Steps for each Recipe
 recipes = Recipe.all
 
-5.times do |n|
-  recipes.each { |recipe|
+recipes.each do |recipe|
+  5.times do |n|
     step_number = n
     content = Faker::Lorem.paragraph
     
     recipe.steps.create!( step_number: step_number, content: content)
-  }
+  end
 end
 
 # Create 5 Ingredients for each Recipe
-5.times do |n|
-  recipes.each { |recipe|
+recipes.each do |recipe|
+  5.times do |n|
     quantity = rand(1...30).to_s + " " + Faker::Lorem.word
     name = Faker::Lorem.word
     
     recipe.ingredients.create!(quantity: quantity, name: name)
-  }
+  end
 end
 
 # Create 10 Reviews for each Recipe
-10.times do |n|
-  recipes.each { |recipe|
+recipes.each do |recipe|
+  10.times do |n|
     user = User.order("RANDOM()").first
     recipe_id = recipe.id
-    rating = rand(1...5)
+    rating = rand(1..5)
     content = Faker::Lorem.sentence
     
     user.reviews.create!(recipe_id: recipe_id, rating: rating, content: content)
-  }
+  end
 end
 
 # Favorite 10 Recipes for each User
-10.times do |n|
-  recipe = Recipe.order("RANDOM()").first
-  users.each { |user| 
+users.each do |user|
+  10.times do |n|
+    recipe = Recipe.order("RANDOM()").first
     user.favorites << recipe
-  }
+  end
+end
+
+# Create 3 featured Collections
+3.times do |n|
+  name = Faker::Lorem.word
+  description = Faker::Lorem.sentence
+  User.first.collections.create!(name: name, description: description, featured: true)
+end
+
+# Add 5 Recipes to each Collection
+collections = Collection.all
+
+collections.each do |collection|
+  5.times do |n|
+    recipe = Recipe.order("RANDOM()").first
+    collection.recipes << recipe
+  end
 end
   

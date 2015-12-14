@@ -27,7 +27,7 @@
 /* BASE */
 
 html, body {
-  height: 100vh;
+  height: 100%;
   font-size: 16px;
 }
 
@@ -48,9 +48,17 @@ body {
   }
 }
 
-body > .container {
-  background-color: #FBFAF9;
-  padding-top: 20px;
+#page-container {
+  position: relative; /* needed for footer positioning*/
+  margin: 0 auto; /* center, not in IE5 */
+  height: auto !important; /* real browsers */
+  height: 100%;
+  min-height: 100%; /* real browsers */
+  > .container {
+    background-color: #FBFAF9;
+    padding-bottom: 70px;
+    padding-top: 40px;
+  }
 }
 
 @media (min-width: 1400px) {
@@ -206,8 +214,26 @@ body > .container {
   .recipe-buttons {
     margin-top: 15px;
   }
+  .well {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .rating-display {
+      display: inline-block;
+      float: none;
+      font-size: 1.2em;
+      position: relative;
+      top: 3px;
+      p {
+        text-align: center;
+      }
+    }
+  }
+  h4 {
+    margin-top: 25px;
+  }
   h3 {
-    margin-bottom: 0;
+    margin-bottom: 15px;
     margin-top: 15px;
     a {
       transition: all 0.2s ease-in-out;
@@ -471,8 +497,11 @@ form {
 /* DISPLAY RATINGS */
 
 .review-panel .panel-heading {
-  height: 60px;
+  height: 50px;
   text-align: right;
+  a {
+    line-height: 26px;
+  }
 }
 
 .review-panel .panel-body {
@@ -521,9 +550,6 @@ form {
 
 .rating-display {
   float: left;
-  position: relative;
-  top: -9px;
-  left: -4px;
   span:before {
     content:'★ ';
   }
@@ -552,7 +578,7 @@ form {
   &.recipe-rating {
     float: none;
     display: inline-block;
-    margin: 10px auto -10px;
+    margin: 10px auto -5px;
   }
 }
 
@@ -573,4 +599,32 @@ form {
 
 .unactivated-row {
   background-color: #ff5050;
+}
+
+footer.mc {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #212121;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  ul.footer-links {
+    list-style-type: none;
+    display: block;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      font-family: "Unica One", Arial, sans-serif;
+      text-transform: uppercase;
+      margin-right: 15px;
+      a {
+        color: white;
+        line-height: 22px;
+        &:hover, &:focus, &:active {
+          color: #FA6900;
+        }
+      }
+    }
+  }
 }

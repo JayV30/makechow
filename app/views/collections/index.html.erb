@@ -45,7 +45,7 @@
   <% if @collections.any? %>
     <div class="col-sm-12 col-md-3 featured-collection">
       <%= link_to @collections[0], class: "thumbnail" do %>
-        <%= image_tag(@collections[0].image.url, alt: @collections[0].name) %>
+        <%= image_tag(@collections[0].image.url(:square), alt: @collections[0].name) %>
         <div class="overlay">
           <div class="collection-content">
             <p><%= @collections[0].description %></p>
@@ -63,7 +63,7 @@
   <% if @collections.size > 1 %>
     <div class="col-sm-12 col-md-3 featured-collection">
       <%= link_to @collections[1], class: "thumbnail" do %>
-        <%= image_tag(@collections[1].image.url, alt: @collections[1].name) %>
+        <%= image_tag(@collections[1].image.url(:square), alt: @collections[1].name) %>
         <div class="overlay">
           <div class="collection-content">
             <p><%= @collections[1].description %></p>
@@ -126,7 +126,7 @@
   <% if @collections.size > 2 %>
     <div class="col-sm-12 col-md-3 featured-collection">
       <%= link_to @collections[2], class: "thumbnail" do %>
-        <%= image_tag(@collections[2].image.url, alt: @collections[2].name) %>
+        <%= image_tag(@collections[2].image.url(:square), alt: @collections[2].name) %>
         <div class="overlay">
           <div class="collection-content">
             <p><%= @collections[2].description %></p>
@@ -137,4 +137,12 @@
       <% end %>
     </div><!-- /.featured-collection-->
   <% end %>
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="well" style="min-height: 200px; width: 100%;">
+      <p>AD SPACE HERE</p>
+    </div>
+  </div><!-- /.col-xs-12 -->
 </div><!-- /.row -->

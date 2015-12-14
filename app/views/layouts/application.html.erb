@@ -16,25 +16,32 @@
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
   
-  <%= render 'layouts/header' %>
-
-  <div class="container">
-    
-    <div class="row">
-      <div class="col-xs-12">
-        <% flash.each do |message_type, message| %>
-          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-        <% end %>
-      </div><!-- /.col-xs-12 -->
-    </div><!-- /.row -->
-    
-    <%= yield %>
-    
-  </div> <!-- /.container -->
+  <div id="page-container">
   
-  <% if Rails.env.development? %>
-  <div class="container"><%= debug(params) %></div>
-  <% end %>
-
+    <%= render 'layouts/header' %>
+  
+    <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <% flash.each do |message_type, message| %>
+              <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+            <% end %>
+          </div><!-- /.col-xs-12 -->
+        </div><!-- /.row -->
+        <%= yield %>
+      
+        <% if Rails.env.development? %>
+          <div class="row">
+            <div class="col-md-8">
+              <%= debug(params) %>
+            </div>
+          </div>
+        <% end %>
+    </div><!-- /.container -->
+  
+    <%= render 'layouts/footer' %>
+  
+  </div><!-- #page-container -->
+  
 </body>
 </html>

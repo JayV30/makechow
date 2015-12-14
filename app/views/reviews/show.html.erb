@@ -1,0 +1,59 @@
+<% provide(:title, "#{@review.user.name}'s Review of #{@review.recipe.title}") %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="page-header">
+      <h1><%= link_to @review.recipe.title, @review.recipe %></h1>
+      <p>a review by: <%= link_to @review.user.name, @review.user %></p>
+      <p>written: <%= @review.updated_at.strftime("%b %d, %Y") %></p>
+    </div><!-- /.page-header -->
+  </div><!-- /.col-sm-6 -->
+  <div class="col-sm-6">
+    <div class="well" style="min-height: 100px; width: 100%">
+      <p>AD SPACE HERE</p>
+    </div>
+  </div><!-- /.col-sm-6 -->
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="well well-sm">
+      <div class="rating-display">
+        <% if @review.rating == 5 %>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif @review.rating == 4 %>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif @review.rating == 3 %>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif @review.rating == 2 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+          <span class="filled-star"></span>
+        <% elsif @review.rating == 1 %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="filled-star"></span>
+        <% else %>
+          <p>error retrieving star rating</p>
+        <% end %>
+      </div><!-- /.rating-display -->
+    </div><!-- /.well -->
+    <p><%= @review.content %></p>
+  </div><!-- /.col-sm-8 -->
+</div><!-- /.row -->
