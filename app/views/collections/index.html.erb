@@ -13,10 +13,12 @@
       </div> <!-- /.jumbotron -->
   </div><!-- /.col-sm-8 -->
   <div class="col-sm-4">
-    <div id="featured-recipe">
-      <h3 class="text-center"><%= link_to "Chow now!", @recipe %></h3>
-      <%= render @recipe %>
-    </div><!-- /#featured-recipe -->
+    <% if !@recipe.nil? %>
+      <div id="featured-recipe">
+        <h3 class="text-center"><%= link_to "Chow now!", @recipe %></h3>
+        <%= render @recipe %>
+      </div><!-- /#featured-recipe -->
+    <% end %>
   </div><!-- /.col-sm-4 -->
 </div><!-- /.row -->
 
