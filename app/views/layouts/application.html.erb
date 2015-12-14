@@ -18,20 +18,19 @@
   
   <%= render 'layouts/header' %>
 
-  <% unless current_page?(root_path) %>
   <div class="container">
-  <% end %>
-
     
-    <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-    <% end %>
+    <div class="row">
+      <div class="col-xs-12">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+      </div><!-- /.col-xs-12 -->
+    </div><!-- /.row -->
     
     <%= yield %>
-  
-  <% unless current_page?(root_path) %>
+    
   </div> <!-- /.container -->
-  <% end %>
   
   <% if Rails.env.development? %>
   <div class="container"><%= debug(params) %></div>

@@ -1,7 +1,7 @@
 <tr>
-  <td><%= image_tag(collection.image.url, size: "32", alt: collection.name) %></td>
-  <td><%= collection.id %></td>
-  <td><%= collection.name %></td>
+  <td><%= link_to image_tag(collection.image.url, size: "32", alt: collection.name), collection %></td>
+  <td><%= link_to collection.id, collection %></td>
+  <td><%= link_to collection.name, collection %></td>
   <td><%= collection.recipes.size %></td>
   <td><%= "✔" if collection.featured == true %></td>
   <td><%= collection.updated_at.strftime("%m-%d-%Y") %></td>

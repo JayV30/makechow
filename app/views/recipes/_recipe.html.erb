@@ -1,4 +1,8 @@
+<% if current_page?(root_path) %>
+  <div id="recipe-<%= recipe.id %>">
+<% else %>
 <div class="col-sm-4 col-md-3" id="recipe-<%= recipe.id %>">
+<% end %>
   <div class="thumbnail">
   <%= link_to(recipe) do %>
     <div class="thumb-img">

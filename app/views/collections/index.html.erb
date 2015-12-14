@@ -1,0 +1,138 @@
+<% provide(:title, "Home") %>
+
+<div class="row">
+  <div class="col-sm-8">
+      <div id="intro" class="jumbotron">
+        <h1>Welcome to MakeChow!</h1>
+        <p>Store, share, and rate recipes. Save your favorites.</p>
+        <% if logged_in? %>
+          <p><%= link_to "Your Recipes", user_path(current_user, anchor: "user-recipes"), :class => "btn btn-primary btn-lg", :role => "button" %></p>
+        <% else %>
+          <p><%= link_to "Sign Up Now!", signup_path, :class => "btn btn-primary btn-lg", :role => "button" %></p>
+        <% end %>
+      </div> <!-- /.jumbotron -->
+  </div><!-- /.col-sm-8 -->
+  <div class="col-sm-4">
+    <div id="featured-recipe">
+      <h3 class="text-center"><%= link_to "Chow now!", @recipe %></h3>
+      <%= render @recipe %>
+    </div><!-- /#featured-recipe -->
+  </div><!-- /.col-sm-4 -->
+</div><!-- /.row -->
+
+<div class="row">
+  <% if @category_recipes.any? %>
+    <div class="col-sm-12 col-md-9" id="featured-category">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-12 col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <h3><%= link_to "#{@category} chow", { controller: "recipes", action: "index", category: @category, sort_by: "Date" } %></h3>
+              <%= link_to image_tag("category.png", size: 128), { controller: "recipes", action: "index", category: @category, sort_by: "Date" } %>
+            </div><!-- /.panel -->
+          </div><!-- /.col-md-12 -->
+          <% @category_recipes.each do |recipe| %>
+            <div class="col-md-4 col-sm-6 col-lg-3">
+              <%= render partial: 'recipes/recipe', object: recipe %>
+            </div><!-- /.col-md-4 -->
+          <% end %>
+        </div><!-- /.row -->
+      </div><!-- /.well -->
+    </div><!-- /#featured-category -->
+  <% end %>
+  <% if @collections.any? %>
+    <div class="col-sm-12 col-md-3 featured-collection">
+      <%= link_to @collections[0], class: "thumbnail" do %>
+        <%= image_tag(@collections[0].image.url, alt: @collections[0].name) %>
+        <div class="overlay">
+          <div class="collection-content">
+            <p><%= @collections[0].description %></p>
+            <h2><%= @collections[0].name %></h2>
+            <p class="small"><%= pluralize(@collections[0].recipes.size, "recipe", "recipes") %></p>
+          </div><!-- /.collection-content -->
+        </div><!-- /.overlay -->
+      <% end %>
+    </div><!-- /.featured-collection -->
+  <% end %>
+</div><!-- /.row -->
+
+
+<div class="row">
+  <% if @collections.size > 1 %>
+    <div class="col-sm-12 col-md-3 featured-collection">
+      <%= link_to @collections[1], class: "thumbnail" do %>
+        <%= image_tag(@collections[1].image.url, alt: @collections[1].name) %>
+        <div class="overlay">
+          <div class="collection-content">
+            <p><%= @collections[1].description %></p>
+            <h2><%= @collections[1].name %></h2>
+            <p class="small"><%= pluralize(@collections[1].recipes.size, "recipe", "recipes") %></p>
+          </div><!-- /.collection-content -->
+        </div><!-- /.overlay -->
+      <% end %>
+    </div><!-- /.featured-collection -->
+  <% else %>
+    <div class="col-md-3"></div>
+  <% end %>
+  <% if @cuisine_recipes.any? %>
+    <div class="col-sm-12 col-md-9" id="featured-cuisine">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-12 col-sm-6 col-lg-3 visible-sm visible-xs visible-md">
+            <div class="panel panel-default">
+              <h3><%= link_to "#{@cuisine} chow", { controller: "recipes", action: "index", cuisine: @cuisine, sort_by: "Date" } %></h3>
+              <%= link_to image_tag("cuisine.png", size: 128), { controller: "recipes", action: "index", cuisine: @cuisine, sort_by: "Date" } %>
+            </div><!-- /.panel -->
+          </div><!-- /.col-sm-12 -->
+          <% @cuisine_recipes.each do |recipe| %>
+            <div class="col-md-4 col-sm-6 col-lg-3">
+              <%= render partial: 'recipes/recipe', object: recipe %>
+            </div><!-- /.col-md-4 -->
+          <% end %>
+          <div class="col-md-12 col-sm-6 col-lg-3 hidden-sm hidden-xs hidden-md">
+            <div class="panel panel-default">
+              <h3><%= link_to "#{@cuisine} chow", { controller: "recipes", action: "index", cuisine: @cuisine, sort_by: "Date" } %></h3>
+              <%= link_to image_tag("cuisine.png", size: 128), { controller: "recipes", action: "index", cuisine: @cuisine, sort_by: "Date" } %>
+            </div><!-- /.panel -->
+          </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+      </div><!-- /.well -->
+    </div><!-- /#featured-cuisine -->
+  <% end %>
+</div><!-- /.row -->
+
+<div class="row">
+  <% if @course_recipes.any? %>
+    <div class="col-sm-12 col-md-9" id="featured-course">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-12 col-sm-6 col-lg-3">
+            <div class="panel panel-default">
+              <h3><%= link_to "#{@course.pluralize(2)}", { controller: "recipes", action: "index", course: @course, sort_by: "Date" } %></h3>
+              <%= link_to image_tag("course.png", size: 128), { controller: "recipes", action: "index", course: @course, sort_by: "Date" } %>
+            </div><!-- /.panel -->
+          </div><!-- /.col-md-12 -->
+          <% @course_recipes.each do |recipe| %>
+            <div class="col-md-4 col-sm-6 col-lg-3">
+              <%= render partial: 'recipes/recipe', object: recipe %>
+            </div><!-- /.col-md-4 -->
+          <% end %>
+        </div><!-- /.row -->
+      </div><!-- /.well -->
+    </div><!-- /#featured-course -->
+  <% end %>
+  <% if @collections.size > 2 %>
+    <div class="col-sm-12 col-md-3 featured-collection">
+      <%= link_to @collections[2], class: "thumbnail" do %>
+        <%= image_tag(@collections[2].image.url, alt: @collections[2].name) %>
+        <div class="overlay">
+          <div class="collection-content">
+            <p><%= @collections[2].description %></p>
+            <h2><%= @collections[2].name %></h2>
+            <p class="small"><%= pluralize(@collections[2].recipes.size, "recipe", "recipes") %></p>
+          </div><!-- /.collection-content -->
+        </div><!-- /.overlay -->
+      <% end %>
+    </div><!-- /.featured-collection-->
+  <% end %>
+</div><!-- /.row -->

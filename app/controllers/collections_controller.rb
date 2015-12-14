@@ -4,10 +4,19 @@ class CollectionsController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :admin_view, :remove_from_collection]
   
   def index
+    @collections = Collection.where(featured: true)
+    @recipe = Recipe.popular.order("RANDOM()").first
+    @category = Recipe::CATEGORY_OPTIONS.sample
+    @category_recipes = Recipe.category(@category).not_private.sort_by("Rating").limit(3)
+    @cuisine = Recipe::CUISINE_OPTIONS.sample
+    @cuisine_recipes = Recipe.cuisine(@cuisine).not_private.sort_by("Rating").limit(3)
+    @course = Recipe::COURSE_OPTIONS.sample
+    @course_recipes = Recipe.course(@course).not_private.sort_by("Rating").limit(3)
   end
   
   def show
     @collection = Collection.find(params[:id])
+    @recipes = @collection.recipes.paginate(page: params[:page])
   end
   
   def new
@@ -32,7 +41,7 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:id])
     if @collection.update_attributes(collection_params)
       flash[:success] = "Collection updated"
-      redirect_to @collection
+      redirect_to admin_view_collections_path
     else
       render 'edit'
     end

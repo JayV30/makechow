@@ -51,11 +51,11 @@
             </div><!-- /.col-sm-2 -->
             <div class="col-xs-6 col-sm-4 col-md-2">
               <div class="form-group">
-                <%= link_to("Remove All", { action: "index", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'index') %>
-                <%= link_to("Remove All", { action: "popular", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'popular') %>
-                <%= link_to("Remove All", { action: "latest", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'latest') %>
-                <%= link_to("Remove All", { action: "quick", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'quick') %>
-                <%= link_to("Remove All", { action: "admin_view", sort_by: "Date (default)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'admin_view') %>
+                <%= link_to("Remove All", { action: "index", sort_by: "Date"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'index') %>
+                <%= link_to("Remove All", { action: "popular", sort_by: "Date)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'popular') %>
+                <%= link_to("Remove All", { action: "latest", sort_by: "Date)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'latest') %>
+                <%= link_to("Remove All", { action: "quick", sort_by: "Date)"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'quick') %>
+                <%= link_to("Remove All", { action: "admin_view", sort_by: "Date"}, class: 'btn btn-danger btn-block') if current_page?(controller: 'recipes', action: 'admin_view') %>
               </div><!-- /.form-group -->
             </div><!-- /.col-sm-2 -->
           </div><!-- /.row -->

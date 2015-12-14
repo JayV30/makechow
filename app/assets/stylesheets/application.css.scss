@@ -129,6 +129,15 @@ body > .container {
       opacity: 1;
     }
   }
+  &.link-icon {
+    padding: 12px 12px 12px 28px;
+    @media (min-width: 768px) {
+      padding: 12px 0;
+    }
+    @media (min-width: 992px) {
+      padding: 12px;
+    }
+  }
 }
 .navbar-nav > li.dropdown.open > a {
   background-color: transparent;
@@ -167,14 +176,22 @@ body > .container {
 /* PAGES */
 
 #intro.jumbotron {
-  background-image: url('http://i.imgur.com/erTksex.jpg');
+  background-image: url('home-welcome.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 500px;
+  min-height: 350px;
+  padding: 20px;
   h1, p {
     color: white;
     text-shadow: 2px 1px grey;
+  }
+  @media (min-width: 768px) {
+    min-height: 420px;
+    padding: 30px;
+    h1 {
+      font-size: 3em;
+    }
   }
 }
 

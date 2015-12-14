@@ -1,3 +1,121 @@
 // Place all the styles related to the Collections controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.collections.index {
+  #featured-recipe {
+    padding: 8px;
+    background-color: #F5F2EF;
+    border: 1px solid #C4C1BF;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    > h3 {
+      margin-top: 10px;
+    }
+    @media (min-width: 768px) {
+      min-height: 420px;
+    }
+  }
+  #featured-category, #featured-cuisine, #featured-course {
+    .well {
+      padding-bottom: 0;
+      background-color: #E0ECE9;
+      .panel.panel-default {
+        padding: 20px;
+        text-align: center;
+        @media (min-width: 768px) {
+          min-height: 340px;
+        }
+        @media (min-width: 992px) {
+          min-height: 0;
+        }
+        @media (min-width: 1200px) {
+          min-height: 315px;
+        }
+        h3 {
+          margin-top: 0;
+          @media (min-width: 768px) {
+            margin-top: 50px;
+          }
+          @media (min-width: 992px) and (max-width: 1200px) {
+            display: inline-block;
+            margin-top: 10px;
+          }
+        }
+        a > img {
+          transition: opacity 0.2s ease-in-out;
+          @media (min-width: 992px) and (max-width: 1200px) {
+            width: 40px;
+            position: relative;
+            bottom: 10px;
+            padding-left: 10px;
+          }
+          &:hover, &:active, &:focus {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+  .featured-collection {
+    .thumbnail {
+      img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        object-position: center;
+        overflow: hidden;
+        background-color: #CECFB6;
+        @media (min-width: 992px) {
+          height: 480px;
+        }
+        @media (min-width: 1200px) {
+          height: 346px;
+        }
+      }
+      .overlay {
+        overflow: hidden;
+        display: block;
+        position: absolute;
+        height: 50%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: 0 4px 4px;
+        background: -moz-linear-gradient(top,rgba(27,26,25,0) 0,#1b1a19 100%);
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(27,26,25,0)),color-stop(100%,#1b1a19));
+        background: -webkit-linear-gradient(top,rgba(27,26,25,0) 0,#1b1a19 100%);
+        background: -o-linear-gradient(top,rgba(27,26,25,0) 0,#1b1a19 100%);
+        background: -ms-linear-gradient(top,rgba(27,26,25,0) 0,#1b1a19 100%);
+        background: linear-gradient(to bottom,rgba(27,26,25,0) 0,#1b1a19 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#001b1a19', endColorstr='#1b1a19', GradientType=0);
+        .collection-content {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          padding: 10px;
+          p {
+          color: white;
+          transition: color 0.2s ease-in-out;
+          }
+          h2 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 0;
+            transition: color 0.2s ease-in-out;
+          }
+          p.small {
+            margin-bottom: 0;
+          }
+        }
+      }
+      &:hover, &:focus, &:active {
+        border-color: #FA6900;
+        .overlay p, .overlay h2 {
+          color: #FA6900;
+        }
+      }
+    }
+  }
+}

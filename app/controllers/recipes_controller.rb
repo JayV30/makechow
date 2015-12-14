@@ -106,7 +106,7 @@ class RecipesController < ApplicationController
     @collection = Collection.find_by(id: params[:collection])
     @recipe = Recipe.find(params[:id])
     if params[:collection].blank?
-      flash[:warning] = "No Collection Supplied - Remove Recipes from Collections on the Collection Edit Screen"
+      flash[:warning] = "No Collection Supplied - Remove Recipes from Collections on the Edit Collection Screen"
       redirect_to admin_view_recipes_path
     elsif in_collection?(@collection, @recipe)
       flash[:warning] = "Already in the Collection"

@@ -23,7 +23,7 @@ class Recipe < ActiveRecord::Base
     case symbol
       when "Rating"
         order average_rating: :desc
-      when "Date (default)"
+      when "Date"
         order created_at: :desc 
       when "Time to Make"
         order total_time: :asc
@@ -36,7 +36,7 @@ class Recipe < ActiveRecord::Base
   CATEGORY_OPTIONS = ["Breakfast", "Brunch", "Lunch", "Dinner"]
   COURSE_OPTIONS = ["Appetizer", "Beverage", "Bread", "Dessert", "Finger food", "Main dish", "Salad", "Side dish", "Snack", "Soup and stew"]
   CUISINE_OPTIONS = ["American", "Argentine", "Australian", "Brazilian", "Canadian", "Caribbean", "Central American", "Chinese", "English", "Ethiopian", "French", "German", "Greek", "Indian", "Irish", "Italian", "Jewish", "Korean", "Mexican", "Moroccan", "Native American", "Persian", "Polish", "Portuguese", "Russian", "Scandinavian", "South Pacific", "Spanish", "Thai", "Turkish", "Vietnamese"]
-  SORTING_OPTIONS = ["Date (default)", "Rating", "Time to Make" ]
+  SORTING_OPTIONS = ["Date", "Rating", "Time to Make" ]
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 130 }
