@@ -6,7 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
   
-  process :auto_orient
+  process :correct_rotation
   process resize_to_limit: [1100, 1100]
   
   # Choose what kind of storage to use for this uploader:
@@ -65,10 +65,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
   
   # Ensure correct image orientation
-  def auto_orient
+  def correct_rotation
     manipulate! do |img|
-      img = img.auto_orient
-      img
+      img.tap(&:auto_orient)
     end
   end
 
