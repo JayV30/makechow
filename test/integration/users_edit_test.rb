@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class UsersEditTest < ActionDispatch::IntegrationTest
-  
+  include RecipesHelper 
+ 
   def setup
     @user = users(:michael)
   end

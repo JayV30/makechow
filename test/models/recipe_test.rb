@@ -4,7 +4,7 @@ class RecipeTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings", hidden: false, cuisine: "American", course: "dessert")
+    @recipe = @user.recipes.build( title: "Chocolate Cake", description: "Delicious and Mouth Watering", prep_time: 10, cook_time: 10, servings: "2 servings", hidden: false, category: "Breakfast", cuisine: "American", course: "Dessert")
     @image_recipe = recipes(:most_recent)
     @no_image_recipe = recipes(:cherry)
   end
@@ -54,6 +54,8 @@ class RecipeTest < ActiveSupport::TestCase
   test "hidden should be a boolean" do
     @recipe.hidden = true
     assert @recipe.valid?
+    @recipe.hidden = false
+    assert @recipe.valid?
     @recipe.hidden = nil
     assert_not @recipe.valid?
   end
@@ -73,6 +75,15 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @no_image_recipe.valid?
   end
   
+  test "category should be present and only one of the values in Recipe::CUISINE_OPTIONS" do
+    @recipe.category = nil
+    assert_not @recipe.valid?
+    @recipe.category = "Breakfast"
+    assert @recipe.valid?
+    @recipe.category = "Smorgasboard"
+    assert_not @recipe.valid?
+  end
+  
   test "cuisine should be present and only one of the values in Recipe::CUISINE_OPTIONS" do
     @recipe.cuisine = nil
     assert_not @recipe.valid?
@@ -85,14 +96,60 @@ class RecipeTest < ActiveSupport::TestCase
   test "course should be present and only one of the values in Recipe::COURSE_OPTIONS" do 
     @recipe.course = nil
     assert_not @recipe.valid?
-    @recipe.course = "appetizer"
+    @recipe.course = "Appetizer"
     assert @recipe.valid?
     @recipe.course = "Gorging"
     assert_not @recipe.valid?
   end
   
-  test "order should be most recent first" do 
-    assert_equal recipes(:most_recent), Recipe.first
+  test "average_rating should be present and only a float from 0-5" do 
+    
+  end
+  
+  test "total_time should be set before save" do 
+    
+  end
+  
+  test "scope sort_by('Date') should list most recent first" do
+    assert_equal recipes(:most_recent), Recipe.sort_by("Date").first
+    assert_equal recipes(:chocolate), Recipe.sort_by("Date").last
+  end
+  
+  test "scope sort_by('Rating') should list highest rated first" do 
+    assert_equal recipes(:highest_rated), Recipe.sort_by("Rating").first
+    assert_equal recipes(:chocolate), Recipe.sort_by("Rating").last
+  end 
+  
+  test "scope sort_by('Time to Make') should list shortest total time recipes first" do 
+    
+  end
+  
+  test "scope not_private should not return private recipes" do 
+  
+  end
+  
+  test "scope category should return only recipes in the provided category" do 
+    
+  end
+  
+  test "scope cuisine should return only recipes in the provided cuisine type" do
+    
+  end 
+  
+  test "scope course should return only recipes in the provided course" do 
+    
+  end 
+  
+  test "scope popular should only return recipes with an average_rating of 3.5 or greater" do 
+    
+  end
+  
+  test "scope latest should only return recipes with a creation date of less than 5 days ago" do 
+    
+  end
+  
+  test "scope quick should only return recipes where the total_time is 30 minutes or less" do 
+    
   end
   
   test "associated steps should be destroyed" do

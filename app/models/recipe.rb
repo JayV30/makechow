@@ -14,8 +14,8 @@ class Recipe < ActiveRecord::Base
   
   mount_uploader :image_url, ImageUploader
   before_save :set_total_time
-  
-  scope :popular, -> { where(["average_rating > :average_rating", average_rating: "3.2"]).not_private }
+
+  scope :popular, -> { where(["average_rating >= :average_rating", average_rating: "3.5"]).not_private }
   scope :latest, -> { where(["created_at > :created_at", created_at: 5.days.ago]).not_private }
   scope :quick, -> { where(["total_time <= :total_time", total_time: "30"]).not_private }
   scope :not_private, -> { where.not(hidden: true) }

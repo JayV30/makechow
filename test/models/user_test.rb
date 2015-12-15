@@ -89,13 +89,18 @@ class UserTest < ActiveSupport::TestCase
     assert_not @no_image_user.valid?
   end
   
+  test "should have a square version of image" do
+    @no_image_user.image_url = fixture_file_upload('/files/right_size.jpg', 'image/jpg')
+    assert @no_image_user.image_url.url(:square).end_with?("square_right_size.jpg")
+  end
+  
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:remember, '')
   end
   
   test "associated recipes should be destroyed" do
     @user.save
-    @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, servings: "2 servings", cuisine: "American", course: "dessert")
+    @user.recipes.create!(title: "Chocolate Cake", description: "Delicious",  image_url: "http://imgur.com/abc123.png", prep_time: 10, cook_time: 10, servings: "2 servings", category: "Breakfast", cuisine: "American", course: "Dessert")
     assert_difference "Recipe.count", -1 do
       @user.destroy
     end
@@ -107,6 +112,14 @@ class UserTest < ActiveSupport::TestCase
     assert_difference "Review.count", -1 do
       @user.destroy
     end
+  end
+  
+  test "associated collections should be destroyed" do
+    @user.save
+    @user.collections.create!(name: "Great Collection", description: "This is awesome")
+    assert_difference "Collection.count", -1 do
+      @user.destroy
+    end 
   end
   
   test "should be able to favorite a recipe" do

@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  descripton: MyText
-  image: MyString
+  name: holiday treats
+  description: treats are great
+  user: michael
 
 two:
-  name: MyString
-  descripton: MyText
-  image: MyString
+  name: collection with image
+  description: this collection has an image
+  image: "right_size.jpg"
+  featured: true
+  user: michael

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
+  include RecipesHelper
   
   def setup
     ActionMailer::Base.deliveries.clear

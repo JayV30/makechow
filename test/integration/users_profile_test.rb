@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UsersProfileTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
+  include RecipesHelper
   
   def setup
     @user = users(:michael)
@@ -16,9 +17,9 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select 'h1', text: @user.name
   # use once fixtures have a test image  assert_select 'img.img-rounded', { :count => 1}
     assert_select 'ul.pagination'
-    @user.recipes.paginate(page: 1, per_page: 8).each do |recipe|
+    @user.recipes.order(created_at: :desc).paginate(page: 1, per_page: 8).each do |recipe|
       assert_match recipe.title, response.body
-      assert_match recipe.description[0...70], response.body
+      assert_match recipe.description[0...100], response.body
     end
   end
   

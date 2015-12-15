@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
+  include RecipesHelper
   
   def setup
     @user = users(:michael)
@@ -33,9 +34,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # Simulate user clicking logout in a second window
     delete logout_path
     follow_redirect!
+    assert_not flash.empty?
     assert_select "a[href=?]", login_path
-    assert_select "a[href=?]", logout_path, count: 0
-    assert_select "a[href=?]", user_path(@user), count: 0
+    assert_select "a[href=?]", signup_path
+    assert_select "a[href=?]", edit_user_path(@user), count: 0
   end
   
   test "login with remembering" do
