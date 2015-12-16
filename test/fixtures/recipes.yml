@@ -3,9 +3,9 @@
 chocolate:
   title: Chocolate Cake
   description: Delicious
-  prep_time: 10
-  cook_time: 10
-  total_time: 20
+  prep_time: 20
+  cook_time: 20
+  total_time: 40
   servings: 10 servings
   hidden: false
   category: Breakfast
@@ -19,14 +19,14 @@ cherry:
   title: Cherry Pie
   description: Sweet and fresh
   prep_time: 20
-  cook_time: 5
-  total_time: 25
+  cook_time: 15
+  total_time: 35
   servings: 10 servings
   hidden: false
   category: Brunch
   cuisine: American
   course: Appetizer
-  average_rating: 3.7
+  average_rating: 3.4
   created_at: <%= 5.hours.ago %>
   user: michael
   
@@ -40,8 +40,8 @@ most_recent:
   hidden: false
   category: Dinner
   cuisine: American
-  course: Appetizer
-  average_rating: 4.3
+  course: Finger food
+  average_rating: 3.3
   created_at: <%= Time.zone.now %>
   user: michael
   image_url: 'right_size.jpg'
@@ -49,15 +49,15 @@ most_recent:
 hidden_recipe:
   title: Cant See Me
   description: Im a private recipe
-  prep_time: 40
-  cook_time: 80
-  total_time: 120
+  prep_time: 100
+  cook_time: 100
+  total_time: 200
   servings: 30 servings
   hidden: true
   category: Lunch
   cuisine: American
   course: Appetizer
-  average_rating: 3
+  average_rating: 2.3
   created_at: <%= 3.hours.ago %>
   user: michael
   
@@ -75,19 +75,34 @@ highest_rated:
   average_rating: 5
   created_at: <%= 4.hours.ago %>
   user: michael
-
+  
+shortest_time:
+  title: Cereal
+  description: Put it in a bowl
+  prep_time: 1
+  cook_time: 0
+  total_time: 1
+  servings: 10 bites
+  hidden: false
+  category: Breakfast
+  cuisine: Greek
+  course: Main dish
+  average_rating: 3.1
+  created_at: <%= 2.hours.ago %>
+  user: michael
+  
 <% 30.times do |n| %>
 recipe_<%= n %>:
   title: <%= Faker::Lorem.word %>
   description: <%= Faker::Lorem.sentence %>
-  prep_time: n + 1
-  cook_time: n + 2
-  total_time: (n + 1) + (n + 2)
+  prep_time: 25
+  cook_time: 25
+  total_time: 50
   servings: <%= rand(1...20).to_s + " " + Faker::Lorem.word %>
   hidden: false
-  category: <%= Recipe::CATEGORY_OPTIONS.sample %>
-  cuisine: <%= Recipe::CUISINE_OPTIONS.sample %>
-  course: <%= Recipe::COURSE_OPTIONS.sample %>
+  category: Breakfast
+  cuisine: Canadian
+  course: Salad
   average_rating: 1
   user: michael
   created_at: <%= 3.days.ago %>

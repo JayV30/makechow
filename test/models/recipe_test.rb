@@ -103,11 +103,22 @@ class RecipeTest < ActiveSupport::TestCase
   end
   
   test "average_rating should be present and only a float from 0-5" do 
-    
+    @recipe.average_rating = -1.2
+    assert_not @recipe.valid?
+    @recipe.average_rating = 5.1
+    assert_not @recipe.valid?
+    # ensure inclusive
+    @recipe.average_rating = 0
+    assert @recipe.valid?
+    @recipe.average_rating = 5
+    assert @recipe.valid?
   end
   
   test "total_time should be set before save" do 
-    
+    @recipe = @user.recipes.build(title: "Hamburgers", description: "Hot off the grill", prep_time: 20, cook_time: 20, servings: "1 burger", hidden: false, category: "Dinner", cuisine: "American", course: "Main dish")
+    assert @recipe.total_time.nil?
+    @recipe.save
+    assert_equal 40, @recipe.total_time
   end
   
   test "scope sort_by('Date') should list most recent first" do
@@ -121,35 +132,53 @@ class RecipeTest < ActiveSupport::TestCase
   end 
   
   test "scope sort_by('Time to Make') should list shortest total time recipes first" do 
-    
+    assert_equal recipes(:shortest_time), Recipe.sort_by("Time to Make").first
+    assert_equal recipes(:hidden_recipe), Recipe.sort_by("Time to Make").last
   end
   
-  test "scope not_private should not return private recipes" do 
-  
+  test "scope not_private should not return private recipes" do
+    actual = Recipe.not_private.to_a
+    assert_not actual.include?(recipes(:hidden_recipe))
   end
   
   test "scope category should return only recipes in the provided category" do 
-    
+    actual = Recipe.category("Brunch").to_a
+    assert_equal 1, actual.size
+    assert_not actual.include?(recipes(:chocolate))
+    assert actual.include?(recipes(:cherry))
   end
   
   test "scope cuisine should return only recipes in the provided cuisine type" do
-    
+    actual = Recipe.cuisine("Greek").to_a
+    assert_equal 1, actual.size
+    assert_not actual.include?(recipes(:highest_rated))
+    assert actual.include?(recipes(:shortest_time))
   end 
   
   test "scope course should return only recipes in the provided course" do 
-    
+    actual = Recipe.course("Finger food").to_a
+    assert_equal 1, actual.size
+    assert_not actual.include?(recipes(:cherry))
+    assert actual.include?(recipes(:most_recent))
   end 
   
   test "scope popular should only return recipes with an average_rating of 3.5 or greater" do 
-    
+    actual = Recipe.popular.to_a
+    assert_equal 1, actual.size
+    assert_not actual.include?(recipes(:shortest_time))
+    assert actual.include?(recipes(:highest_rated))
   end
   
   test "scope latest should only return recipes with a creation date of less than 5 days ago" do 
-    
+    actual = Recipe.latest.to_a
+    assert_not actual.include?(recipes(:chocolate))
   end
   
   test "scope quick should only return recipes where the total_time is 30 minutes or less" do 
-    
+    actual = Recipe.quick.to_a
+    assert_equal 1, actual.size
+    assert_not actual.include?(recipes(:cherry))
+    assert actual.include?(recipes(:shortest_time))
   end
   
   test "associated steps should be destroyed" do
