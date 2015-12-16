@@ -44,6 +44,15 @@ class ActiveSupport::TestCase
       session[:user_id] = user.id
     end
   end
+    
+  # Logs out a test user  
+  def log_out(user)
+    if integration_test?
+      delete logout_path, session: { user_id: user.id }
+    else
+      session.delete[user.id]
+    end
+  end
 
   private
     

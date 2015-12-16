@@ -72,4 +72,5 @@ class UsersControllerTest < ActionController::TestCase
     assert_not flash.empty?
     assert_redirected_to root_url
   end
+  
 end

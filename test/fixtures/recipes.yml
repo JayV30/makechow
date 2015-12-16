@@ -47,7 +47,7 @@ most_recent:
   image_url: 'right_size.jpg'
   
 hidden_recipe:
-  title: Cant See Me
+  title: Cant-See-Me
   description: Im a private recipe
   prep_time: 100
   cook_time: 100

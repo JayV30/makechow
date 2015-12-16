@@ -10,7 +10,7 @@ review_one:
 review_two:
   rating: 1
   content: One Star Review
-  recipe: cherry
+  recipe: most_recent
   user: michael
   created_at: <%= 5.hours.ago %>
 

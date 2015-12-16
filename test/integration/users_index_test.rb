@@ -23,4 +23,19 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
   end
   
+  test "not admin user redirected to root" do 
+    log_in_as @non_admin
+    get users_path
+    assert_redirected_to root_url
+    follow_redirect!
+    assert_template 'collections/index'
+  end
+  
+  test "non logged in user redirected to login" do 
+    get users_path
+    assert_redirected_to login_url
+    follow_redirect!
+    assert_template 'sessions/new'
+  end
+  
 end
