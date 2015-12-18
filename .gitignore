@@ -21,3 +21,6 @@
 
 # Ignore fixture images
 /test/fixtures/files/uploads/tmp
+
+# Ignore application configuration
+/config/application.yml
