@@ -22,6 +22,7 @@ gem 'cocoon',       '~> 1.2.6'
 gem 'sdoc',         '0.4.0', group: :doc
 gem 'figaro'
 gem 'puma'
+gem 'net-ssh'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

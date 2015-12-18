@@ -2,6 +2,7 @@
 require 'capistrano/setup'
 
 # Include default deployment tasks
+require 'net/ssh'
 require 'capistrano/deploy'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
