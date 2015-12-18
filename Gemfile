@@ -20,6 +20,8 @@ gem 'mini_magick',  '3.8.0'
 gem 'fog',          '1.26.0'
 gem 'cocoon',       '~> 1.2.6'
 gem 'sdoc',         '0.4.0', group: :doc
+gem 'figaro'
+gem 'puma'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -37,5 +39,12 @@ end
 group :production do
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
-  gem 'puma',           '2.11.1'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
 end
