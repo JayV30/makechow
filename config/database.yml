@@ -22,4 +22,10 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  host: localhost
+  adapter: postgresql
+  encoding: utf8
+  database: recipe-maker_production
+  pool: 5
+  username: <%= ENV['RECIPE-MAKER_DATABASE_USER'] %>
+  password: <% = ENV['RECIPE-MAKER_DATABASE_PASSWORD'] %>
